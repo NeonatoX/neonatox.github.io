@@ -1,3 +1,13 @@
 ---
-return Astro.redirect('/es/', 301);
+const acceptLang = Astro.request.headers.get('accept-language') || '';
+const lang = acceptLang.toLowerCase();
+
+let defaultLang = 'es';
+if (lang.includes('pt') || lang.includes('pt-')) {
+  defaultLang = 'pt';
+} else if (lang.includes('en')) {
+  defaultLang = 'en';
+}
+
+return Astro.redirect(`/${defaultLang}/`, 301);
 ---
