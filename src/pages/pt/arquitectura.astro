@@ -1,0 +1,140 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { dict } from '../../utils/i18n';
+const t = dict.pt;
+---
+
+<BaseLayout title="Arquitetura" description="Arquitetura Neonatox: multicamada, transparente e educacional." lang="pt">
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-4xl font-bold text-cyan-400 mb-8">Arquitetura do Sistema</h1>
+      <p class="text-xl text-slate-300 mb-12">
+        Neonatox constrói sobre Linux From Scratch com systemd como init e um gerenciador de pacotes nativo. Aqui está o mapa completo.
+      </p>
+
+      <div class="bg-slate-800/50 p-8 rounded-xl border border-slate-700 mb-12">
+        <h2 class="text-2xl font-semibold text-cyan-300 mb-6 text-center">Camadas do Sistema</h2>
+        
+        <div class="space-y-4">
+          <div class="flex items-center gap-4">
+            <div class="w-32 text-right text-slate-400 font-mono text-sm">Aplicativos</div>
+            <div class="flex-1 bg-purple-500/20 border border-purple-500/50 rounded p-3 text-center text-purple-300">GUI Apps, CLI tools, Serviços</div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-32 text-right text-slate-400 font-mono text-sm">nhopkg</div>
+            <div class="flex-1 bg-cyan-500/20 border border-cyan-500/50 rounded p-3 text-center text-cyan-300">Gerenciador de pacotes nativo</div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-32 text-right text-slate-400 font-mono text-sm">Systemd</div>
+            <div class="flex-1 bg-yellow-500/20 border border-yellow-500/50 rounded p-3 text-center text-yellow-300">Init + Serviços + Logging</div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-32 text-right text-slate-400 font-mono text-sm">Glibc + Toolchain</div>
+            <div class="flex-1 bg-green-500/20 border border-green-500/50 rounded p-3 text-center text-green-300">libc, gcc, binutils, make</div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-32 text-right text-slate-400 font-mono text-sm">Kernel Linux</div>
+            <div class="flex-1 bg-red-500/20 border border-red-500/50 rounded p-3 text-center text-red-300">Kernel 6.x (custom build)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 mb-12">
+        <div class="bg-slate-800/30 p-6 rounded-lg border border-slate-700">
+          <h3 class="text-xl font-semibold text-cyan-300 mb-4">Init: systemd</h3>
+          <p class="text-slate-400 text-sm">
+            Não reinventamos a roda. systemd é o init mais documentado, mais testado, com maior ecossistema.
+            Neonatox integra completamente: services, sockets, timers, sysusers, tmpfiles.
+          </p>
+        </div>
+        
+        <div class="bg-slate-800/30 p-6 rounded-lg border border-slate-700">
+          <h3 class="text-xl font-semibold text-cyan-300 mb-4">Gerenciador: nhopkg</h3>
+          <p class="text-slate-400 text-sm">
+            Nativo, minimalista, transparente. Formato <code>.nhopkg</code> com funções de ciclo de vida:
+            <code>nbuild()</code>, <code>ninstall()</code>, <code>npostinstall()</code>, <code>npostremove()</code>.
+            Cada pacote é uma masterclass.
+          </p>
+        </div>
+
+        <div class="bg-slate-800/30 p-6 rounded-lg border border-slate-700">
+          <h3 class="text-xl font-semibold text-cyan-300 mb-4">Multilib</h3>
+          <p class="text-slate-400 text-sm">
+            Arquitetura x86_64 + i686. Não escolhemos: suportamos ambos.
+            Compilação com <code>CFLAGS="-O2 -march=x86-64 -mtune=generic"</code> para 64-bit,
+            multilib GCC para 32-bit quando necessário.
+          </p>
+        </div>
+
+        <div class="bg-slate-800/30 p-6 rounded-lg border border-slate-700">
+          <h3 class="text-xl font-semibold text-cyan-300 mb-4">Base LFS</h3>
+          <p class="text-slate-400 text-sm">
+            Tudo começa em /tools. Toolchain estático, depois dinâmico.
+            Cada pacote constrói sobre o anterior. A cadeia de confiança é visível,
+            sem magia negra.
+          </p>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto mb-12">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-slate-700">
+              <th class="text-left py-3 px-4 text-slate-400">Característica</th>
+              <th class="text-center py-3 px-4 text-purple-400">Neonatox</th>
+              <th class="text-center py-3 px-4 text-slate-400">Debian</th>
+              <th class="text-center py-3 px-4 text-slate-400">Arch</th>
+              <th class="text-center py-3 px-4 text-slate-400">Gentoo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-slate-800">
+              <td class="py-3 px-4 text-slate-300">Gerenciador nativo</td>
+              <td class="text-center py-3 px-4 text-cyan-400">nhopkg</td>
+              <td class="text-center py-3 px-4 text-slate-500">dpkg</td>
+              <td class="text-center py-3 px-4 text-slate-500">pacman</td>
+              <td class="text-center py-3 px-4 text-slate-500">portage</td>
+            </tr>
+            <tr class="border-b border-slate-800">
+              <td class="py-3 px-4 text-slate-300">Build reproduzível</td>
+              <td class="text-center py-3 px-4 text-cyan-400">✓</td>
+              <td class="text-center py-3 px-4">-</td>
+              <td class="text-center py-3 px-4">-</td>
+              <td class="text-center py-3 px-4">✓</td>
+            </tr>
+            <tr class="border-b border-slate-800">
+              <td class="py-3 px-4 text-slate-300">Docs em cada pacote</td>
+              <td class="text-center py-3 px-4 text-cyan-400">✓</td>
+              <td class="text-center py-3 px-4">-</td>
+              <td class="text-center py-3 px-4">-</td>
+              <td class="text-center py-3 px-4">-</td>
+            </tr>
+            <tr class="border-b border-slate-800">
+              <td class="py-3 px-4 text-slate-300">Base LFS</td>
+              <td class="text-center py-3 px-4 text-cyan-400">✓</td>
+              <td class="text-center py-3 px-4">-</td>
+              <td class="text-center py-3 px-4">-</td>
+              <td class="text-center py-3 px-4">-</td>
+            </tr>
+            <tr>
+              <td class="py-3 px-4 text-slate-300">Multilib</td>
+              <td class="text-center py-3 px-4 text-cyan-400">✓</td>
+              <td class="text-center py-3 px-4">✓</td>
+              <td class="text-center py-3 px-4">-</td>
+              <td class="text-center py-3 px-4">✓</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="flex gap-4">
+        <a href="/pt/paquetes" class="bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-semibold px-6 py-3 rounded-lg transition-colors">
+          Ver pacotes
+        </a>
+        <a href="/pt/ruta-constructor" class="border border-cyan-500 text-cyan-400 hover:bg-cyan-500/10 font-semibold px-6 py-3 rounded-lg transition-colors">
+          Começar a construir
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

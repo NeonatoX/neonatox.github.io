@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { dict } from '../../utils/i18n';
+const t = dict.en;
+---
+
+<BaseLayout title="Home" description="Neonatox: learn Linux by building it from scratch. Experimental, educational, and transparent distro." lang="en">
+  <section class="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950"></div>
+    <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 2px 2px, rgba(0,245,255,0.3) 1px, transparent 0); background-size: 40px 40px;"></div>
+    
+    <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
+      <h1 class="text-5xl md:text-7xl font-bold mb-6">
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
+          {t.heroTitle}
+        </span>
+      </h1>
+      <p class="text-xl md:text-2xl text-slate-300 mb-8 max-w-2xl mx-auto leading-relaxed">
+        {t.heroDesc}
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/en/ruta-constructor" class="bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-bold text-lg px-8 py-4 rounded-lg transition-all transform hover:scale-105">
+          {t.ctaStart}
+        </a>
+        <a href="/en/arquitectura" class="border-2 border-cyan-500 text-cyan-400 hover:bg-cyan-500/10 font-bold text-lg px-8 py-4 rounded-lg transition-all">
+          {t.ctaArch}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 px-4 bg-slate-800/30">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-12">
+        <span class="text-purple-400">{t.pkgRuleTitle}</span>
+      </h2>
+      
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-slate-900 p-6 rounded-xl border border-slate-700 hover:border-cyan-500/50 transition-colors">
+          <div class="text-cyan-400 text-4xl font-mono mb-4">01</div>
+          <h3 class="text-xl font-semibold text-white mb-3">Transparent</h3>
+          <p class="text-slate-400">Every package is a document. Open *.srcnho, inside the nhoid file, and see exactly what it does, what dependencies it has, how it integrates with the system.</p>
+        </div>
+        
+        <div class="bg-slate-900 p-6 rounded-xl border border-slate-700 hover:border-cyan-500/50 transition-colors">
+          <div class="text-cyan-400 text-4xl font-mono mb-4">02</div>
+          <h3 class="text-xl font-semibold text-white mb-3">Educational</h3>
+          <p class="text-slate-400">Reading a PKG is like taking a masterclass. You understand not just what it installs, but how and why.</p>
+        </div>
+        
+        <div class="bg-slate-900 p-6 rounded-xl border border-slate-700 hover:border-cyan-500/50 transition-colors">
+          <div class="text-cyan-400 text-4xl font-mono mb-4">03</div>
+          <h3 class="text-xl font-semibold text-white mb-3">Native</h3>
+          <p class="text-slate-400">nhopkg is our package manager. Own, minimal, designed to teach while installing.</p>
+        </div>
+        
+        <div class="bg-slate-900 p-6 rounded-xl border border-slate-700 hover:border-cyan-500/50 transition-colors">
+          <div class="text-cyan-400 text-4xl font-mono mb-4">04</div>
+          <h3 class="text-xl font-semibold text-white mb-3">From LFS</h3>
+          <p class="text-slate-400">Everything started from /tools. Toolchain compiled from scratch. The build chain is visible, no secrets.</p>
+        </div>
+      </div>
+      
+      <div class="text-center mt-12">
+        <a href="/en/paquetes" class="text-cyan-400 hover:text-cyan-300 text-lg font-medium">
+          See example: Transmission →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 px-4">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-6 text-white">Ready to build your system?</h2>
+      <p class="text-xl text-slate-300 mb-8">
+        There are no shortcuts. But you have the map.
+      </p>
+      <a href="/en/ruta-constructor" class="inline-block bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-400 hover:to-purple-500 text-white font-bold text-lg px-8 py-4 rounded-lg transition-all transform hover:scale-105">
+        Start now
+      </a>
+    </div>
+  </section>
+</BaseLayout>

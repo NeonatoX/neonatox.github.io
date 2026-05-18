@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { dict } from '../../utils/i18n';
+const t = dict.en;
+---
+
+<BaseLayout title="Philosophy" description="Neonatox philosophy: learn by building, not using without understanding." lang="en">
+  <section class="py-20 px-4">
+    <div class="max-w-3xl mx-auto">
+      <h1 class="text-4xl font-bold text-cyan-400 mb-8">Not another distro</h1>
+      <p class="text-xl text-slate-300 mb-8">
+        Neonatox doesn't aim to be the best distro. It aims to be the most honest.
+      </p>
+
+      <div class="space-y-8 text-slate-300">
+        <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700">
+          <h2 class="text-2xl font-semibold text-cyan-300 mb-4">The black box</h2>
+          <p>
+            Modern distributions work incredibly well. Installing them takes minutes. Everything boots. Everything just works.
+          </p>
+          <p class="mt-4">
+            But underneath that convenience lies a black box.
+          </p>
+          <p class="mt-4">
+            Thousands of lines of code running out of your sight. Systemd services spawning processes. Inherited configs you never touched. Precompiled packages whose origin and build remain hidden.
+          </p>
+          <p class="mt-4">
+            There's nothing wrong with that.
+          </p>
+          <p class="mt-4">
+            But if your goal is not just to use Linux, but to master it, you need to open the box.
+          </p>
+        </div>
+
+        <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700">
+          <h2 class="text-2xl font-semibold text-cyan-300 mb-4">Build to understand</h2>
+          <p>
+            Linux From Scratch isn't just an installation guide. It's a transformative learning experience.
+          </p>
+          <p class="mt-4">
+            Compiling GCC teaches you how a compiler is born. Building Glibc reveals what actually holds up a Linux system. Configuring systemd forces you to understand how the system boots and organizes itself.
+          </p>
+          <p class="mt-4">
+            Neonatox is born from the same philosophy, but with a modern approach: keeping the deep learning of LFS while providing practical tools for real use — native package manager, clean separation between build and runtime dependencies, and documentation designed to teach, not just instruct.
+          </p>
+        </div>
+
+        <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700">
+          <h2 class="text-2xl font-semibold text-cyan-300 mb-4">The package manager that teaches</h2>
+          <p>
+            <code>nhopkg</code> doesn't just install. Every package is a document.
+            Open a <code>*.srcnho</code> and inside you see a <code>nhoid</code> with: build vs. runtime dependencies,
+            build scripts with explicit variables, systemd integration.
+          </p>
+          <p class="mt-4">
+            A package in Neonatox isn't just a downloaded binary or source. It's <strong>a project</strong> with history.
+          </p>
+        </div>
+
+        <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700">
+          <h2 class="text-2xl font-semibold text-cyan-300 mb-4">Who is this for?</h2>
+          <p>
+            If you install Ubuntu, everything works and you never wonder why, you probably don't need Neonatox.
+          </p>
+          <p class="mt-4">
+            But if you've ever wondered:
+          </p>
+          <ul class="list-disc list-slate-300 space-y-2 mt-4 pl-4">
+            <li>What actually happens when you run <code>systemctl start</code>?</li>
+            <li>Why does this package drag 47 dependencies?</li>
+            <li>How do you compile GCC from scratch?</li>
+            <li>What does the system actually do during boot?</li>
+          </ul>
+          <p class="mt-4 text-cyan-400 font-medium">
+            Then you probably do. Welcome.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-12 flex gap-4">
+        <a href="/en/arquitectura" class="bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-semibold px-6 py-3 rounded-lg transition-colors">
+          See the architecture
+        </a>
+        <a href="/en/ruta-constructor" class="border border-cyan-500 text-cyan-400 hover:bg-cyan-500/10 font-semibold px-6 py-3 rounded-lg transition-colors">
+          Start the path
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

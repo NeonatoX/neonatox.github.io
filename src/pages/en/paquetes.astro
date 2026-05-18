@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { dict } from '../../utils/i18n';
+const t = dict.en;
+---
+
+<BaseLayout title="nhopkg Package System | Neonatox" lang="en">
+  <main class="max-w-5xl mx-auto px-6 py-16 text-slate-100">
+    <h1 class="text-3xl font-bold mb-6">{t.pkgRuleTitle}</h1>
+    
+    <!-- Rules -->
+    <ul class="grid md:grid-cols-2 gap-4 mb-12">
+      <li class="bg-slate-800/50 p-4 rounded-lg">✅ <strong>Reproducibility:</strong> same input → same binary</li>
+      <li class="bg-slate-800/50 p-4 rounded-lg">✅ <strong>Split packages:</strong> base/gtk/qt in a single PKG</li>
+      <li class="bg-slate-800/50 p-4 rounded-lg">✅ <strong>Explicit dependencies:</strong> BuildDep vs Dep(post)</li>
+      <li class="bg-slate-800/50 p-4 rounded-lg">✅ <strong>Systemd integration:</strong> services, sysusers, tmpfiles</li>
+    </ul>
+
+    <!-- nhopkg Anatomy -->
+    <h2 class="text-2xl font-semibold mb-4">Real nhopkg anatomy: Transmission 4.1.1</h2>
+    
+    <div class="bg-slate-900 rounded-lg overflow-hidden mb-6">
+      <div class="px-4 py-2 bg-slate-800 text-sm text-slate-300 border-b border-slate-700">
+        transmission.nhopkg
+      </div>
+      <pre is:raw class="p-4 text-sm text-green-400 font-mono overflow-x-auto">
+#%NHO-0.5
+# Package Maintainer: cargabsj175 &lt;cargabsj175@gmail.com&gt;
+
+# Name:       transmission
+# Version:    4.1.1
+# Release:    n2026
+# License:    GPL-2.0-or-later
+# Arch:       i686 x86_64
+# Splitpackage: gtk qt
+
+# BuildDep:   curl nodejs libevent gtkmm4 qt6-svg ...
+# Dep(post):  curl nodejs libevent
+# Dep_gtk(post): gtk4 hicolor-icon-theme
+# Dep_qt(post):  qt6-core qt6-svg
+      </pre>
+    </div>
+
+    <p class="text-slate-300 mb-6">
+      <strong>Format keys:</strong>
+    </p>
+    <ul class="list-disc pl-5 space-y-2 text-slate-300 mb-8">
+      <li><code>#%NHO-0.5</code>: nhopkg format version (future change control)</li>
+      <li><code>Splitpackage</code>: defines sub-packages derived from the same build</li>
+      <li><code>BuildDep</code> vs <code>Dep(post)</code>: separates what's needed to compile vs what's needed to run</li>
+      <li><code>Dep_gtk(post)</code>: specific dependencies per sub-package</li>
+    </ul>
+
+    <!-- Functions -->
+    <h3 class="text-xl font-semibold mb-3">Lifecycle functions</h3>
+    <div class="space-y-4 mb-8">
+      <div class="bg-slate-800/30 p-4 rounded-lg">
+        <code class="text-cyan-400">nbuild()</code>
+        <p class="text-slate-300 mt-2 text-sm">
+          Isolated compilation in <code>build/</code>. Use of explicit <code>CFLAGS</code>, <code>cmake</code> with integration flags, and <code>make -j$(nproc/2)</code> for load balancing.
+        </p>
+      </div>
+      <div class="bg-slate-800/30 p-4 rounded-lg">
+        <code class="text-cyan-400">ninstall()</code>, <code>ninstall_gtk()</code>, <code>ninstall_qt()</code>
+        <p class="text-slate-300 mt-2 text-sm">
+          Modular installation per sub-package using temporary <code>DESTDIR</code>. Includes systemd integration (<code>.service</code>, <code>sysusers</code>, <code>tmpfiles</code>) and licenses in <code>/usr/share/licenses</code>.
+        </p>
+      </div>
+      <div class="bg-slate-800/30 p-4 rounded-lg">
+        <code class="text-cyan-400">npostinstall()</code>, <code>npostremove()</code>
+        <p class="text-slate-300 mt-2 text-sm">
+          Post-installation hooks. In this example, <code>noemptyfuncs</code> indicates no additional action is required (but the hook exists for consistency).
+        </p>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
+      <p class="text-cyan-300 text-sm">
+        💡 <strong>Next step:</strong> Want to see how to create your first nhopkg from scratch? 
+        <a href="/en/ruta-constructor" class="underline hover:text-cyan-200">Follow the Builder Path →</a>
+      </p>
+    </div>
+  </main>
+</BaseLayout>

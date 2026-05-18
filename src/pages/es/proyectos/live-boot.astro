@@ -1,0 +1,132 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { dict } from '../../../utils/i18n';
+const t = dict.es;
+---
+
+<BaseLayout title="Live Boot - Constructor de ISOs" description="Constructor de ISOs Live desde cero con soporte BIOS/UEFI" lang="es">
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="flex items-center gap-4 mb-8">
+        <a href="/es/proyectos" class="text-cyan-400 hover:text-cyan-300">← Proyectos</a>
+      </div>
+
+      <div class="flex items-center gap-4 mb-8">
+        <div class="w-16 h-16 bg-purple-500/20 rounded-xl flex items-center justify-center text-4xl">💿</div>
+        <div>
+          <h1 class="text-4xl font-bold text-purple-400">Neonatox Live Boot</h1>
+          <p class="text-xl text-purple-400/70">Constructor de ISOs Live desde cero</p>
+        </div>
+      </div>
+
+      <div class="flex gap-4 mb-8">
+        <a href="https://github.com/cargabsj175/neonatox-live-boot" target="_blank" class="bg-purple-500 hover:bg-purple-400 text-slate-900 font-semibold px-6 py-3 rounded-lg transition-colors">
+          {t.verRepos} →
+        </a>
+      </div>
+
+      <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700 mb-8">
+        <h2 class="text-2xl font-semibold text-purple-300 mb-4">Descripción</h2>
+        <p class="text-slate-300">
+          Constructor de ISOs Live Linux desde cero. Diseñado como un proyecto educativo y experimental 
+          que demuestra, paso a paso, cómo un sistema Linux completo boot, detecta hardware, monta un 
+          sistema de archivos real y entrega el control a systemd.
+        </p>
+        <p class="text-slate-300 mt-4">
+          Este proyecto evita deliberadamente frameworks de alto nivel (como dracut o live-build) 
+          para exponer la verdadera mecánica del boot.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-slate-800/30 p-6 rounded-lg border border-slate-700">
+          <h3 class="text-xl font-semibold text-purple-300 mb-4">Características</h3>
+          <ul class="space-y-2 text-slate-300">
+            <li>✓ Soporte BIOS y UEFI con GRUB</li>
+            <li>✓ Sistema completo en SquashFS</li>
+            <li>✓ Sistema live escribible con OverlayFS</li>
+            <li>✓ initramfs mínimo con BusyBox</li>
+            <li>✓ Detección de hardware explícita</li>
+            <li>✓ Soporte de teclado temprano (USB HID, PS/2)</li>
+          </ul>
+        </div>
+
+        <div class="bg-slate-800/30 p-6 rounded-lg border border-slate-700">
+          <h3 class="text-xl font-semibold text-purple-300 mb-4">Compatibilidad probada</h3>
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-slate-700">
+                <th class="text-left py-2 text-slate-400">Distro</th>
+                <th class="text-center py-2 text-slate-400">USB</th>
+                <th class="text-center py-2 text-slate-400">Ventoy</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-slate-800">
+                <td class="py-2 text-slate-300">Alpine 3.22</td>
+                <td class="text-center text-green-400">✓</td>
+                <td class="text-center text-green-400">✓</td>
+              </tr>
+              <tr class="border-b border-slate-800">
+                <td class="py-2 text-slate-300">NeonatoX 2025</td>
+                <td class="text-center text-green-400">✓</td>
+                <td class="text-center text-green-400">✓</td>
+              </tr>
+              <tr>
+                <td class="py-2 text-slate-300">Ubuntu 24.04</td>
+                <td class="text-center text-green-400">✓</td>
+                <td class="text-center text-green-400">✓</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700 mb-8">
+        <h2 class="text-2xl font-semibold text-purple-300 mb-4">Uso</h2>
+        <pre is:raw class="bg-slate-900 p-4 rounded-lg text-green-400 text-sm overflow-x-auto"># Clonar el repositorio
+git clone https://github.com/cargabsj175/neonatox-live-boot.git
+
+# Personalizar fondo si se desea
+# cp tu-imagen.png iso/background.png
+
+# Compilar BusyBox (como usuario normal)
+./build-tools.sh --busybox
+
+# Generar ISO (como root)
+sudo ./build.sh
+
+# Resultado en: output/neonatox-202X-x86_64.iso</pre>
+      </div>
+
+      <div class="bg-slate-800/30 p-6 rounded-lg border border-slate-700 mb-8">
+        <h3 class="text-xl font-semibold text-purple-300 mb-4">Flujo de boot</h3>
+        <ol class="list-decimal list-slate-300 space-y-2 pl-4">
+          <li>GRUB carga el kernel e initramfs</li>
+          <li>El kernel ejecuta <code>/init</code> dentro de initramfs</li>
+          <li>Se montan sistemas virtuales mínimos</li>
+          <li>Se cargan módulos kernel esenciales</li>
+          <li>Medio de boot detectado</li>
+          <li><code>rootfs.squashfs</code> ubicado y montado</li>
+          <li>OverlayFS root creado con tmpfs</li>
+          <li>Entorno limpio preparado para systemd</li>
+          <li><code>switch_root</code> entrega control a systemd</li>
+        </ol>
+      </div>
+
+      <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-6">
+        <p class="text-purple-300">
+          <strong>¿Por qué existe este proyecto?</strong> La mayoría de los sistemas live ocultan 
+          complejidad detrás de capas de herramientas. Neonatox Live Boot hace lo contrario. 
+          Durante el desarrollo, muchas suposiciones comunes resultaron falsas:
+        </p>
+        <ul class="list-disc list-purple-300 space-y-1 mt-4 pl-4 text-purple-300/80 text-sm">
+          <li>Los dispositivos no siempre existen en <code>/dev</code> tempranamente</li>
+          <li>udev no está disponible en initramfs</li>
+          <li>systemd requiere un entorno muy específico</li>
+          <li>Los errores aparecen mucho después de su causa real</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

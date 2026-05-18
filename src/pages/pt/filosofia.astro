@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { dict } from '../../utils/i18n';
+const t = dict.pt;
+---
+
+<BaseLayout title="Filosofia" description="Filosofia Neonatox: aprender construindo, não usar sem entender." lang="pt">
+  <section class="py-20 px-4">
+    <div class="max-w-3xl mx-auto">
+      <h1 class="text-4xl font-bold text-cyan-400 mb-8">Não é só mais uma distro</h1>
+      <p class="text-xl text-slate-300 mb-8">
+        Neonatox não pretende ser a melhor distro. Pretende ser a mais honesta.
+      </p>
+
+      <div class="space-y-8 text-slate-300">
+        <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700">
+          <h2 class="text-2xl font-semibold text-cyan-300 mb-4">A caixa preta</h2>
+          <p>
+            As distribuições modernas funcionam incrivelmente bem. Instalar leva minutos. Tudo inicia. Tudo simplesmente funciona.
+          </p>
+          <p class="mt-4">
+            Mas por baixo dessa comodidade existe uma caixa preta.
+          </p>
+          <p class="mt-4">
+            Milhares de linhas de código executando fora da sua visão. Serviços do systemd iniciando processos. Configurações herdadas que você nunca tocou. Pacotes pré-compilados cuja origem e construção permanecem ocultas.
+          </p>
+          <p class="mt-4">
+            Não há nada errado com isso.
+          </p>
+          <p class="mt-4">
+            Mas se seu objetivo não é apenas usar Linux, mas dominá-lo, você precisa abrir a caixa.
+          </p>
+        </div>
+
+        <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700">
+          <h2 class="text-2xl font-semibold text-cyan-300 mb-4">Construir para compreender</h2>
+          <p>
+            Linux From Scratch não é simplesmente um guia de instalação. É uma experiência de aprendizado transformadora.
+          </p>
+          <p class="mt-4">
+            Compilar GCC ensina como nasce um compilador. Construir Glibc revela o que realmente sustenta um sistema Linux. Configurar systemd força você a entender como o sistema inicia e se organiza.
+          </p>
+          <p class="mt-4">
+            Neonatox nasce da mesma filosofia, mas com uma abordagem moderna: preservar o aprendizado profundo do LFS enquanto aporta ferramentas práticas para o uso real — gerenciador de pacotes nativo, separação limpa entre dependências de compilação e execução, e documentação desenhada para ensinar, não apenas instruir.
+          </p>
+        </div>
+
+        <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700">
+          <h2 class="text-2xl font-semibold text-cyan-300 mb-4">O gerenciador que ensina</h2>
+          <p>
+            <code>nhopkg</code> não apenas instala. Cada pacote é um documento.
+            Abra um <code>*.srcnho</code> e dentro você vê um <code>nhoid</code> com: dependências de build vs. runtime,
+            scripts de build com variáveis explícitas, integração com systemd.
+          </p>
+          <p class="mt-4">
+            Um pacote em Neonatox não é apenas um binário ou fonte baixado. É <strong>um projeto</strong> com história.
+          </p>
+        </div>
+
+        <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700">
+          <h2 class="text-2xl font-semibold text-cyan-300 mb-4">Para quem é isso?</h2>
+          <p>
+            Se você instala Ubuntu, tudo funciona e nunca se pergunta por que, provavelmente não precisa do Neonatox.
+          </p>
+          <p class="mt-4">
+            Mas se você já se perguntou:
+          </p>
+          <ul class="list-disc list-slate-300 space-y-2 mt-4 pl-4">
+            <li>O que realmente acontece quando você executa <code>systemctl start</code>?</li>
+            <li>Por que este pacote arrasta 47 dependências?</li>
+            <li>Como se compila GCC do zero?</li>
+            <li>O que o sistema realmente faz durante a inicialização?</li>
+          </ul>
+          <p class="mt-4 text-cyan-400 font-medium">
+            Então provavelmente sim. Bem-vindo.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-12 flex gap-4">
+        <a href="/pt/arquitectura" class="bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-semibold px-6 py-3 rounded-lg transition-colors">
+          Ver a arquitetura
+        </a>
+        <a href="/pt/ruta-constructor" class="border border-cyan-500 text-cyan-400 hover:bg-cyan-500/10 font-semibold px-6 py-3 rounded-lg transition-colors">
+          Começar o caminho
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

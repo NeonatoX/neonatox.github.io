@@ -1,0 +1,31 @@
+---
+// src/components/LangSwitcher.astro
+const { currentLang = 'es' } = Astro.props;
+const langs = [
+  { code: 'es', label: 'ES', title: 'Español' },
+  { code: 'en', label: 'EN', title: 'English' },
+  { code: 'pt', label: 'PT', title: 'Português' }
+];
+const currentPath = Astro.url.pathname;
+---
+<div class="flex items-center gap-1 bg-slate-800/50 rounded-lg p-1">
+  {langs.map(lang => {
+    const isActive = lang.code === currentLang;
+    // Reconstruye la URL manteniendo la ruta pero cambiando el prefijo de idioma
+    const newPath = currentPath.replace(/^\/(es|en|pt)(\/|$)/, `/${lang.code}/`);
+    return (
+      <a
+        href={newPath}
+        class={`px-2 py-1 text-sm rounded-md transition ${
+          isActive 
+            ? 'bg-cyan-500 text-black font-medium' 
+            : 'text-slate-300 hover:text-white hover:bg-slate-700'
+        }`}
+        title={lang.title}
+        hreflang={lang.code}
+      >
+        {lang.label}
+      </a>
+    );
+  })}
+</div>

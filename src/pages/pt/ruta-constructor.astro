@@ -1,0 +1,174 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { dict } from '../../utils/i18n';
+const t = dict.pt;
+---
+
+<BaseLayout title="Como o Neonatox foi construído" description="A história de como o Neonatox passou de zero a um sistema operacional completo." lang="pt">
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-4xl font-bold text-cyan-400 mb-8">Como o Neonatox foi construído</h1>
+      <p class="text-xl text-slate-300 mb-12">
+        Não é um tutorial. É a história de como um sistema operacional passou de zero a funcional.
+      </p>
+
+      <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700 mb-8">
+        <p class="text-slate-300">
+          O Neonatox não nasceu de um download. Nasceu de compilar cada pacote, 
+          uma vez, à mão, entendendo o que era necessário para o próximo funcionar. Esta é essa história.
+        </p>
+      </div>
+
+      <div class="relative">
+        <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-cyan-500/30"></div>
+        
+        <div class="space-y-12">
+          <div class="relative pl-20">
+            <div class="absolute left-6 w-4 h-4 rounded-full bg-cyan-500 border-4 border-slate-900"></div>
+            <h2 class="text-2xl font-bold text-cyan-300 mb-2">O ponto zero</h2>
+            <p class="text-slate-400 mb-4">Tudo começou com uma pergunta: o que há dentro do Linux?</p>
+            
+            <div class="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <p class="text-slate-300 text-sm">
+                Não havia Neonatox. Não havia pacotes. Apenas Linux From Scratch (LFS) 
+                como base e a decisão de que systemd seria o init. Sem chroot, 
+                sem abstrações. Apenas o livro LFS e horas de compilação.
+              </p>
+            </div>
+          </div>
+
+          <div class="relative pl-20">
+            <div class="absolute left-6 w-4 h-4 rounded-full bg-purple-500 border-4 border-slate-900"></div>
+            <h2 class="text-2xl font-bold text-purple-300 mb-2">Toolchain: o compilador que se compila a si mesmo</h2>
+            <p class="text-slate-400 mb-4">A primeira coisa construída em LFS é o que constrói tudo o mais.</p>
+            
+            <div class="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <ul class="space-y-2 text-sm font-mono text-slate-300">
+                <li><span class="text-purple-400">→</span> Binutils - montador e linker</li>
+                <li><span class="text-purple-400">→</span> GCC (apenas C) - compilador mínimo</li>
+                <li><span class="text-purple-400">→</span> Linux API Headers - interface do kernel</li>
+                <li><span class="text-purple-400">→</span> Glibc - a biblioteca padrão C</li>
+                <li><span class="text-purple-400">→</span> GCC completo - agora pode se compilar</li>
+              </ul>
+              <p class="text-slate-500 text-xs mt-3">
+                No final desta fase, em /tools vivia um compilador capaz de construir 
+                qualquer coisa para Linux. Era a semente de tudo.
+              </p>
+            </div>
+          </div>
+
+          <div class="relative pl-20">
+            <div class="absolute left-6 w-4 h-4 rounded-full bg-cyan-500 border-4 border-slate-900"></div>
+            <h2 class="text-2xl font-bold text-cyan-300 mb-2">Sistema base: ferramentas essenciais</h2>
+            <p class="text-slate-400 mb-4">Com o toolchain pronto, compilou-se tudo que é preciso para um sistema usável.</p>
+            
+            <div class="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <ul class="space-y-2 text-sm font-mono text-slate-300">
+                <li><span class="text-cyan-400">→</span> M4, Ncurses, Bash, Coreutils, Diffutils...</li>
+                <li><span class="text-cyan-400">→</span> GMP, MPFR, MPC (matemática para GCC)</li>
+                <li><span class="text-cyan-400">→</span> Perl, Python3, Findutils, Gawk</li>
+                <li><span class="text-cyan-400">→</span> Gettext, Bison, Flex (ferramentas de desenvolvimento)</li>
+                <li><span class="text-cyan-400">→</span> file, grep, sed, gzip, tar</li>
+              </ul>
+              <p class="text-slate-500 text-xs mt-3">
+                Cada pacote foi configurado, compilado e instalado à mão. Cada flag, 
+                cada opção, foi uma decisão consciente.
+              </p>
+            </div>
+          </div>
+
+          <div class="relative pl-20">
+            <div class="absolute left-6 w-4 h-4 rounded-full bg-purple-500 border-4 border-slate-900"></div>
+            <h2 class="text-2xl font-bold text-purple-300 mb-2">Init, rede e bootloader</h2>
+            <p class="text-slate-400 mb-4">O sistema que inicia. systemd, kernel, GRUB.</p>
+            
+            <div class="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <ul class="space-y-2 text-sm font-mono text-slate-300">
+                <li><span class="text-purple-400">→</span> Systemd - init, serviços, logging</li>
+                <li><span class="text-purple-400">→</span> Linux Kernel 6.x - compilação customizada</li>
+                <li><span class="text-purple-400">→</span> GRUB2 - bootloader BIOS/UEFI</li>
+                <li><span class="text-purple-400">→</span> dhcpcd ou systemd-networkd</li>
+              </ul>
+              <p class="text-slate-500 text-xs mt-3">
+                Neste ponto, o sistema iniciava. Você podia fazer login, tinha rede. 
+                Tinha um nome: LFS. Agora precisava se tornar Neonatox.
+              </p>
+            </div>
+          </div>
+
+          <div class="relative pl-20">
+            <div class="absolute left-6 w-4 h-4 rounded-full bg-yellow-500 border-4 border-slate-900"></div>
+            <h2 class="text-2xl font-bold text-yellow-300 mb-2">nhopkg: o gerenciador de pacotes próprio</h2>
+            <p class="text-slate-400 mb-4">De LFS para Neonatox: precisava de um gerenciador que ensina.</p>
+            
+            <div class="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <p class="text-slate-300 text-sm mb-3">
+                nhopkg não apenas instala pacotes. Cada pacote é um documento. 
+                O arquivo <code>nhoid</code> contém metadados, dependências, scripts de build.
+              </p>
+              <p class="text-slate-500 text-xs">
+                O primeiro repositório foi configurado: /var/lib/nhopkg/extra com pacotes 
+                base do sistema. A cadeia fechou: agora o sistema podia instalar mais 
+                software usando a si mesmo.
+              </p>
+            </div>
+          </div>
+
+          <div class="relative pl-20">
+            <div class="absolute left-6 w-4 h-4 rounded-full bg-green-500 border-4 border-slate-900"></div>
+            <h2 class="text-2xl font-bold text-green-300 mb-2">O ecossistema: Live Boot + Installer</h2>
+            <p class="text-slate-400 mb-4">Um sistema que não pode ser distribuído não serve.</p>
+            
+            <div class="bg-slate-900 rounded-lg p-4 border border-slate-700">
+              <ul class="space-y-2 text-sm font-mono text-slate-300">
+                <li><span class="text-green-400">→</span> neonatox-live-boot - gera ISOs com SquashFS</li>
+                <li><span class="text-green-400">→</span> neonatox-installer - instala o sistema em disco</li>
+              </ul>
+              <p class="text-slate-500 text-xs mt-3">
+                Com o ISO gerado e instalador funcionando, o Neonatox podia viver 
+                em um USB e se replicar para outras máquinas.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-16 bg-slate-800/50 p-6 rounded-lg border border-slate-700">
+        <h3 class="text-xl font-semibold text-cyan-300 mb-4">E os pacotes?</h3>
+        <p class="text-slate-300 mb-4">
+          Cada pacote do Neonatox tem duas partes:
+        </p>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="bg-slate-900 p-4 rounded-lg">
+            <code class="text-cyan-400">.nhoid</code>
+            <p class="text-slate-400 text-sm mt-2">Metadados do pacote fonte. Contém script de build (nbuild), instalação (ninstall), dependências e versionamento. É um arquivo de texto que documenta como construir o pacote.</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-lg">
+            <code class="text-cyan-400">.nho</code>
+            <p class="text-slate-400 text-sm mt-2">Pacote binário pronto para instalar. Arquivo comprimido com arquivos + metadados + scripts pós-install. O que realmente é instalado no sistema.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-6">
+        <p class="text-cyan-300">
+          <strong>O resultado:</strong> Um sistema construído do zero, onde cada pacote 
+          foi decisão consciente, onde o gerenciador não esconde mas ensina, 
+          onde boot não é magia mas código visível.
+        </p>
+        <p class="text-cyan-400 font-medium mt-4">
+          Não é o único caminho. Mas é o nosso.
+        </p>
+      </div>
+
+      <div class="flex gap-4 mt-12">
+        <a href="/pt/paquetes" class="bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-semibold px-6 py-3 rounded-lg transition-colors">
+          Ver estrutura de pacotes
+        </a>
+        <a href="/pt/proyectos" class="border border-cyan-500 text-cyan-400 hover:bg-cyan-500/10 font-semibold px-6 py-3 rounded-lg transition-colors">
+          Ver projetos do ecossistema
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

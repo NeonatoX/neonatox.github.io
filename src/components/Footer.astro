@@ -1,0 +1,13 @@
+---
+const currentLang = Astro.params.lang || 'es';
+---
+<footer class="bg-slate-950 border-t border-slate-800 py-8 mt-16">
+  <div class="max-w-6xl mx-auto px-4 text-center text-slate-400 text-sm">
+    <p>NEONATOX &copy; 2026 — {currentLang === 'es' ? 'Construido desde cero, no desde una plantilla.' : currentLang === 'en' ? 'Built from scratch, not from a template.' : 'Construído do zero, não de um modelo.'}</p>
+    <div class="flex justify-center gap-4 mt-4">
+      <a href={`/${currentLang}/paquetes`} class="text-cyan-400 hover:text-cyan-300">Paquetes</a>
+      <a href={`/${currentLang}/arquitectura`} class="text-cyan-400 hover:text-cyan-300">Arquitectura</a>
+      <a href={`/${currentLang}/ruta-constructor`} class="text-cyan-400 hover:text-cyan-300">{currentLang === 'es' ? 'Ruta del Constructor' : currentLang === 'en' ? 'Builder Path' : 'Caminho do Construtor'}</a>
+    </div>
+  </div>
+</footer>

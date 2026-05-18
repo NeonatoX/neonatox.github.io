@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { dict } from '../../../utils/i18n';
+const t = dict.es;
+---
+
+<BaseLayout title="Installer - Instalador modular" description="Framework de instalación modular basado en estado" lang="es">
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="flex items-center gap-4 mb-8">
+        <a href="/es/proyectos" class="text-cyan-400 hover:text-cyan-300">← Proyectos</a>
+      </div>
+
+      <div class="flex items-center gap-4 mb-8">
+        <div class="w-16 h-16 bg-yellow-500/20 rounded-xl flex items-center justify-center text-4xl">⚙️</div>
+        <div>
+          <h1 class="text-4xl font-bold text-yellow-400">Neonatox Installer</h1>
+          <p class="text-xl text-yellow-400/70">Framework de instalación modular</p>
+        </div>
+      </div>
+
+      <div class="flex gap-4 mb-8">
+        <a href="https://github.com/cargabsj175/neonatox-installer" target="_blank" class="bg-yellow-500 hover:bg-yellow-400 text-slate-900 font-semibold px-6 py-3 rounded-lg transition-colors">
+          {t.verRepos} →
+        </a>
+        <span class="bg-yellow-500/20 text-yellow-400 px-3 py-2 rounded-lg text-sm">{t.experimental}</span>
+      </div>
+
+      <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700 mb-8">
+        <h2 class="text-2xl font-semibold text-yellow-300 mb-4">Descripción</h2>
+        <p class="text-slate-300">
+          Framework de instalación portable, modular y basado en estado, diseñado para sistemas live 
+          generados con <strong>neonatox-live-boot</strong>.
+        </p>
+        <p class="text-slate-300 mt-4">
+          El instalador <strong>no es un script monolónico</strong>, sino un conjunto de micro-aplicaciones 
+          que trabajan independientemente, almacenan estado en archivos `.conf` + `.ok`, y pueden 
+          invocarse desde CLI, TUI o GUI.
+        </p>
+      </div>
+
+      <div class="bg-slate-800/30 p-6 rounded-lg border border-slate-700 mb-8">
+        <h3 class="text-xl font-semibold text-yellow-300 mb-4">Micro-aplicaciones</h3>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+          <div class="bg-slate-900 p-3 rounded"><span class="text-yellow-400">partctl</span><p class="text-slate-500 text-xs">Particiones</p></div>
+          <div class="bg-slate-900 p-3 rounded"><span class="text-yellow-400">localectl</span><p class="text-slate-500 text-xs">Locale/Teclado</p></div>
+          <div class="bg-slate-900 p-3 rounded"><span class="text-yellow-400">timectl</span><p class="text-slate-500 text-xs">Zona horaria</p></div>
+          <div class="bg-slate-900 p-3 rounded"><span class="text-yellow-400">usersctl</span><p class="text-slate-500 text-xs">Usuarios</p></div>
+          <div class="bg-slate-900 p-3 rounded"><span class="text-yellow-400">fstabctl</span><p class="text-slate-500 text-xs">fstab</p></div>
+          <div class="bg-slate-900 p-3 rounded"><span class="text-yellow-400">bootctl</span><p class="text-slate-500 text-xs">Bootloader</p></div>
+          <div class="bg-slate-900 p-3 rounded"><span class="text-yellow-400">systemid</span><p class="text-slate-500 text-xs">Hostname</p></div>
+          <div class="bg-slate-900 p-3 rounded"><span class="text-yellow-400">sysconfig</span><p class="text-slate-500 text-xs">Config sistema</p></div>
+          <div class="bg-slate-900 p-3 rounded"><span class="text-yellow-400">distroinfo</span><p class="text-slate-500 text-xs">OS release</p></div>
+        </div>
+      </div>
+
+      <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700 mb-8">
+        <h2 class="text-2xl font-semibold text-yellow-300 mb-4">Distribuciones soportadas</h2>
+        <ul class="space-y-2 text-slate-300">
+          <li>✓ <strong>Neonatox</strong> - via live + bind /boot</li>
+          <li>✓ <strong>Debian/Ubuntu</strong> - update-initramfs</li>
+          <li>✓ <strong>Arch Linux</strong> - mkinitcpio</li>
+          <li>✓ <strong>Alpine Linux</strong> - mkinitfs</li>
+          <li>✓ <strong>RedHat/Fedora</strong> - dracut</li>
+          <li>✓ <strong>LFS</strong> - layout personalizado</li>
+        </ul>
+      </div>
+
+      <div class="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-6">
+        <p class="text-yellow-300">
+          <strong>Estado:</strong> Funcional y probado. Instalación completa verificada. 
+          Usuario login trabajando. Próximos pasos: frontends CLI/TUI/GTK, documentación pública, 
+          polish de UX, usuarios/grupos del sistema.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

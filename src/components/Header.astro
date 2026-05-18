@@ -1,0 +1,26 @@
+---
+import LangSwitcher from './LangSwitcher.astro';
+const currentLang = Astro.params.lang || 'es';
+
+const navLabels = {
+  es: { filosofia: 'Filosofía', arquitectura: 'Arquitectura', paquetes: 'Paquetes', proyectos: 'Proyectos', descargas: 'Descargas' },
+  en: { filosofia: 'Philosophy', arquitectura: 'Architecture', paquetes: 'Packages', proyectos: 'Projects', descargas: 'Downloads' },
+  pt: { filosofia: 'Filosofia', arquitetura: 'Arquitetura', pacotes: 'Pacotes', projetos: 'Projetos', downloads: 'Downloads' }
+};
+const t = navLabels[currentLang as keyof typeof navLabels];
+---
+<header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur border-b border-slate-700">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+    <a href={`/${currentLang}/`} class="flex items-center gap-2">
+      <img src="/logo.png" alt="Neonatox" class="h-8 w-auto" />
+    </a>
+    <nav class="hidden md:flex gap-6 text-slate-300">
+      <a href={`/${currentLang}/filosofia`}>{t.filosofia}</a>
+      <a href={`/${currentLang}/arquitectura`}>{t.arquitectura}</a>
+      <a href={`/${currentLang}/paquetes`}>{t.paquetes}</a>
+      <a href={`/${currentLang}/proyectos`} class="text-purple-400 hover:text-purple-300">{t.proyectos}</a>
+      <a href={`/${currentLang}/descargas`} class="text-cyan-400 hover:text-cyan-300">{t.descargas || t.downloads}</a>
+    </nav>
+    <LangSwitcher currentLang={currentLang} />
+  </div>
+</header>

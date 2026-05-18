@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { dict } from '../../utils/i18n';
+const t = dict.pt;
+---
+
+<BaseLayout title="Sistema de Pacotes nhopkg | Neonatox" lang="pt">
+  <main class="max-w-5xl mx-auto px-6 py-16 text-slate-100">
+    <h1 class="text-3xl font-bold mb-6">{t.pkgRuleTitle}</h1>
+    
+    <!-- Regras -->
+    <ul class="grid md:grid-cols-2 gap-4 mb-12">
+      <li class="bg-slate-800/50 p-4 rounded-lg">✅ <strong>Reprodutibilidade:</strong> mesma entrada → mesmo binário</li>
+      <li class="bg-slate-800/50 p-4 rounded-lg">✅ <strong>Split packages:</strong> base/gtk/qt em um único PKG</li>
+      <li class="bg-slate-800/50 p-4 rounded-lg">✅ <strong>Dependências explícitas:</strong> BuildDep vs Dep(post)</li>
+      <li class="bg-slate-800/50 p-4 rounded-lg">✅ <strong>Integração systemd:</strong> serviços, sysusers, tmpfiles</li>
+    </ul>
+
+    <!-- Anatomia nhopkg -->
+    <h2 class="text-2xl font-semibold mb-4">Anatomia de um nhopkg real: Transmission 4.1.1</h2>
+    
+    <div class="bg-slate-900 rounded-lg overflow-hidden mb-6">
+      <div class="px-4 py-2 bg-slate-800 text-sm text-slate-300 border-b border-slate-700">
+        transmission.nhopkg
+      </div>
+      <pre is:raw class="p-4 text-sm text-green-400 font-mono overflow-x-auto">
+#%NHO-0.5
+# Package Maintainer: cargabsj175 &lt;cargabsj175@gmail.com&gt;
+
+# Name:       transmission
+# Version:    4.1.1
+# Release:    n2026
+# License:    GPL-2.0-or-later
+# Arch:       i686 x86_64
+# Splitpackage: gtk qt
+
+# BuildDep:   curl nodejs libevent gtkmm4 qt6-svg ...
+# Dep(post):  curl nodejs libevent
+# Dep_gtk(post): gtk4 hicolor-icon-theme
+# Dep_qt(post):  qt6-core qt6-svg
+      </pre>
+    </div>
+
+    <p class="text-slate-300 mb-6">
+      <strong>Chaves do formato:</strong>
+    </p>
+    <ul class="list-disc pl-5 space-y-2 text-slate-300 mb-8">
+      <li><code>#%NHO-0.5</code>: versão do formato nhopkg (controle de mudanças futuro)</li>
+      <li><code>Splitpackage</code>: define sub-pacotes derivados do mesmo build</li>
+      <li><code>BuildDep</code> vs <code>Dep(post)</code>: separa o necessário para compilar vs o necessário para executar</li>
+      <li><code>Dep_gtk(post)</code>: dependências específicas por sub-pacote</li>
+    </ul>
+
+    <!-- Funções -->
+    <h3 class="text-xl font-semibold mb-3">Funções do ciclo de vida</h3>
+    <div class="space-y-4 mb-8">
+      <div class="bg-slate-800/30 p-4 rounded-lg">
+        <code class="text-cyan-400">nbuild()</code>
+        <p class="text-slate-300 mt-2 text-sm">
+          Compilação isolada em <code>build/</code>. Uso de <code>CFLAGS</code> explícitas, <code>cmake</code> com flags de integração, e <code>make -j$(nproc/2)</code> para balancear carga.
+        </p>
+      </div>
+      <div class="bg-slate-800/30 p-4 rounded-lg">
+        <code class="text-cyan-400">ninstall()</code>, <code>ninstall_gtk()</code>, <code>ninstall_qt()</code>
+        <p class="text-slate-300 mt-2 text-sm">
+          Instalação modular por sub-pacote usando <code>DESTDIR</code> temporário. Inclui integração systemd (<code>.service</code>, <code>sysusers</code>, <code>tmpfiles</code>) e licenças em <code>/usr/share/licenses</code>.
+        </p>
+      </div>
+      <div class="bg-slate-800/30 p-4 rounded-lg">
+        <code class="text-cyan-400">npostinstall()</code>, <code>npostremove()</code>
+        <p class="text-slate-300 mt-2 text-sm">
+          Hooks pós-instalação. Neste exemplo, <code>noemptyfuncs</code> indica que não é requerida ação adicional (mas o hook existe para consistência).
+        </p>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
+      <p class="text-cyan-300 text-sm">
+        💡 <strong>Próximo passo:</strong> Quer ver como criar seu primeiro nhopkg do zero? 
+        <a href="/pt/ruta-constructor" class="underline hover:text-cyan-200">Siga o Caminho do Construtor →</a>
+      </p>
+    </div>
+  </main>
+</BaseLayout>
