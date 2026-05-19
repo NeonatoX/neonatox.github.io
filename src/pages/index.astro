@@ -1,13 +1,26 @@
 ---
-const acceptLang = Astro.request.headers.get('accept-language') || '';
-const lang = acceptLang.toLowerCase();
-
-let defaultLang = 'es';
-if (lang.includes('pt') || lang.includes('pt-')) {
-  defaultLang = 'pt';
-} else if (lang.includes('en')) {
-  defaultLang = 'en';
-}
-
-return Astro.redirect(`/${defaultLang}/`, 301);
 ---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="refresh" content="0;url=/es/" />
+    <title>Neonatox</title>
+  </head>
+  <body>
+    <script>
+      const lang = navigator.language || navigator.userLanguage || 'es';
+      const lower = lang.toLowerCase();
+      let redirect = '/es/';
+      
+      if (lower.startsWith('pt')) {
+        redirect = '/pt/';
+      } else if (lower.startsWith('en')) {
+        redirect = '/en/';
+      }
+      
+      window.location.href = redirect;
+    </script>
+  </body>
+</html>
