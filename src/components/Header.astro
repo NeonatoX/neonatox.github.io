@@ -3,9 +3,9 @@ import LangSwitcher from './LangSwitcher.astro';
 const currentLang = Astro.params.lang || 'es';
 
 const navLabels = {
-  es: { filosofia: 'Filosofía', arquitectura: 'Arquitectura', paquetes: 'Paquetes', proyectos: 'Proyectos', descargas: 'Descargas' },
-  en: { filosofia: 'Philosophy', arquitectura: 'Architecture', paquetes: 'Packages', proyectos: 'Projects', descargas: 'Downloads' },
-  pt: { filosofia: 'Filosofia', arquitetura: 'Arquitetura', pacotes: 'Pacotes', projetos: 'Projetos', downloads: 'Downloads' }
+  es: { historia: 'Historia', filosofia: 'Filosofía', arquitectura: 'Arquitectura', paquetes: 'Paquetes', proyectos: 'Proyectos', descargas: 'Descargas' },
+  en: { historia: 'History', filosofia: 'Philosophy', arquitectura: 'Architecture', paquetes: 'Packages', proyectos: 'Projects', descargas: 'Downloads' },
+  pt: { historia: 'História', filosofia: 'Filosofia', arquitetura: 'Arquitetura', pacotes: 'Pacotes', projetos: 'Projetos', downloads: 'Downloads' }
 };
 const t = navLabels[currentLang as keyof typeof navLabels];
 ---
@@ -15,6 +15,7 @@ const t = navLabels[currentLang as keyof typeof navLabels];
       <img src="/logo.png" alt="Neonatox" class="h-8 w-auto" />
     </a>
     <nav class="hidden md:flex gap-6 text-slate-300">
+      <a href={`/${currentLang}/historia`}>{t.historia}</a>
       <a href={`/${currentLang}/filosofia`}>{t.filosofia}</a>
       <a href={`/${currentLang}/arquitectura`}>{t.arquitectura}</a>
       <a href={`/${currentLang}/paquetes`}>{t.paquetes}</a>
