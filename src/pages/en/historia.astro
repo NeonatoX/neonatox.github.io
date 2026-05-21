@@ -3,8 +3,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 const t = {
   title: "History",
   desc: "How Neonatox was born: from curiosity to building an operating system from scratch.",
-  summary: "Neonatox wasn't born because Linux was broken. It was born because I wanted to understand it. From Mandriva to LFS, from the pause to the return in 2023.",
-  readMore: "Read the full story",
   backHome: "← Back to home"
 };
 ---
@@ -13,136 +11,166 @@ const t = {
   <section class="py-16 px-4">
     <div class="max-w-4xl mx-auto">
       <a href="/en/" class="text-cyan-400 hover:text-cyan-300 mb-8 inline-block">{t.backHome}</a>
-      <article class="prose prose-invert prose-lg max-w-none">
-        <h1 class="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 mb-8">{t.title}</h1>
 
-        <p class="text-xl text-slate-300">Neonatox wasn't born because Linux was broken.</p>
-        <p class="text-xl text-slate-300">It was born because I wanted to understand it.</p>
-
-        <p class="text-slate-300">For many people, free software simply means using free programs.</p>
-        <p class="text-slate-300">For me, it meant something different.</p>
-
-        <ul class="list-disc list-inside text-slate-300 space-y-2">
+      <!-- HERO -->
+      <div class="text-center mb-16">
+        <h1 class="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 mb-6">{t.title}</h1>
+        <p class="text-lg text-slate-300 max-w-2xl mx-auto">
+          Neonatox wasn't born because Linux was broken, it was born because I wanted to understand it. For many people, free software simply means using free programs. For me, it meant something different.
+        </p>
+        <ul class="list-disc list-inside text-slate-300 space-y-2 mt-6 max-w-xl mx-auto">
           <li>The freedom to modify.</li>
           <li>The freedom to build.</li>
           <li>The freedom to understand what really happens inside the system.</li>
         </ul>
+        <p class="text-lg text-slate-300 mt-6 max-w-2xl mx-auto">
+          That was the starting point. I didn't just want to install a distribution and use it. I wanted to truly experience the freedoms that free software promises.
+        </p>
+      </div>
 
-        <p class="text-slate-300">That was the starting point.</p>
-        <p class="text-slate-300">I didn't just want to install a distribution and use it.</p>
-        <p class="text-slate-300">I wanted to truly experience the freedoms that free software promises.</p>
+      <!-- HERO IMAGE -->
+      <div class="mb-16 rounded-xl overflow-hidden border border-slate-700">
+        <img src="/screenshots/historia-hero.jpg" alt="Neonatox - The beginning" class="w-full h-auto" loading="lazy">
+      </div>
 
-        <h2 class="text-2xl font-bold text-white mt-12 mb-4">The beginning</h2>
+      <!-- SECTIONS WITH IMAGES -->
+      <div class="space-y-20">
 
-        <p class="text-slate-300">I started my journey with <strong>Mandriva</strong>.</p>
-        <p class="text-slate-300">Then <strong>Ubuntu</strong>.</p>
-        <p class="text-slate-300">Later <strong>Arch Linux</strong>.</p>
-        <p class="text-slate-300">Each one taught me something different.</p>
+        <!-- THE BEGINNING -->
+        <section>
+          <div class="mb-8">
+            <h2 class="text-2xl font-bold text-white mb-4">The beginning</h2>
+            <p class="text-slate-300 mb-4">I started my journey with <strong>Mandriva</strong>. Then <strong>Ubuntu</strong>. Later <strong>Arch Linux</strong>. Each one taught me something different.</p>
+            <p class="text-slate-300 mb-4">Ubuntu, in its early years, still forced you to solve problems and learn a lot. Over time it improved so much that many things no longer required intervention.</p>
+            <p class="text-slate-300 mb-4">Arch brought back some of that learning, but it still wasn't enough. I kept feeling something was missing.</p>
+            <blockquote class="border-l-4 border-cyan-500 pl-4 italic text-slate-400 my-6">
+              Not because they were bad distributions. Simply because they were still systems built by others.
+            </blockquote>
+            <p class="text-slate-300">And while that's a natural part of free software, I wanted to experience something different: <strong>build from scratch.</strong></p>
+          </div>
+          <div class="rounded-xl overflow-hidden border border-slate-700">
+            <img src="/screenshots/historia-comienzo.jpg" alt="First distributions: Mandriva, Ubuntu, Arch" class="w-full h-auto" loading="lazy">
+          </div>
+        </section>
 
-        <p class="text-slate-300">Ubuntu, in its early years, still forced you to solve problems and learn a lot. Over time it improved so much that many things no longer required intervention.</p>
-        <p class="text-slate-300">Arch brought back some of that learning, but it still wasn't enough.</p>
-        <p class="text-slate-300">I kept feeling something was missing.</p>
+        <!-- LINUX FROM SCRATCH -->
+        <section>
+          <div class="mb-8">
+            <h2 class="text-2xl font-bold text-white mb-4">Linux From Scratch</h2>
+            <p class="text-slate-300 mb-4">That's when <strong>Linux From Scratch</strong> appeared and everything changed. LFS wasn't just a guide, it was identity, a way to understand Linux component by component.</p>
+            <p class="text-slate-300 mb-4">At first it was copying commands without fully understanding, but a moment came when that changed. It was no longer copy and paste, now I was starting to understand:</p>
+            <ul class="list-disc list-inside text-slate-300 space-y-2 mb-4">
+              <li>what each line did</li>
+              <li>which environment variables mattered</li>
+              <li>why certain paths existed</li>
+              <li>how toolchain, kernel, init and libraries fit together</li>
+            </ul>
+            <p class="text-slate-300">That was probably the moment Neonatox stopped being just an idea.</p>
+          </div>
+          <div class="rounded-xl overflow-hidden border border-slate-700">
+            <img src="/screenshots/historia-lfs.jpg" alt="Linux From Scratch - Compiling from scratch" class="w-full h-auto" loading="lazy">
+          </div>
+        </section>
 
-        <blockquote class="border-l-4 border-cyan-500 pl-4 italic text-slate-400 my-6">
-          Not because they were bad distributions. Simply because they were still systems built by others.
-        </blockquote>
+        <!-- FIRST VERSIONS -->
+        <section>
+          <div class="mb-8">
+            <h2 class="text-2xl font-bold text-white mb-4">First versions</h2>
+            <p class="text-slate-300 mb-4">The first versions were crazy, I didn't have a package manager at all, everything was much more manual. I especially remember compiling <strong>XFree86</strong>, a total disaster.</p>
+            <p class="text-slate-300 mb-4">It was huge, monolithic, a soup of components hard to understand. That reinforced an important idea:</p>
+            <blockquote class="border-l-4 border-cyan-500 pl-4 italic text-slate-400 my-6">
+              Modularity, reproducibility and control were necessary if I wanted to make something truly useful.
+            </blockquote>
+          </div>
+          <div class="rounded-xl overflow-hidden border border-slate-700">
+            <img src="/screenshots/historia-primeras-versiones.jpg" alt="First versions of Neonatox" class="w-full h-auto" loading="lazy">
+          </div>
+        </section>
 
-        <p class="text-slate-300">And while that's a natural part of free software, I wanted to experience something different:</p>
-        <p class="text-slate-300"><strong>build from scratch.</strong></p>
+        <!-- ORIGIN OF THE NAME -->
+        <section>
+          <div class="mb-8">
+            <h2 class="text-2xl font-bold text-white mb-4">Origin of the name</h2>
+            <p class="text-slate-300 mb-4">The name <strong>Neonatox</strong> was born from a conversation with my brother.</p>
+            <p class="text-slate-300 mb-4">When I explained that I wasn't modifying an existing distribution but building a new one from scratch, the idea came up:</p>
+            <code class="bg-slate-800 px-3 py-1 rounded text-cyan-400">Neonato + X = Neonatox</code>
+            <p class="text-slate-300 mt-4">A distribution being born from scratch.</p>
+          </div>
+          <div class="rounded-xl overflow-hidden border border-slate-700">
+            <img src="/screenshots/historia-nombre.jpg" alt="Origin of the name Neonatox" class="w-full h-auto" loading="lazy">
+          </div>
+        </section>
 
-        <h2 class="text-2xl font-bold text-white mt-12 mb-4">Linux From Scratch</h2>
+        <!-- NHOPKG -->
+        <section>
+          <div class="mb-8">
+            <h2 class="text-2xl font-bold text-white mb-4">nhopkg</h2>
+            <p class="text-slate-300 mb-4">At some point another need appeared: packaging.</p>
+            <p class="text-slate-300 mb-4">I tried several things, among which I remember trying to compile <code class="bg-slate-800 px-2 py-0.5 rounded">dpkg</code> to build my own <code class="bg-slate-800 px-2 py-0.5 rounded">.deb</code> packages, but it was too complex for me at that time.</p>
+            <p class="text-slate-300 mb-4">Gentoo's way of managing packages seemed like another planet to me.</p>
+            <p class="text-slate-300 mb-4">That's when I stumbled upon <strong>nhopkg</strong>. Nhopkg was originally created by <strong>Jaime Gil</strong>, a Spanish developer who at that time was also building his own LFS-based distribution called <strong>Nhoax</strong>.</p>
+            <code class="bg-slate-800 px-3 py-1 rounded text-cyan-400">nhopkg = Nhoax Package Manager</code>
+            <p class="text-slate-300 mt-4 mb-4">His idea was fascinating: a package manager that was universal, simple and adaptable. Although Nhoax was never released, nhopkg was already there and it fit.</p>
+            <p class="text-slate-300 mb-4">When Jaime abandoned the project, I was already starting to understand Bash better. Nhopkg was simple, understandable and improvable, so I started evolving it for Neonatox.</p>
+            <blockquote class="border-l-4 border-cyan-500 pl-4 italic text-slate-400 my-6">
+              That's also free software: understanding existing tools, improving them and building something new.
+            </blockquote>
+          </div>
+          <div class="rounded-xl overflow-hidden border border-slate-700">
+            <img src="/screenshots/historia-nhopkg.jpg" alt="nhopkg - Nhoax Package Manager" class="w-full h-auto" loading="lazy">
+          </div>
+        </section>
 
-        <p class="text-slate-300">That's when <strong>Linux From Scratch</strong> appeared and everything changed. LFS wasn't just a guide, it was identity, a way to understand Linux component by component.</p>
+        <!-- THE PAUSE -->
+        <section>
+          <div class="mb-8">
+            <h2 class="text-2xl font-bold text-white mb-4">The pause</h2>
+            <p class="text-slate-300 mb-4">For a while came a pause. Not necessarily technical, but human. Like many personal projects, Neonatox also had years where the priority was simply real life.</p>
+            <p class="text-slate-300 mb-4"><strong>Surviving, working and focusing on the essential left little room for technical experiments.</strong></p>
+            <p class="text-slate-300">The project went silent, with no progress, not for lack of interest. It simply wasn't the time.</p>
+          </div>
+          <div class="rounded-xl overflow-hidden border border-slate-700">
+            <img src="/screenshots/historia-pausa.jpg" alt="The pause in Neonatox development" class="w-full h-auto" loading="lazy">
+          </div>
+        </section>
 
-        <p class="text-slate-300">At first it was copying commands without fully understanding, but a moment came when that changed. It was no longer copy and paste, now I was starting to understand:</p>
+        <!-- THE RETURN -->
+        <section>
+          <div class="mb-8">
+            <h2 class="text-2xl font-bold text-white mb-4">The return</h2>
+            <p class="text-slate-300 mb-4">Until <strong>2023</strong>. I started working on Neonatox again, but not as simple nostalgia. It returned with the need to put accumulated experience into practice. With more understanding, with a different perspective.</p>
+            <p class="text-slate-300">Things like Systemd stopped seeming like magic. Getting kernel compilation to work, mastering topics like initramfs, multilib, reproducible packaging, making it possible to fully rebuild a functional system using only packages created with nhopkg, that was the goal. What was once an experiment began to become a real distribution.</p>
+          </div>
+          <div class="rounded-xl overflow-hidden border border-slate-700">
+            <img src="/screenshots/historia-regreso.jpg" alt="The return of Neonatox in 2023" class="w-full h-auto" loading="lazy">
+          </div>
+        </section>
 
-        <ul class="list-disc list-inside text-slate-300 space-y-2">
-          <li>what each line did</li>
-          <li>which environment variables mattered</li>
-          <li>why certain paths existed</li>
-          <li>how toolchain, kernel, init and libraries fit together</li>
-        </ul>
+        <!-- TODAY -->
+        <section>
+          <div class="mb-8">
+            <h2 class="text-2xl font-bold text-white mb-4">Today</h2>
+            <p class="text-slate-300 mb-4">If I had to define Neonatox technically in one phrase:</p>
+            <blockquote class="border-l-4 border-purple-500 pl-4 text-xl text-white my-6">
+              It's a puzzle.
+            </blockquote>
+            <p class="text-slate-300 mb-4">A system built piece by piece to understand how everything fits together. It doesn't try to be just another distribution.</p>
+            <p class="text-slate-300 mb-4">It's a platform to:</p>
+            <ul class="list-disc list-inside text-slate-300 space-y-2 mb-4">
+              <li>learn</li>
+              <li>experiment</li>
+              <li>build</li>
+              <li>adapt</li>
+            </ul>
+            <p class="text-slate-300 mb-4">Ideally, for any environment where the user wants to take it. From personal exploration to much more serious uses. Neonatox exists because curiosity can also build operating systems.</p>
+            <p class="text-lg font-semibold text-cyan-400">It wasn't abandoned. It waited for the right moment.</p>
+          </div>
+          <div class="rounded-xl overflow-hidden border border-slate-700">
+            <img src="/screenshots/historia-hoy.jpg" alt="Neonatox today" class="w-full h-auto" loading="lazy">
+          </div>
+        </section>
 
-        <p class="text-slate-300">That was probably the moment Neonatox stopped being just an idea.</p>
-
-        <h2 class="text-2xl font-bold text-white mt-12 mb-4">First versions</h2>
-
-        <p class="text-slate-300">The first versions were crazy, I didn't have a package manager at all, everything was much more manual. I especially remember compiling <strong>XFree86</strong>, a total disaster.</p>
-
-        <p class="text-slate-300">It was huge, monolithic, a soup of components hard to understand. That reinforced an important idea:</p>
-
-        <blockquote class="border-l-4 border-cyan-500 pl-4 italic text-slate-400 my-6">
-          Modularity, reproducibility and control were necessary if I wanted to make something truly useful.
-        </blockquote>
-
-        <h2 class="text-2xl font-bold text-white mt-12 mb-4">Origin of the name</h2>
-
-        <p class="text-slate-300">The name <strong>Neonatox</strong> was born from a conversation with my brother.</p>
-
-        <p class="text-slate-300">When I explained that I wasn't modifying an existing distribution but building a new one from scratch, the idea came up:</p>
-
-        <code class="bg-slate-800 px-3 py-1 rounded text-cyan-400">Neonato + X = Neonatox</code>
-
-        <p class="text-slate-300 mt-4">A distribution being born from scratch.</p>
-
-        <h2 class="text-2xl font-bold text-white mt-12 mb-4">nhopkg</h2>
-
-        <p class="text-slate-300">At some point another need appeared: packaging.</p>
-
-        <p class="text-slate-300">I tried several things, among which I remember trying to compile <code class="bg-slate-800 px-2 py-0.5 rounded">dpkg</code> to build my own <code class="bg-slate-800 px-2 py-0.5 rounded">.deb</code> packages, but it was too complex for me at that time.</p>
-
-        <p class="text-slate-300">Gentoo's way of managing packages seemed like another planet to me.</p>
-
-        <p class="text-slate-300">That's when I stumbled upon <strong>nhopkg</strong>. Nhopkg was originally created by <strong>Jaime Gil</strong>, a Spanish developer who at that time was also building his own LFS-based distribution called <strong>Nhoax</strong>.</p>
-
-        <code class="bg-slate-800 px-3 py-1 rounded text-cyan-400">nhopkg = Nhoax Package Manager</code>
-
-        <p class="text-slate-300 mt-4">His idea was fascinating: a package manager that was universal, simple and adaptable. Although Nhoax was never released, nhopkg was already there and it fit.</p>
-
-        <p class="text-slate-300">When Jaime abandoned the project, I was already starting to understand Bash better. Nhopkg was simple, understandable and improvable, so I started evolving it for Neonatox.</p>
-
-        <blockquote class="border-l-4 border-cyan-500 pl-4 italic text-slate-400 my-6">
-          That's also free software: understanding existing tools, improving them and building something new.
-        </blockquote>
-
-        <h2 class="text-2xl font-bold text-white mt-12 mb-4">The pause</h2>
-
-        <p class="text-slate-300">For a while came a pause. Not necessarily technical, but human. Like many personal projects, Neonatox also had years where the priority was simply real life.</p>
-
-        <p class="text-slate-300"><strong>Surviving, working and focusing on the essential left little room for technical experiments.</strong></p>
-
-        <p class="text-slate-300">The project went silent, with no progress, not for lack of interest. It simply wasn't the time.</p>
-
-        <h2 class="text-2xl font-bold text-white mt-12 mb-4">The return</h2>
-
-        <p class="text-slate-300">Until <strong>2023</strong>. I started working on Neonatox again, but not as simple nostalgia. It returned with the need to put accumulated experience into practice. With more understanding, with a different perspective.</p>
-
-        <p class="text-slate-300">Things like Systemd stopped seeming like magic. Getting kernel compilation to work, mastering topics like initramfs, multilib, reproducible packaging, making it possible to fully rebuild a functional system using only packages created with nhopkg, that was the goal. What was once an experiment began to become a real distribution.</p>
-
-        <h2 class="text-2xl font-bold text-white mt-12 mb-4">Today</h2>
-
-        <p class="text-slate-300">If I had to define Neonatox technically in one phrase:</p>
-
-        <blockquote class="border-l-4 border-purple-500 pl-4 text-xl text-white my-6">
-          It's a puzzle.
-        </blockquote>
-
-        <p class="text-slate-300">A system built piece by piece to understand how everything fits together.</p>
-        <p class="text-slate-300">It doesn't try to be just another distribution.</p>
-
-        <p class="text-slate-300">It's a platform to:</p>
-
-        <ul class="list-disc list-inside text-slate-300 space-y-2">
-          <li>learn</li>
-          <li>experiment</li>
-          <li>build</li>
-          <li>adapt</li>
-        </ul>
-
-        <p class="text-slate-300">Ideally, for any environment where the user wants to take it. From personal exploration to much more serious uses. Neonatox exists because curiosity can also build operating systems.</p>
-
-        <p class="text-slate-300 mt-8 text-lg font-semibold text-cyan-400">It wasn't abandoned. It waited for the right moment.</p>
-      </article>
+      </div>
     </div>
   </section>
 </BaseLayout>
