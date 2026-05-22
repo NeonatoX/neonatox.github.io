@@ -1,0 +1,34 @@
+---
+const { lang = 'es' } = Astro.props;
+const labels: Record<string, { packages: string; latest: string }> = {
+  es: { packages: 'paquetes', latest: 'Últimos' },
+  en: { packages: 'packages', latest: 'Latest' },
+  pt: { packages: 'pacotes', latest: 'Últimos' },
+};
+const t = labels[lang as keyof typeof labels] || labels.es;
+
+const totalPackages = await fetch('https://gitlab.com/api/v4/groups/neonatox-sources/projects?per_page=1')
+  .then(r => parseInt(r.headers.get('x-total') || '0'))
+  .catch(() => 0);
+
+const packages = await fetch(`https://gitlab.com/api/v4/groups/neonatox-sources/projects?per_page=100&page=1`)
+  .then(r => r.json())
+  .catch(() => []);
+const packageList = (packages as Array<{name: string}>).map(p => p.name).slice(0, 4);
+---
+
+<div class="flex flex-col sm:flex-row gap-6 justify-center items-center text-sm text-slate-400 mt-8 pt-8 border-t border-slate-700/50">
+  <span class="flex items-center gap-2">
+    <span class="text-cyan-400 font-bold text-2xl">{totalPackages}</span>
+    <span>{t.packages}</span>
+  </span>
+  <span class="hidden sm:block text-slate-600">|</span>
+  <span class="flex items-center gap-2 text-slate-500">
+    {t.latest}:
+    {packageList.map((name, i) => (
+      <a href={`https://gitlab.com/neonatox-sources/${name}`} target="_blank" class="text-slate-400 hover:text-cyan-400 transition-colors">
+        {name}{i < packageList.length - 1 ? ',' : ''}
+      </a>
+    ))}
+  </span>
+</div>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PackageStats from '../../components/PackageStats.astro';
 import { dict } from '../../utils/i18n';
 const t = dict.pt;
 ---
@@ -203,4 +204,6 @@ const t = dict.pt;
       </div>
     </div>
   </section>
+
+  <PackageStats lang="pt" />
 </BaseLayout>
