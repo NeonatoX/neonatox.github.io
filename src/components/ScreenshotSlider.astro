@@ -4,7 +4,6 @@ interface Slide {
   alt: string;
 }
 
-// Add or remove entries here to update the gallery
 const slides: Slide[] = [
   { src: '/screenshots/gnome50.png', alt: 'GNOME 50' },
   { src: '/screenshots/xfce.png', alt: 'XFCE' },
@@ -18,26 +17,29 @@ const total = slides.length;
 const id = 'ss-' + Math.random().toString(36).slice(2, 7);
 ---
 
-<div class="relative" id={id}>
+<div class="relative group" id={id}>
   <div class="overflow-hidden rounded-xl border border-slate-700">
     <div class="flex transition-transform duration-500 ease-in-out" id={`${id}-track`} style="transform: translateX(0)">
       {slides.map(s => (
         <a
           href={s.src}
           target="_blank"
-          class="min-w-full block cursor-zoom-in"
+          class="min-w-full block cursor-zoom-in select-none"
+          draggable="false"
         >
-          <img src={s.src} alt={s.alt} class="w-full h-auto" loading="lazy" />
+          <img src={s.src} alt={s.alt} class="w-full h-auto pointer-events-none" loading="lazy" draggable="false" />
         </a>
       ))}
     </div>
   </div>
 
-  <!-- Navigation arrows -->
-  <button id={`${id}-prev`} class="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-slate-900/80 border border-slate-600 text-white hover:bg-slate-700 transition-colors flex items-center justify-center text-lg opacity-0 group-hover:opacity-100 hover:opacity-100 focus:opacity-100" aria-label="Previous" style="opacity: 0.7;">‹</button>
-  <button id={`${id}-next`} class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-slate-900/80 border border-slate-600 text-white hover:bg-slate-700 transition-colors flex items-center justify-center text-lg opacity-0 group-hover:opacity-100 hover:opacity-100 focus:opacity-100" aria-label="Next" style="opacity: 0.7;">›</button>
+  <button id={`${id}-prev`}
+    class="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-slate-900/70 border border-slate-500 text-white hover:bg-slate-600 transition-colors flex items-center justify-center text-2xl opacity-0 group-hover:opacity-100 focus:opacity-100"
+    aria-label="Previous">‹</button>
+  <button id={`${id}-next`}
+    class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-slate-900/70 border border-slate-500 text-white hover:bg-slate-600 transition-colors flex items-center justify-center text-2xl opacity-0 group-hover:opacity-100 focus:opacity-100"
+    aria-label="Next">›</button>
 
-  <!-- Dots -->
   <div class="flex justify-center gap-2 mt-4">
     {Array.from({ length: total }, (_, i) => (
       <button
@@ -51,56 +53,45 @@ const id = 'ss-' + Math.random().toString(36).slice(2, 7);
 
 <script define:vars={{ id, total }}>
 (function() {
+  const container = document.getElementById(id);
   const track = document.getElementById(id + '-track');
   const prev = document.getElementById(id + '-prev');
   const next = document.getElementById(id + '-next');
-  const dots = document.querySelectorAll(`#${id} [data-index]`);
-  if (!track) return;
+  const dots = container?.querySelectorAll('[data-index]');
+  if (!track || !container) return;
 
   let current = 0;
-  let autoplay: ReturnType<typeof setInterval>;
+  let autoplayTimer;
 
-  function goTo(index: number) {
+  function goTo(index) {
     if (index < 0) index = total - 1;
     if (index >= total) index = 0;
     current = index;
-    track.style.transform = `translateX(-${current * 100}%)`;
-    dots.forEach((dot, i) => {
-      if (i === current) {
-        dot.classList.add('bg-cyan-400', 'border-cyan-400');
-        dot.classList.remove('bg-transparent');
-      } else {
-        dot.classList.remove('bg-cyan-400', 'border-cyan-400');
-        dot.classList.add('bg-transparent');
-      }
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    dots?.forEach((dot, i) => {
+      dot.classList.toggle('bg-cyan-400', i === current);
+      dot.classList.toggle('border-cyan-400', i === current);
+      dot.classList.toggle('bg-transparent', i !== current);
     });
   }
 
-  function startAutoplay() {
-    stopAutoplay();
-    autoplay = setInterval(() => goTo(current + 1), 5000);
-  }
+  function start() { stop(); autoplayTimer = setInterval(function() { goTo(current + 1); }, 5000); }
+  function stop() { if (autoplayTimer) clearInterval(autoplayTimer); }
 
-  function stopAutoplay() {
-    if (autoplay) clearInterval(autoplay);
-  }
-
-  if (prev) prev.addEventListener('click', () => { goTo(current - 1); startAutoplay(); });
-  if (next) next.addEventListener('click', () => { goTo(current + 1); startAutoplay(); });
-  dots.forEach(dot => {
-    dot.addEventListener('click', () => {
+  prev?.addEventListener('click', function() { goTo(current - 1); start(); });
+  next?.addEventListener('click', function() { goTo(current + 1); start(); });
+  dots?.forEach(function(dot) {
+    dot.addEventListener('click', function() {
       goTo(parseInt(dot.getAttribute('data-index') || '0'));
-      startAutoplay();
+      start();
     });
   });
 
-  // Pause on hover
-  const container = document.getElementById(id);
-  if (container) {
-    container.addEventListener('mouseenter', stopAutoplay);
-    container.addEventListener('mouseleave', startAutoplay);
-  }
+  container.addEventListener('mouseenter', stop);
+  container.addEventListener('mouseleave', start);
+  container.addEventListener('touchstart', stop);
+  container.addEventListener('touchend', start);
 
-  startAutoplay();
+  start();
 })();
 </script>

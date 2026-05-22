@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PackageMetrics from '../../components/PackageMetrics.astro';
 import { dict } from '../../utils/i18n';
 const t = dict.en;
 ---
@@ -7,37 +8,82 @@ const t = dict.en;
 <BaseLayout title="nhopkg Package System | Neonatox" lang="en">
   <main class="max-w-5xl mx-auto px-6 py-16 text-slate-100">
     <h1 class="text-3xl font-bold mb-6">{t.pkgRuleTitle}</h1>
-    
-    <!-- Rules -->
-    <ul class="grid md:grid-cols-2 gap-4 mb-12">
-      <li class="bg-slate-800/50 p-4 rounded-lg">✅ <strong>Reproducibility:</strong> same input → same binary</li>
-      <li class="bg-slate-800/50 p-4 rounded-lg">✅ <strong>Split packages:</strong> base/gtk/qt in a single PKG</li>
-      <li class="bg-slate-800/50 p-4 rounded-lg">✅ <strong>Explicit dependencies:</strong> BuildDep vs Dep(post)</li>
-      <li class="bg-slate-800/50 p-4 rounded-lg">✅ <strong>Systemd integration:</strong> services, sysusers, tmpfiles</li>
-    </ul>
 
-    <!-- nhopkg Anatomy -->
-    <h2 class="text-2xl font-semibold mb-4">Real nhopkg anatomy: Transmission 4.1.1</h2>
+    <!-- Difference nhoid vs nho -->
+    <div class="grid md:grid-cols-2 gap-6 mb-12">
+      <div class="bg-cyan-500/10 border border-cyan-500/30 p-6 rounded-lg">
+        <h2 class="text-xl font-bold text-cyan-400 mb-3">*.srcnho (nhoid) – Source Package</h2>
+        <p class="text-slate-300 text-sm mb-3">
+          Metadata file containing everything needed to compile a package.
+        </p>
+        <ul class="text-slate-400 text-sm space-y-1">
+          <li>• Source code (downloaded or included)</li>
+          <li>• Script <code>nbuild()</code> – how to compile</li>
+          <li>• Script <code>ninstall()</code> – how to install</li>
+          <li>• Build and runtime dependencies</li>
+          <li>• Metadata (version, license, repo)</li>
+        </ul>
+        <p class="text-cyan-400 text-xs mt-3 font-mono">Example: transmission.nhoid</p>
+      </div>
+
+      <div class="bg-purple-500/10 border border-purple-500/30 p-6 rounded-lg">
+        <h2 class="text-xl font-bold text-purple-400 mb-3">.nho – Binary Package</h2>
+        <p class="text-slate-300 text-sm mb-3">
+          Compressed file ready to install. Contains the compiled binaries.
+        </p>
+        <ul class="text-slate-400 text-sm space-y-1">
+          <li>• Compiled binary files</li>
+          <li>• Package metadata</li>
+          <li>• Post-install/post-remove scripts</li>
+          <li>• Systemd integration</li>
+          <li>• Licenses in /usr/share/licenses</li>
+        </ul>
+        <p class="text-purple-400 text-xs mt-3 font-mono">Example: transmission-4.1.1-n2026-x86_64.nho</p>
+      </div>
+    </div>
+
+    <!-- nhoid Anatomy -->
+    <h2 class="text-2xl font-semibold mb-4">Real nhoid anatomy: Transmission 4.1.1</h2>
     
     <div class="bg-slate-900 rounded-lg overflow-hidden mb-6">
       <div class="px-4 py-2 bg-slate-800 text-sm text-slate-300 border-b border-slate-700">
-        transmission.nhopkg
+        transmission.nhoid (source package)
       </div>
       <pre is:raw class="p-4 text-sm text-green-400 font-mono overflow-x-auto">
 #%NHO-0.5
-# Package Maintainer: cargabsj175 &lt;cargabsj175@gmail.com&gt;
+# Package Maintainer: cargabsj175 <cargabsj175@gmail.com>
 
 # Name:       transmission
 # Version:    4.1.1
 # Release:    n2026
 # License:    GPL-2.0-or-later
+# Repository: extra
 # Arch:       i686 x86_64
-# Splitpackage: gtk qt
+# Splitpackage: base gtk qt
 
-# BuildDep:   curl nodejs libevent gtkmm4 qt6-svg ...
-# Dep(post):  curl nodejs libevent
-# Dep_gtk(post): gtk4 hicolor-icon-theme
-# Dep_qt(post):  qt6-core qt6-svg
+# BuildDep:   curl nodejs libevent gtkmm4 qt6-svg cmake...
+# Dep(base):  curl nodejs libevent
+# Dep(gtk):   gtk4 hicolor-icon-theme
+# Dep(qt):    qt6-core qt6-svg
+
+nbuild() {
+  cd src/transmission-4.1.1
+  cmake -B build -DCMAKE_BUILD_TYPE=Release \
+    -DENABLE_GTK=ON -DENABLE_QT=ON -DENABLE_CLI=OFF
+  cmake --build build -j$(nproc/2)
+}
+
+ninstall() {
+  cmake --install build --prefix=$DESTDIR/usr
+}
+
+ninstall_gtk() {
+  install -Dm755 build/transmission-gtk $DESTDIR/usr/bin/transmission-gtk
+}
+
+ninstall_qt() {
+  install -Dm755 build/transmission-qt $DESTDIR/usr/bin/transmission-qt
+}
       </pre>
     </div>
 
@@ -45,33 +91,50 @@ const t = dict.en;
       <strong>Format keys:</strong>
     </p>
     <ul class="list-disc pl-5 space-y-2 text-slate-300 mb-8">
-      <li><code>#%NHO-0.5</code>: nhopkg format version (future change control)</li>
-      <li><code>Splitpackage</code>: defines sub-packages derived from the same build</li>
-      <li><code>BuildDep</code> vs <code>Dep(post)</code>: separates what's needed to compile vs what's needed to run</li>
-      <li><code>Dep_gtk(post)</code>: specific dependencies per sub-package</li>
+      <li><code>#%NHO-0.5</code>: nhoid format version (future change control)</li>
+      <li><code>Splitpackage</code>: defines sub-packages (base, gtk, qt) derived from the same build</li>
+      <li><code>BuildDep</code>: dependencies only needed for compilation</li>
+      <li><code>Dep(package)</code>: specific dependencies per sub-package</li>
+      <li><code>nbuild()</code>: compilation function</li>
+      <li><code>ninstall()</code>, <code>ninstall_gtk()</code>, etc.: installation functions per sub-package</li>
     </ul>
 
-    <!-- Functions -->
+    <!-- Lifecycle functions -->
     <h3 class="text-xl font-semibold mb-3">Lifecycle functions</h3>
     <div class="space-y-4 mb-8">
       <div class="bg-slate-800/30 p-4 rounded-lg">
         <code class="text-cyan-400">nbuild()</code>
         <p class="text-slate-300 mt-2 text-sm">
-          Isolated compilation in <code>build/</code>. Use of explicit <code>CFLAGS</code>, <code>cmake</code> with integration flags, and <code>make -j$(nproc/2)</code> for load balancing.
+          Isolated compilation in <code>build/</code>. Uses explicit <code>CFLAGS</code> and <code>cmake</code>/<code>make</code> with parallelization.
         </p>
       </div>
       <div class="bg-slate-800/30 p-4 rounded-lg">
-        <code class="text-cyan-400">ninstall()</code>, <code>ninstall_gtk()</code>, <code>ninstall_qt()</code>
+        <code class="text-cyan-400">ninstall()</code>, <code>ninstall_&lt;subpkg&gt;()</code>
         <p class="text-slate-300 mt-2 text-sm">
-          Modular installation per sub-package using temporary <code>DESTDIR</code>. Includes systemd integration (<code>.service</code>, <code>sysusers</code>, <code>tmpfiles</code>) and licenses in <code>/usr/share/licenses</code>.
+          Modular installation per sub-package using <code>DESTDIR</code>. Integrates systemd, licenses, and file structure.
         </p>
       </div>
       <div class="bg-slate-800/30 p-4 rounded-lg">
-        <code class="text-cyan-400">npostinstall()</code>, <code>npostremove()</code>
+        <code class="text-cyan-400">npostinstall()</code>, <code class="text-slate-500">npostremove()</code>
         <p class="text-slate-300 mt-2 text-sm">
-          Post-installation hooks. In this example, <code>noemptyfuncs</code> indicates no additional action is required (but the hook exists for consistency).
+          Post-installation/removal hooks. User configuration, service enabling, cleanup.
         </p>
       </div>
+    </div>
+
+    <!-- Source repository -->
+    <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700 mb-8">
+      <h3 class="text-xl font-semibold text-cyan-300 mb-3">Source repository</h3>
+      <p class="text-slate-300 text-sm mb-4">
+        All Neonatox nhoid files are available on GitLab, organized by category.
+      </p>
+      <div class="flex gap-4 mb-6">
+        <a href="https://gitlab.com/neonatox-sources" target="_blank" class="bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-semibold px-6 py-3 rounded-lg transition-colors">
+          View repository →
+        </a>
+        <span class="bg-slate-700 text-slate-300 px-3 py-2 rounded-lg text-sm">GitLab</span>
+      </div>
+      <PackageMetrics />
     </div>
 
     <!-- CTA -->
