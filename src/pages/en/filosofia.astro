@@ -1,81 +1,80 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { dict } from '../../utils/i18n';
-const t = dict.en;
 ---
 
 <BaseLayout title="Philosophy" description="Neonatox philosophy: learn by building, not using without understanding." lang="en">
-  <section class="py-20 px-4">
+  <section class="py-16 px-4">
     <div class="max-w-3xl mx-auto">
-      <h1 class="text-4xl font-bold text-cyan-400 mb-8">Not another distro</h1>
-      <p class="text-xl text-slate-300 mb-8">
-        Neonatox doesn't aim to be the best distro. It aims to be the most honest.
-      </p>
+      <h1 class="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 mb-12 text-center">Philosophy</h1>
 
-      <div class="space-y-8 text-slate-300">
-        <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700">
-          <h2 class="text-2xl font-semibold text-cyan-300 mb-4">The black box</h2>
-          <p>
-            Modern distributions work incredibly well. Installing them takes minutes. Everything boots. Everything just works.
-          </p>
-          <p class="mt-4">
-            But underneath that convenience lies a black box.
-          </p>
-          <p class="mt-4">
-            Thousands of lines of code running out of your sight. Systemd services spawning processes. Inherited configs you never touched. Precompiled packages whose origin and build remain hidden.
-          </p>
-          <p class="mt-4">
-            There's nothing wrong with that.
-          </p>
-          <p class="mt-4">
-            But if your goal is not just to use Linux, but to master it, you need to open the box.
-          </p>
-        </div>
+      <article class="space-y-12">
 
-        <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700">
-          <h2 class="text-2xl font-semibold text-cyan-300 mb-4">Build to understand</h2>
-          <p>
-            Linux From Scratch isn't just an installation guide. It's a transformative learning experience.
-          </p>
-          <p class="mt-4">
-            Compiling GCC teaches you how a compiler is born. Building Glibc reveals what actually holds up a Linux system. Configuring systemd forces you to understand how the system boots and organizes itself.
-          </p>
-          <p class="mt-4">
-            Neonatox is born from the same philosophy, but with a modern approach: keeping the deep learning of LFS while providing practical tools for real use — native package manager, clean separation between build and runtime dependencies, and documentation designed to teach, not just instruct.
-          </p>
-        </div>
+        <!-- NOT ANOTHER DISTRO -->
+        <section>
+          <h2 class="text-2xl font-bold text-white mb-4">Not another distro</h2>
+          <p class="text-slate-300">Neonatox doesn't pretend to be the best distribution.<br /><strong>It aims to be honest and transparent.</strong></p>
+        </section>
 
-        <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700">
-          <h2 class="text-2xl font-semibold text-cyan-300 mb-4">The package manager that teaches</h2>
-          <p>
-            <code>nhopkg</code> doesn't just install. Every package is a document.
-            Open a <code>*.srcnho</code> and inside you see a <code>nhoid</code> with: build vs. runtime dependencies,
-            build scripts with explicit variables, systemd integration.
-          </p>
-          <p class="mt-4">
-            A package in Neonatox isn't just a downloaded binary or source. It's <strong>a project</strong> with history.
-          </p>
-        </div>
+        <hr class="border-slate-700" />
 
-        <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700">
-          <h2 class="text-2xl font-semibold text-cyan-300 mb-4">Who is this for?</h2>
-          <p>
-            If you install Ubuntu, everything works and you never wonder why, you probably don't need Neonatox.
+        <!-- THE BLACK BOX -->
+        <section>
+          <h2 class="text-2xl font-bold text-white mb-4">The black box</h2>
+          <p class="text-slate-300">Modern distributions are incredibly convenient. You install them in minutes and everything "just works."</p>
+          <p class="text-slate-300 mt-4">
+            But behind that convenience lies a <strong>black box</strong>: thousands of lines of code you don't understand, services starting without your knowledge, precompiled packages whose origin is unknown.
           </p>
-          <p class="mt-4">
-            But if you've ever wondered:
+          <p class="text-slate-300 mt-4">There's nothing wrong with using that convenience.<br /><strong>But if your goal is to master Linux, you have to open the box.</strong></p>
+        </section>
+
+        <hr class="border-slate-700" />
+
+        <!-- BUILD TO UNDERSTAND -->
+        <section>
+          <h2 class="text-2xl font-bold text-white mb-4">Build to understand</h2>
+          <p class="text-slate-300">Linux From Scratch isn't just a guide. It's a transformative experience.</p>
+          <p class="text-slate-300 mt-4">
+            Compiling GCC teaches you how a compiler is born.<br />
+            Building Glibc shows you what actually holds up a Linux system.<br />
+            Configuring systemd forces you to understand the boot process.
           </p>
-          <ul class="list-disc list-slate-300 space-y-2 mt-4 pl-4">
-            <li>What actually happens when you run <code>systemctl start</code>?</li>
-            <li>Why does this package drag 47 dependencies?</li>
-            <li>How do you compile GCC from scratch?</li>
-            <li>What does the system actually do during boot?</li>
+          <p class="text-slate-300 mt-4">
+            Neonatox takes that LFS philosophy and brings it to the modern world: deep learning + practical tools (native package manager, clear and reproducible scripts).
+          </p>
+        </section>
+
+        <hr class="border-slate-700" />
+
+        <!-- THE PACKAGE MANAGER THAT TEACHES -->
+        <section>
+          <h2 class="text-2xl font-bold text-white mb-4">The package manager that teaches</h2>
+          <p class="text-slate-300"><strong>nhopkg</strong> doesn't just install packages.<br />Every package is a learning document.</p>
+          <p class="text-slate-300 mt-4">Opening a <code class="bg-slate-800 px-2 py-0.5 rounded text-cyan-300">*.srcnho</code> you explicitly see:</p>
+          <ul class="list-disc list-inside text-slate-300 space-y-1 mt-2">
+            <li>Build vs. runtime dependencies</li>
+            <li>Clear, commented build scripts</li>
+            <li>Transparent metadata</li>
           </ul>
-          <p class="mt-4 text-cyan-400 font-medium">
-            Then you probably do. Welcome.
-          </p>
-        </div>
-      </div>
+          <p class="text-slate-300 mt-4">A package in Neonatox isn't just software. It's <strong>knowledge</strong>.</p>
+        </section>
+
+        <hr class="border-slate-700" />
+
+        <!-- WHO IS NEONATOX FOR? -->
+        <section>
+          <h2 class="text-2xl font-bold text-white mb-4">Who is Neonatox for?</h2>
+          <p class="text-slate-300">If you're looking for something to install and forget, Neonatox probably isn't for you.</p>
+          <p class="text-slate-300 mt-6">But if you've ever asked yourself these questions:</p>
+          <ul class="list-disc list-inside text-slate-300 space-y-1 mt-4">
+            <li>What actually happens when I run <code class="bg-slate-800 px-2 py-0.5 rounded text-cyan-300">systemctl start</code>?</li>
+            <li>Why does this package bring 47 dependencies?</li>
+            <li>How do you compile GCC from scratch?</li>
+            <li>What is the system doing during boot?</li>
+          </ul>
+          <p class="text-cyan-400 font-medium mt-6 text-lg">Then yes. Welcome.</p>
+        </section>
+
+      </article>
 
       <div class="mt-12 flex gap-4">
         <a href="/en/arquitectura" class="bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-semibold px-6 py-3 rounded-lg transition-colors">

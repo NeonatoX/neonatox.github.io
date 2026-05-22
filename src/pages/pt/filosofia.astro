@@ -1,81 +1,80 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { dict } from '../../utils/i18n';
-const t = dict.pt;
 ---
 
 <BaseLayout title="Filosofia" description="Filosofia Neonatox: aprender construindo, não usar sem entender." lang="pt">
-  <section class="py-20 px-4">
+  <section class="py-16 px-4">
     <div class="max-w-3xl mx-auto">
-      <h1 class="text-4xl font-bold text-cyan-400 mb-8">Não é só mais uma distro</h1>
-      <p class="text-xl text-slate-300 mb-8">
-        Neonatox não pretende ser a melhor distro. Pretende ser a mais honesta.
-      </p>
+      <h1 class="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 mb-12 text-center">Filosofia</h1>
 
-      <div class="space-y-8 text-slate-300">
-        <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700">
-          <h2 class="text-2xl font-semibold text-cyan-300 mb-4">A caixa preta</h2>
-          <p>
-            As distribuições modernas funcionam incrivelmente bem. Instalar leva minutos. Tudo inicia. Tudo simplesmente funciona.
-          </p>
-          <p class="mt-4">
-            Mas por baixo dessa comodidade existe uma caixa preta.
-          </p>
-          <p class="mt-4">
-            Milhares de linhas de código executando fora da sua visão. Serviços do systemd iniciando processos. Configurações herdadas que você nunca tocou. Pacotes pré-compilados cuja origem e construção permanecem ocultas.
-          </p>
-          <p class="mt-4">
-            Não há nada errado com isso.
-          </p>
-          <p class="mt-4">
-            Mas se seu objetivo não é apenas usar Linux, mas dominá-lo, você precisa abrir a caixa.
-          </p>
-        </div>
+      <article class="space-y-12">
 
-        <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700">
-          <h2 class="text-2xl font-semibold text-cyan-300 mb-4">Construir para compreender</h2>
-          <p>
-            Linux From Scratch não é simplesmente um guia de instalação. É uma experiência de aprendizado transformadora.
-          </p>
-          <p class="mt-4">
-            Compilar GCC ensina como nasce um compilador. Construir Glibc revela o que realmente sustenta um sistema Linux. Configurar systemd força você a entender como o sistema inicia e se organiza.
-          </p>
-          <p class="mt-4">
-            Neonatox nasce da mesma filosofia, mas com uma abordagem moderna: preservar o aprendizado profundo do LFS enquanto aporta ferramentas práticas para o uso real — gerenciador de pacotes nativo, separação limpa entre dependências de compilação e execução, e documentação desenhada para ensinar, não apenas instruir.
-          </p>
-        </div>
+        <!-- NÃO É SÓ MAIS UMA DISTRO -->
+        <section>
+          <h2 class="text-2xl font-bold text-white mb-4">Não é só mais uma distro</h2>
+          <p class="text-slate-300">Neonatox não pretende ser a melhor distribuição.<br /><strong>Pretende ser honesta e transparente.</strong></p>
+        </section>
 
-        <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700">
-          <h2 class="text-2xl font-semibold text-cyan-300 mb-4">O gerenciador que ensina</h2>
-          <p>
-            <code>nhopkg</code> não apenas instala. Cada pacote é um documento.
-            Abra um <code>*.srcnho</code> e dentro você vê um <code>nhoid</code> com: dependências de build vs. runtime,
-            scripts de build com variáveis explícitas, integração com systemd.
-          </p>
-          <p class="mt-4">
-            Um pacote em Neonatox não é apenas um binário ou fonte baixado. É <strong>um projeto</strong> com história.
-          </p>
-        </div>
+        <hr class="border-slate-700" />
 
-        <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700">
-          <h2 class="text-2xl font-semibold text-cyan-300 mb-4">Para quem é isso?</h2>
-          <p>
-            Se você instala Ubuntu, tudo funciona e nunca se pergunta por que, provavelmente não precisa do Neonatox.
+        <!-- A CAIXA PRETA -->
+        <section>
+          <h2 class="text-2xl font-bold text-white mb-4">A caixa preta</h2>
+          <p class="text-slate-300">As distribuições modernas são incrivelmente confortáveis. Você instala em minutos e tudo "simplesmente funciona".</p>
+          <p class="text-slate-300 mt-4">
+            Mas por trás desse conforto existe uma <strong>caixa preta</strong>: milhares de linhas de código que você não entende, serviços que iniciam sem você saber, pacotes pré-compilados cuja origem você ignora.
           </p>
-          <p class="mt-4">
-            Mas se você já se perguntou:
+          <p class="text-slate-300 mt-4">Não há nada de errado em usar esse conforto.<br /><strong>Mas se seu objetivo é dominar Linux, você tem que abrir a caixa.</strong></p>
+        </section>
+
+        <hr class="border-slate-700" />
+
+        <!-- CONSTRUIR PARA COMPREENDER -->
+        <section>
+          <h2 class="text-2xl font-bold text-white mb-4">Construir para compreender</h2>
+          <p class="text-slate-300">Linux From Scratch não é só um guia. É uma experiência transformadora.</p>
+          <p class="text-slate-300 mt-4">
+            Compilar GCC te ensina como nasce um compilador.<br />
+            Construir Glibc mostra o que realmente sustenta um sistema Linux.<br />
+            Configurar systemd te obriga a entender a inicialização do sistema.
           </p>
-          <ul class="list-disc list-slate-300 space-y-2 mt-4 pl-4">
-            <li>O que realmente acontece quando você executa <code>systemctl start</code>?</li>
-            <li>Por que este pacote arrasta 47 dependências?</li>
-            <li>Como se compila GCC do zero?</li>
-            <li>O que o sistema realmente faz durante a inicialização?</li>
+          <p class="text-slate-300 mt-4">
+            Neonatox pega essa filosofia do LFS e a leva ao mundo moderno: aprendizado profundo + ferramentas práticas (gestor de pacotes próprio, scripts claros e reproduzíveis).
+          </p>
+        </section>
+
+        <hr class="border-slate-700" />
+
+        <!-- O GESTOR DE PACOTES QUE ENSINA -->
+        <section>
+          <h2 class="text-2xl font-bold text-white mb-4">O gestor de pacotes que ensina</h2>
+          <p class="text-slate-300"><strong>nhopkg</strong> não só instala pacotes.<br />Cada pacote é um documento de aprendizado.</p>
+          <p class="text-slate-300 mt-4">Ao abrir um <code class="bg-slate-800 px-2 py-0.5 rounded text-cyan-300">*.srcnho</code> você vê explicitamente:</p>
+          <ul class="list-disc list-inside text-slate-300 space-y-1 mt-2">
+            <li>Dependências de compilação vs. runtime</li>
+            <li>Scripts de build claros e comentados</li>
+            <li>Metadados transparentes</li>
           </ul>
-          <p class="mt-4 text-cyan-400 font-medium">
-            Então provavelmente sim. Bem-vindo.
-          </p>
-        </div>
-      </div>
+          <p class="text-slate-300 mt-4">Um pacote no Neonatox não é só software. É <strong>conhecimento</strong>.</p>
+        </section>
+
+        <hr class="border-slate-700" />
+
+        <!-- PARA QUEM É O NEONATOX? -->
+        <section>
+          <h2 class="text-2xl font-bold text-white mb-4">Para quem é o Neonatox?</h2>
+          <p class="text-slate-300">Se você procura algo que instala e esquece, provavelmente Neonatox não é para você.</p>
+          <p class="text-slate-300 mt-6">Mas se você já se fez estas perguntas:</p>
+          <ul class="list-disc list-inside text-slate-300 space-y-1 mt-4">
+            <li>O que realmente acontece quando executo <code class="bg-slate-800 px-2 py-0.5 rounded text-cyan-300">systemctl start</code>?</li>
+            <li>Por que este pacote traz 47 dependências?</li>
+            <li>Como se compila GCC do zero?</li>
+            <li>O que o sistema está fazendo durante a inicialização?</li>
+          </ul>
+          <p class="text-cyan-400 font-medium mt-6 text-lg">Então sim. Bem-vindo.</p>
+        </section>
+
+      </article>
 
       <div class="mt-12 flex gap-4">
         <a href="/pt/arquitectura" class="bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-semibold px-6 py-3 rounded-lg transition-colors">
