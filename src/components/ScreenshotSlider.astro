@@ -1,0 +1,106 @@
+---
+interface Slide {
+  src: string;
+  alt: string;
+}
+
+// Add or remove entries here to update the gallery
+const slides: Slide[] = [
+  { src: '/screenshots/gnome50.png', alt: 'GNOME 50' },
+  { src: '/screenshots/xfce.png', alt: 'XFCE' },
+  { src: '/screenshots/kde.png', alt: 'KDE' },
+  { src: '/screenshots/nhopkg.png', alt: 'nhopkg' },
+  { src: '/screenshots/live-boot1.png', alt: 'Live Boot' },
+  { src: '/screenshots/live-boot2.png', alt: 'Live Boot 2' },
+];
+
+const total = slides.length;
+const id = 'ss-' + Math.random().toString(36).slice(2, 7);
+---
+
+<div class="relative" id={id}>
+  <div class="overflow-hidden rounded-xl border border-slate-700">
+    <div class="flex transition-transform duration-500 ease-in-out" id={`${id}-track`} style="transform: translateX(0)">
+      {slides.map(s => (
+        <a
+          href={s.src}
+          target="_blank"
+          class="min-w-full block cursor-zoom-in"
+        >
+          <img src={s.src} alt={s.alt} class="w-full h-auto" loading="lazy" />
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <!-- Navigation arrows -->
+  <button id={`${id}-prev`} class="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-slate-900/80 border border-slate-600 text-white hover:bg-slate-700 transition-colors flex items-center justify-center text-lg opacity-0 group-hover:opacity-100 hover:opacity-100 focus:opacity-100" aria-label="Previous" style="opacity: 0.7;">‹</button>
+  <button id={`${id}-next`} class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-slate-900/80 border border-slate-600 text-white hover:bg-slate-700 transition-colors flex items-center justify-center text-lg opacity-0 group-hover:opacity-100 hover:opacity-100 focus:opacity-100" aria-label="Next" style="opacity: 0.7;">›</button>
+
+  <!-- Dots -->
+  <div class="flex justify-center gap-2 mt-4">
+    {Array.from({ length: total }, (_, i) => (
+      <button
+        class={`w-2.5 h-2.5 rounded-full border border-slate-500 transition-all duration-300 ${i === 0 ? 'bg-cyan-400 border-cyan-400' : 'bg-transparent'}`}
+        data-index={i}
+        aria-label={`Slide ${i + 1}`}
+      ></button>
+    ))}
+  </div>
+</div>
+
+<script define:vars={{ id, total }}>
+(function() {
+  const track = document.getElementById(id + '-track');
+  const prev = document.getElementById(id + '-prev');
+  const next = document.getElementById(id + '-next');
+  const dots = document.querySelectorAll(`#${id} [data-index]`);
+  if (!track) return;
+
+  let current = 0;
+  let autoplay: ReturnType<typeof setInterval>;
+
+  function goTo(index: number) {
+    if (index < 0) index = total - 1;
+    if (index >= total) index = 0;
+    current = index;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dots.forEach((dot, i) => {
+      if (i === current) {
+        dot.classList.add('bg-cyan-400', 'border-cyan-400');
+        dot.classList.remove('bg-transparent');
+      } else {
+        dot.classList.remove('bg-cyan-400', 'border-cyan-400');
+        dot.classList.add('bg-transparent');
+      }
+    });
+  }
+
+  function startAutoplay() {
+    stopAutoplay();
+    autoplay = setInterval(() => goTo(current + 1), 5000);
+  }
+
+  function stopAutoplay() {
+    if (autoplay) clearInterval(autoplay);
+  }
+
+  if (prev) prev.addEventListener('click', () => { goTo(current - 1); startAutoplay(); });
+  if (next) next.addEventListener('click', () => { goTo(current + 1); startAutoplay(); });
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      goTo(parseInt(dot.getAttribute('data-index') || '0'));
+      startAutoplay();
+    });
+  });
+
+  // Pause on hover
+  const container = document.getElementById(id);
+  if (container) {
+    container.addEventListener('mouseenter', stopAutoplay);
+    container.addEventListener('mouseleave', startAutoplay);
+  }
+
+  startAutoplay();
+})();
+</script>
