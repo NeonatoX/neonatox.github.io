@@ -71,14 +71,16 @@ for (const p of pkgList) {
 
 const sortedCats = Object.entries(cats).sort((a, b) => b[1] - a[1]);
 const maxCat = sortedCats[0]?.[1] || 1;
+const initialTotal = totalCount;
+const apiUrl = 'https://gitlab.com/api/v4/groups/neonatox-sources/projects?per_page=1';
 ---
 
 <div class="space-y-16">
 
   <!-- Metrics Hero -->
-  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+  <div id="metrics-hero" class="grid grid-cols-2 md:grid-cols-4 gap-4">
     <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700 text-center">
-      <div class="text-4xl font-bold text-cyan-400 mb-1">{totalCount}</div>
+      <div id="metrics-total" class="text-4xl font-bold text-cyan-400 mb-1">{totalCount}</div>
       <div class="text-sm text-slate-400">paquetes totales</div>
     </div>
     <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700 text-center">
@@ -134,3 +136,18 @@ const maxCat = sortedCats[0]?.[1] || 1;
   </div>
 
 </div>
+
+<script define:vars={{ initialTotal, apiUrl }}>
+(async () => {
+  try {
+    const res = await fetch(apiUrl);
+    const newTotal = parseInt(res.headers.get('x-total') || '0');
+    if (newTotal && newTotal !== initialTotal) {
+      const el = document.getElementById('metrics-total');
+      if (el) el.textContent = String(newTotal);
+    }
+  } catch {
+    // fallback: show build-time value
+  }
+})();
+</script>

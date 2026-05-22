@@ -15,23 +15,66 @@ const packages = await fetch(`https://gitlab.com/api/v4/groups/neonatox-sources/
   .then(r => r.json())
   .catch(() => []);
 const packageList = (packages as Array<{name: string}>).map(p => p.name).slice(0, 4);
+
+const initialTotal = totalPackages;
+const initialNames = JSON.stringify(packageList);
+const apiEndpoint = 'https://gitlab.com/api/v4/groups/neonatox-sources/projects?per_page=100&page=1';
 ---
 
-<div class="flex flex-col sm:flex-row gap-6 justify-center items-center text-sm text-slate-400 mt-8 pt-8 border-t border-slate-700/50">
+<div id="package-stats" class="flex flex-col sm:flex-row gap-6 justify-center items-center text-sm text-slate-400 mt-8 pt-8 border-t border-slate-700/50">
   <span class="flex items-center gap-2">
-    <span class="text-cyan-400 font-bold text-2xl">{totalPackages}</span>
+    <span id="pkg-total" class="text-cyan-400 font-bold text-2xl">{totalPackages}</span>
     <span>{t.packages}</span>
   </span>
   <span class="hidden sm:block text-slate-600">|</span>
   <span class="flex items-center gap-2 text-slate-500">
     {t.latest}:
-    {packageList.map((name, i) => (
-      <a href={`https://gitlab.com/neonatox-sources/${name}`} target="_blank" class="text-slate-400 hover:text-cyan-400 transition-colors">
-        {name}{i < packageList.length - 1 ? ',' : ''}
-      </a>
-    ))}
+    <span id="pkg-list">
+      {packageList.map((name, i) => (
+        <a href={`https://gitlab.com/neonatox-sources/${name}`} target="_blank" class="text-slate-400 hover:text-cyan-400 transition-colors">
+          {name}{i < packageList.length - 1 ? ',' : ''}
+        </a>
+      ))}
+    </span>
   </span>
   <a href={`/${lang}/proyectos/sources`} class="text-cyan-400 hover:text-cyan-300 text-sm font-medium transition-colors">
     {t.seeMore} →
   </a>
 </div>
+
+<script define:vars={{ initialTotal, initialNames, apiEndpoint }}>
+(async () => {
+  try {
+    const res = await fetch(apiEndpoint);
+    const data = await res.json();
+
+    if (!data || !Array.isArray(data)) return;
+
+    // Total count from header
+    const newTotal = parseInt(res.headers.get('x-total') || '0');
+    if (newTotal && newTotal !== initialTotal) {
+      const el = document.getElementById('pkg-total');
+      if (el) el.textContent = String(newTotal);
+    }
+
+    // Recent packages
+    const newNames = data.map(p => p.name).slice(0, 4);
+    if (newNames.length) {
+      const listEl = document.getElementById('pkg-list');
+      if (listEl) {
+        const joined = newNames.map(n => {
+          const a = document.createElement('a');
+          a.href = `https://gitlab.com/neonatox-sources/${n}`;
+          a.target = '_blank';
+          a.className = 'text-slate-400 hover:text-cyan-400 transition-colors';
+          a.textContent = n;
+          return a.outerHTML + ',';
+        }).join(' ');
+        listEl.innerHTML = joined.replace(/, $/, '');
+      }
+    }
+  } catch {
+    // fallback: do nothing, show build-time value
+  }
+})();
+</script>
