@@ -1,41 +1,37 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import PackageMetrics from '../../../components/PackageMetrics.astro';
-import { dict } from '../../../utils/i18n';
-const t = dict.es;
 ---
 
-<BaseLayout title="Sources - Repositorio de paquetes" description="Repositorio GitLab con paquetes fuente" lang="es">
+<BaseLayout title="Sources - Package repository" description="GitLab repository with source packages" lang="en">
   <section class="py-20 px-4">
     <div class="max-w-4xl mx-auto">
       <div class="flex items-center gap-4 mb-8">
-        <a href="/es/proyectos" class="text-cyan-400 hover:text-cyan-300">← Proyectos</a>
+        <a href="/en/proyectos" class="text-cyan-400 hover:text-cyan-300">← Projects</a>
       </div>
 
       <div class="flex items-center gap-4 mb-8">
         <div class="w-16 h-16 bg-red-500/20 rounded-xl flex items-center justify-center text-4xl">📚</div>
         <div>
           <h1 class="text-4xl font-bold text-red-400">neonatox-sources</h1>
-          <p class="text-xl text-red-400/70">Repositorio de paquetes fuente</p>
+          <p class="text-xl text-red-400/70">Source package repository</p>
         </div>
       </div>
 
       <div class="flex gap-4 mb-8">
         <a href="https://gitlab.com/neonatox-sources" target="_blank" class="bg-red-500 hover:bg-red-400 text-slate-900 font-semibold px-6 py-3 rounded-lg transition-colors">
-          {t.verRepos} →
+          View repository →
         </a>
         <span class="bg-slate-500/20 text-slate-400 px-3 py-2 rounded-lg text-sm">GitLab</span>
       </div>
 
       <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700 mb-12">
-        <h2 class="text-2xl font-semibold text-red-300 mb-4">Descripción</h2>
+        <h2 class="text-2xl font-semibold text-red-300 mb-4">Description</h2>
         <p class="text-slate-300">
-          Repositorio GitLab con paquetes fuente en constante actualización. 
-          Constituye la base de construcción de Neonatox.
+          GitLab repository with source packages constantly updated. It forms the build base of Neonatox.
         </p>
         <p class="text-slate-300 mt-4">
-          Aquí encontrarás los archivos necesarios para compilar cada paquete del sistema, 
-          incluyendo scripts de build, parches y metadatos.
+          Here you will find all the necessary files to compile each package of the system, including build scripts, patches and metadata.
         </p>
       </div>
 
@@ -43,8 +39,7 @@ const t = dict.es;
 
       <div class="bg-red-500/10 border border-red-500/30 rounded-lg p-6 mt-12">
         <p class="text-red-300">
-          <strong>Nota:</strong> Este repositorio es de solo lectura para referencia. 
-          Los paquetes se construyen localmente usando nhopkg.
+          <strong>Note:</strong> This repository is read-only for reference. Packages are built locally using nhopkg.
         </p>
       </div>
     </div>

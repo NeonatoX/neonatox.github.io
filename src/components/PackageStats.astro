@@ -1,9 +1,9 @@
 ---
 const { lang = 'es' } = Astro.props;
-const labels: Record<string, { packages: string; latest: string }> = {
-  es: { packages: 'paquetes', latest: 'Últimos' },
-  en: { packages: 'packages', latest: 'Latest' },
-  pt: { packages: 'pacotes', latest: 'Últimos' },
+const labels = {
+  es: { packages: 'paquetes', latest: 'Últimos', seeMore: 'Ver métricas completas' },
+  en: { packages: 'packages', latest: 'Latest', seeMore: 'View full metrics' },
+  pt: { packages: 'pacotes', latest: 'Últimos', seeMore: 'Ver métricas completas' },
 };
 const t = labels[lang as keyof typeof labels] || labels.es;
 
@@ -31,4 +31,7 @@ const packageList = (packages as Array<{name: string}>).map(p => p.name).slice(0
       </a>
     ))}
   </span>
+  <a href={`/${lang}/proyectos/sources`} class="text-cyan-400 hover:text-cyan-300 text-sm font-medium transition-colors">
+    {t.seeMore} →
+  </a>
 </div>
