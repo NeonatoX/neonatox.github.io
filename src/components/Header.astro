@@ -3,9 +3,9 @@ import LangSwitcher from './LangSwitcher.astro';
 const currentLang = Astro.params.lang || 'es';
 
 const navLabels: Record<string, Record<string, string>> = {
-  es: { historia: 'Historia', filosofia: 'Filosofía', arquitectura: 'Arquitectura', paquetes: 'Paquetes', proyectos: 'Proyectos', descargas: 'Descargas' },
-  en: { historia: 'History', filosofia: 'Philosophy', arquitectura: 'Architecture', paquetes: 'Packages', proyectos: 'Projects', descargas: 'Downloads' },
-  pt: { historia: 'História', filosofia: 'Filosofia', arquitetura: 'Arquitetura', pacotes: 'Pacotes', projetos: 'Projetos', downloads: 'Downloads' }
+  es: { historia: 'Historia', filosofia: 'Filosofía', arquitectura: 'Arquitectura', paquetes: 'Paquetes', blog: 'Blog', proyectos: 'Proyectos', descargas: 'Descargas' },
+  en: { historia: 'History', filosofia: 'Philosophy', arquitectura: 'Architecture', paquetes: 'Packages', blog: 'Blog', proyectos: 'Projects', descargas: 'Downloads' },
+  pt: { historia: 'História', filosofia: 'Filosofia', arquitetura: 'Arquitetura', pacotes: 'Pacotes', blog: 'Blog', projetos: 'Projetos', downloads: 'Downloads' }
 };
 const t = navLabels[currentLang] || navLabels.es;
 const id = 'h-' + Math.random().toString(36).slice(2, 7);
@@ -22,6 +22,7 @@ const id = 'h-' + Math.random().toString(36).slice(2, 7);
       <a href={`/${currentLang}/arquitectura`}>{t.arquitectura}</a>
       <a href={`/${currentLang}/paquetes`}>{t.paquetes}</a>
       <a href={`/${currentLang}/proyectos`} class="text-purple-400 hover:text-purple-300">{t.proyectos}</a>
+      <a href={`/${currentLang}/blog`} class="text-amber-400 hover:text-amber-300">{t.blog}</a>
       <a href={`/${currentLang}/descargas`} class="text-cyan-400 hover:text-cyan-300">{t.descargas || t.downloads}</a>
     </nav>
     <div class="flex items-center gap-2">
@@ -40,6 +41,7 @@ const id = 'h-' + Math.random().toString(36).slice(2, 7);
       <a href={`/${currentLang}/arquitectura`} class="py-2">{t.arquitectura}</a>
       <a href={`/${currentLang}/paquetes`} class="py-2">{t.paquetes}</a>
       <a href={`/${currentLang}/proyectos`} class="py-2 text-purple-400">{t.proyectos}</a>
+      <a href={`/${currentLang}/blog`} class="py-2 text-amber-400">{t.blog}</a>
       <a href={`/${currentLang}/descargas`} class="py-2 text-cyan-400">{t.descargas || t.downloads}</a>
       <div class="pt-2 border-t border-slate-700"><LangSwitcher currentLang={currentLang} /></div>
     </div>
