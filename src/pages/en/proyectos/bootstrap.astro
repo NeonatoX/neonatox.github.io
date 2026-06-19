@@ -1,0 +1,157 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { dict } from '../../../utils/i18n';
+const t = dict.en;
+---
+
+<BaseLayout title="Bootstrap - System Installer" description="Scripts to install Neonatox from any other Linux distro" lang="en">
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="flex items-center gap-4 mb-8">
+        <a href="/en/proyectos" class="text-cyan-400 hover:text-cyan-300">← Projects</a>
+      </div>
+
+      <div class="flex items-center gap-4 mb-8">
+        <div class="w-16 h-16 bg-emerald-500/20 rounded-xl flex items-center justify-center text-4xl">🚀</div>
+        <div>
+          <h1 class="text-4xl font-bold text-emerald-400">{t.bootstrapTitle}</h1>
+          <p class="text-xl text-emerald-400/70">{t.bootstrapSubtitle}</p>
+        </div>
+      </div>
+
+      <div class="flex gap-4 mb-8">
+        <a href="https://github.com/cargabsj175/neonatox-bootstrap" target="_blank" class="bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-semibold px-6 py-3 rounded-lg transition-colors">
+          {t.verRepos} →
+        </a>
+      </div>
+
+      <div class="prose prose-invert max-w-none">
+        <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700 mb-8">
+          <h2 class="text-2xl font-semibold text-emerald-300 mb-4">Description</h2>
+          <p class="text-slate-300">
+            <strong>Neonatox Bootstrap</strong> is an executable script that installs Neonatox from
+            any existing GNU/Linux distribution. It creates the entire filesystem hierarchy,
+            builds and installs the <strong>nhopkg</strong> package manager, generates dynamic system
+            configuration (fstab, hostname, timezone, locale) and installs base packages.
+          </p>
+          <p class="text-slate-300 mt-4">
+            Additionally, it supports installing three complete desktop environments: <strong>KDE</strong>
+            (KF6+Plasma), <strong>GNOME</strong> and <strong>XFCE</strong>, including their main
+            applications and service configuration.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6 mb-8">
+          <div class="bg-slate-800/30 p-6 rounded-lg border border-slate-700">
+            <h3 class="text-xl font-semibold text-emerald-300 mb-4">Commands</h3>
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-slate-700">
+                  <th class="text-left py-2 text-slate-400">Command</th>
+                  <th class="text-left py-2 text-slate-400">Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b border-slate-800">
+                  <td class="py-2 text-emerald-400">core</td>
+                  <td class="py-2 text-slate-300">Base system: directories, nhopkg, config, core packages</td>
+                </tr>
+                <tr class="border-b border-slate-800">
+                  <td class="py-2 text-emerald-400">kde</td>
+                  <td class="py-2 text-slate-300">KDE desktop + desktop-common</td>
+                </tr>
+                <tr class="border-b border-slate-800">
+                  <td class="py-2 text-emerald-400">gnome</td>
+                  <td class="py-2 text-slate-300">GNOME desktop + desktop-common</td>
+                </tr>
+                <tr class="border-b border-slate-800">
+                  <td class="py-2 text-emerald-400">xfce</td>
+                  <td class="py-2 text-slate-300">XFCE desktop + desktop-common</td>
+                </tr>
+                <tr>
+                  <td class="py-2 text-emerald-400">chroot</td>
+                  <td class="py-2 text-slate-300">Interactive shell inside the target system</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="bg-slate-800/30 p-6 rounded-lg border border-slate-700">
+            <h3 class="text-xl font-semibold text-emerald-300 mb-4">Technologies</h3>
+            <ul class="space-y-2 text-slate-300">
+              <li>✓ Main Bash executable script</li>
+              <li>✓ systemd for service management</li>
+              <li>✓ btrfs with snapshots and systemd-nspawn</li>
+              <li>✓ nhopkg as package manager</li>
+              <li>✓ chroot for target operations</li>
+              <li>✓ BIOS + UEFI support</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700 mb-8">
+          <h2 class="text-2xl font-semibold text-emerald-300 mb-4">Quick usage</h2>
+          <div class="space-y-4 text-slate-300">
+            <div class="bg-slate-900 p-4 rounded-lg">
+              <code class="text-emerald-400">sudo ./neonatox-bootstrap -L /mnt core</code>
+              <p class="text-slate-400 text-sm mt-1">Install base system to /mnt</p>
+            </div>
+            <div class="bg-slate-900 p-4 rounded-lg">
+              <code class="text-emerald-400">sudo ./neonatox-bootstrap -L /mnt -p mypassword kde</code>
+              <p class="text-slate-400 text-sm mt-1">Install KDE with root password</p>
+            </div>
+            <div class="bg-slate-900 p-4 rounded-lg">
+              <code class="text-emerald-400">sudo ./neonatox-bootstrap -L /mnt --hostname neonbox --locale en_US.UTF-8 core</code>
+              <p class="text-slate-400 text-sm mt-1">Install with custom hostname and locale</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700 mb-8">
+          <h2 class="text-2xl font-semibold text-emerald-300 mb-4">Project structure</h2>
+          <pre is:raw class="bg-slate-900 p-4 rounded-lg text-green-400 text-sm overflow-x-auto">neonatox-bootstrap          # main executable (bash)
+bootstrap/
+  data/etc/                 # static configuration
+    {passwd,group,profile,bashrc,os-release,...}
+    polkit-1/rules.d/
+    profile.d/
+    skel/
+  packs/                    # package lists
+    core                    # 61 base packages
+    base-extra              # 5 extra packages
+    desktop-common          # 13 shared DE packages
+    kde / kde-extra         # KF6+Plasma and apps
+    gnome / gnome-extra     # GNOME core and apps
+    xfce / xfce-extra       # XFCE4 and apps
+FLUJO.md                    # detailed flow diagram</pre>
+        </div>
+
+        <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700 mb-8">
+          <h2 class="text-2xl font-semibold text-emerald-300 mb-4">Execution flow</h2>
+          <p class="text-slate-300 mb-4">
+            The script executes the following steps sequentially:
+          </p>
+          <ol class="space-y-2 text-slate-300 list-decimal list-inside">
+            <li>Create filesystem hierarchy and symlinks</li>
+            <li>Copy static configuration files</li>
+            <li>Clone, build and install nhopkg from source</li>
+            <li>Generate dynamic config: fstab, hosts, hostname, timezone, machine-id</li>
+            <li>Install base packages (core + base-extra)</li>
+            <li>Run post-install triggers inside chroot</li>
+            <li>Install selected desktop environment packages</li>
+            <li>Configure systemd services and root password</li>
+            <li>Final cleanup of caches and temporary sources</li>
+          </ol>
+        </div>
+
+        <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-6">
+          <p class="text-emerald-300">
+            <strong>Philosophy:</strong> Bootstrap is not a magic installer. Every step is visible and
+            modifiable. Configuration files are static and editable. Package lists are plain text files.
+            There is no black box: everything it does, you can see and change.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
