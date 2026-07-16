@@ -9,7 +9,7 @@ const t = dict.en;
 <BaseLayout title="Home" description="Neonatox: learn Linux by building it from scratch. Experimental, educational, and transparent distro." lang="en">
   <!-- HERO -->
   <section class="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-gray-50 via-gray-50 to-gray-100"></div>
     <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 2px 2px, rgba(0,245,255,0.3) 1px, transparent 0); background-size: 40px 40px;"></div>
     
     <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
@@ -18,61 +18,61 @@ const t = dict.en;
           {t.heroTitle}
         </span>
       </h1>
-      <p class="text-xl md:text-2xl text-slate-300 mb-8 max-w-2xl mx-auto leading-relaxed">
+      <p class="text-xl md:text-2xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
         {t.heroDesc}
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center mb-6">
-        <a href="/en/ruta-constructor" class="bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-bold text-lg px-8 py-4 rounded-lg transition-all transform hover:scale-105">
+        <a href="/en/ruta-constructor" class="bg-cyan-500 hover:bg-cyan-400 text-white font-bold text-lg px-8 py-4 rounded-lg transition-all transform hover:scale-105">
           {t.ctaStart}
         </a>
         <a href="/en/arquitectura" class="border-2 border-cyan-500 text-cyan-400 hover:bg-cyan-500/10 font-bold text-lg px-8 py-4 rounded-lg transition-all">
           {t.ctaArch}
         </a>
       </div>
-      <div class="flex gap-6 justify-center text-sm text-slate-400">
-        <a href="https://gitlab.com/neonatox-sources" target="_blank" class="text-slate-400 hover:text-cyan-400 transition-colors">→ {t.githubLink}</a>
-        <a href="https://gitlab.com/neonatox-sources/neonatox-nhopkg" target="_blank" class="text-slate-400 hover:text-cyan-400 transition-colors">→ nhopkg</a>
-        <a href="https://gitlab.com/neonatox-sources/neonatox-live-boot" target="_blank" class="text-slate-400 hover:text-cyan-400 transition-colors">→ Live Boot</a>
+      <div class="flex gap-6 justify-center text-sm text-gray-500">
+        <a href="https://gitlab.com/neonatox-sources" target="_blank" class="text-gray-500 hover:text-cyan-400 transition-colors">→ {t.githubLink}</a>
+        <a href="https://gitlab.com/neonatox-sources/neonatox-nhopkg" target="_blank" class="text-gray-500 hover:text-cyan-400 transition-colors">→ nhopkg</a>
+        <a href="https://gitlab.com/neonatox-sources/neonatox-live-boot" target="_blank" class="text-gray-500 hover:text-cyan-400 transition-colors">→ Live Boot</a>
       </div>
     </div>
   </section>
 
   <!-- WHAT IS NEONATOX -->
-  <section class="py-24 px-4 bg-slate-800/30">
+  <section class="py-24 px-4 bg-gray-50">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl font-bold text-center mb-8 text-white">{t.queEsNeonatox}</h2>
-      <p class="text-xl text-center text-slate-300 mb-12 max-w-3xl mx-auto">{t.queEsDesc}</p>
+      <h2 class="text-3xl font-bold text-center mb-8 text-gray-900">{t.queEsNeonatox}</h2>
+      <p class="text-xl text-center text-gray-600 mb-12 max-w-3xl mx-auto">{t.queEsDesc}</p>
       
       <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
-        <div class="bg-slate-900 p-5 rounded-lg border border-slate-700 text-center">
+        <div class="bg-white p-5 rounded-lg border border-gray-200 text-center">
           <div class="text-cyan-400 text-2xl mb-2">🔧</div>
-          <h3 class="text-white font-semibold mb-1">{t.lfsBased}</h3>
-          <p class="text-slate-400 text-sm">{t.lfsBasedDesc}</p>
+          <h3 class="text-gray-900 font-semibold mb-1">{t.lfsBased}</h3>
+          <p class="text-gray-500 text-sm">{t.lfsBasedDesc}</p>
         </div>
-        <div class="bg-slate-900 p-5 rounded-lg border border-slate-700 text-center">
+        <div class="bg-white p-5 rounded-lg border border-gray-200 text-center">
           <div class="text-cyan-400 text-2xl mb-2">📦</div>
-          <h3 class="text-white font-semibold mb-1">{t.nhopkgMgr}</h3>
-          <p class="text-slate-400 text-sm">{t.nhopkgMgrDesc}</p>
+          <h3 class="text-gray-900 font-semibold mb-1">{t.nhopkgMgr}</h3>
+          <p class="text-gray-500 text-sm">{t.nhopkgMgrDesc}</p>
         </div>
-        <div class="bg-slate-900 p-5 rounded-lg border border-slate-700 text-center">
+        <div class="bg-white p-5 rounded-lg border border-gray-200 text-center">
           <div class="text-cyan-400 text-2xl mb-2">⚙️</div>
-          <h3 class="text-white font-semibold mb-1">{t.systemdInit}</h3>
-          <p class="text-slate-400 text-sm">{t.systemdInitDesc}</p>
+          <h3 class="text-gray-900 font-semibold mb-1">{t.systemdInit}</h3>
+          <p class="text-gray-500 text-sm">{t.systemdInitDesc}</p>
         </div>
-        <div class="bg-slate-900 p-5 rounded-lg border border-slate-700 text-center">
+        <div class="bg-white p-5 rounded-lg border border-gray-200 text-center">
           <div class="text-cyan-400 text-2xl mb-2">🔄</div>
-          <h3 class="text-white font-semibold mb-1">{t.multilib}</h3>
-          <p class="text-slate-400 text-sm">{t.multilibDesc}</p>
+          <h3 class="text-gray-900 font-semibold mb-1">{t.multilib}</h3>
+          <p class="text-gray-500 text-sm">{t.multilibDesc}</p>
         </div>
-        <div class="bg-slate-900 p-5 rounded-lg border border-slate-700 text-center">
+        <div class="bg-white p-5 rounded-lg border border-gray-200 text-center">
           <div class="text-cyan-400 text-2xl mb-2">📡</div>
-          <h3 class="text-white font-semibold mb-1">{t.rollingRelease}</h3>
-          <p class="text-slate-400 text-sm">{t.rollingReleaseDesc}</p>
+          <h3 class="text-gray-900 font-semibold mb-1">{t.rollingRelease}</h3>
+          <p class="text-gray-500 text-sm">{t.rollingReleaseDesc}</p>
         </div>
-        <div class="bg-slate-900 p-5 rounded-lg border border-slate-700 text-center">
+        <div class="bg-white p-5 rounded-lg border border-gray-200 text-center">
           <div class="text-cyan-400 text-2xl mb-2">🔍</div>
-          <h3 class="text-white font-semibold mb-1">{t.transparentPack}</h3>
-          <p class="text-slate-400 text-sm">{t.transparentPackDesc}</p>
+          <h3 class="text-gray-900 font-semibold mb-1">{t.transparentPack}</h3>
+          <p class="text-gray-500 text-sm">{t.transparentPackDesc}</p>
         </div>
       </div>
     </div>
@@ -82,37 +82,37 @@ const t = dict.en;
   <section class="py-24 px-4">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-3xl font-bold text-center mb-12">
-        <span class="text-purple-400">{t.pkgRuleTitle}</span>
+        <span class="text-purple-600">{t.pkgRuleTitle}</span>
       </h2>
       
       <div class="grid md:grid-cols-2 gap-8">
-        <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700 hover:border-cyan-500/50 transition-colors">
+        <div class="bg-gray-100 p-6 rounded-xl border border-gray-200 hover:border-cyan-500/50 transition-colors">
           <div class="text-cyan-400 text-4xl font-mono mb-4">01</div>
-          <h3 class="text-xl font-semibold text-white mb-3">Transparent</h3>
-          <p class="text-slate-400">Every package is a document. Open *.srcnho, inside the nhoid file, and see exactly what it does, what dependencies it has, how it integrates with the system.</p>
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Transparent</h3>
+          <p class="text-gray-500">Every package is a document. Open *.srcnho, inside the nhoid file, and see exactly what it does, what dependencies it has, how it integrates with the system.</p>
         </div>
         
-        <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700 hover:border-cyan-500/50 transition-colors">
+        <div class="bg-gray-100 p-6 rounded-xl border border-gray-200 hover:border-cyan-500/50 transition-colors">
           <div class="text-cyan-400 text-4xl font-mono mb-4">02</div>
-          <h3 class="text-xl font-semibold text-white mb-3">Educational</h3>
-          <p class="text-slate-400">Reading a PKG is like taking a masterclass. You understand not just what it installs, but how and why.</p>
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Educational</h3>
+          <p class="text-gray-500">Reading a PKG is like taking a masterclass. You understand not just what it installs, but how and why.</p>
         </div>
         
-        <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700 hover:border-cyan-500/50 transition-colors">
+        <div class="bg-gray-100 p-6 rounded-xl border border-gray-200 hover:border-cyan-500/50 transition-colors">
           <div class="text-cyan-400 text-4xl font-mono mb-4">03</div>
-          <h3 class="text-xl font-semibold text-white mb-3">Native</h3>
-          <p class="text-slate-400">nhopkg is our package manager. Own, minimal, designed to teach while installing.</p>
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Native</h3>
+          <p class="text-gray-500">nhopkg is our package manager. Own, minimal, designed to teach while installing.</p>
         </div>
         
-        <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700 hover:border-cyan-500/50 transition-colors">
+        <div class="bg-gray-100 p-6 rounded-xl border border-gray-200 hover:border-cyan-500/50 transition-colors">
           <div class="text-cyan-400 text-4xl font-mono mb-4">04</div>
-          <h3 class="text-xl font-semibold text-white mb-3">From LFS</h3>
-          <p class="text-slate-400">Everything started from /tools. Toolchain compiled from scratch. The build chain is visible, no secrets.</p>
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">From LFS</h3>
+          <p class="text-gray-500">Everything started from /tools. Toolchain compiled from scratch. The build chain is visible, no secrets.</p>
         </div>
       </div>
       
       <div class="text-center mt-12">
-        <a href="/en/paquetes" class="text-cyan-400 hover:text-cyan-300 text-lg font-medium">
+        <a href="/en/paquetes" class="text-cyan-500 hover:text-cyan-700 text-lg font-medium">
           See example: Transmission →
         </a>
       </div>
@@ -120,9 +120,9 @@ const t = dict.en;
   </section>
 
   <!-- SCREENSHOTS SLIDER -->
-  <section class="py-24 px-4 bg-slate-800/30">
+  <section class="py-24 px-4 bg-gray-50">
     <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-3xl font-bold text-white mb-8">Neonatox in action</h2>
+      <h2 class="text-3xl font-bold text-gray-900 mb-8">Neonatox in action</h2>
       <ScreenshotSlider />
     </div>
   </section>
@@ -130,52 +130,52 @@ const t = dict.en;
   <!-- WHO IS THIS FOR -->
   <section class="py-24 px-4">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl font-bold text-center mb-4 text-white">{t.paraQuien}</h2>
-      <p class="text-center text-slate-300 mb-12">{t.paraQuienDesc}</p>
+      <h2 class="text-3xl font-bold text-center mb-4 text-gray-900">{t.paraQuien}</h2>
+      <p class="text-center text-gray-600 mb-12">{t.paraQuienDesc}</p>
       
       <div class="grid md:grid-cols-2 gap-6">
-        <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
+        <div class="bg-gray-100 p-6 rounded-xl border border-gray-200">
           <h3 class="text-lg font-semibold text-cyan-400 mb-2">{t.learners}</h3>
-          <p class="text-slate-400 text-sm">{t.learnersDesc}</p>
+          <p class="text-gray-500 text-sm">{t.learnersDesc}</p>
         </div>
-        <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
+        <div class="bg-gray-100 p-6 rounded-xl border border-gray-200">
           <h3 class="text-lg font-semibold text-cyan-400 mb-2">{t.packagers}</h3>
-          <p class="text-slate-400 text-sm">{t.packagersDesc}</p>
+          <p class="text-gray-500 text-sm">{t.packagersDesc}</p>
         </div>
-        <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
+        <div class="bg-gray-100 p-6 rounded-xl border border-gray-200">
           <h3 class="text-lg font-semibold text-cyan-400 mb-2">{t.lfsEnthusiasts}</h3>
-          <p class="text-slate-400 text-sm">{t.lfsEnthusiastsDesc}</p>
+          <p class="text-gray-500 text-sm">{t.lfsEnthusiastsDesc}</p>
         </div>
-        <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
+        <div class="bg-gray-100 p-6 rounded-xl border border-gray-200">
           <h3 class="text-lg font-semibold text-cyan-400 mb-2">{t.systemBuilders}</h3>
-          <p class="text-slate-400 text-sm">{t.systemBuildersDesc}</p>
+          <p class="text-gray-500 text-sm">{t.systemBuildersDesc}</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- HISTORY + CTA -->
-  <section class="py-24 px-4 bg-slate-800/30">
+  <section class="py-24 px-4 bg-gray-50">
     <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-12 items-center">
       <div class="text-center md:text-left">
-        <h2 class="text-3xl font-bold mb-6 text-white">The Neonatox story</h2>
-        <p class="text-lg text-slate-300 mb-6">
+        <h2 class="text-3xl font-bold mb-6 text-gray-900">The Neonatox story</h2>
+        <p class="text-lg text-gray-600 mb-6">
           Neonatox wasn't born because Linux was broken. It was born because I wanted to understand it. From Mandriva to LFS, from the pause to the return in 2023. A distribution built piece by piece to understand how everything fits together.
         </p>
-        <a href="/en/historia" class="text-cyan-400 hover:text-cyan-300 text-lg font-medium">
+        <a href="/en/historia" class="text-cyan-500 hover:text-cyan-700 text-lg font-medium">
           Read the full story →
         </a>
       </div>
-      <div class="text-center md:text-left border-t md:border-t-0 md:border-l border-slate-700 pt-8 md:pt-0 md:pl-12">
-        <h2 class="text-3xl font-bold mb-6 text-white">Ready to build your system?</h2>
-        <p class="text-xl text-slate-300 mb-8">
+      <div class="text-center md:text-left border-t md:border-t-0 md:border-l border-gray-200 pt-8 md:pt-0 md:pl-12">
+        <h2 class="text-3xl font-bold mb-6 text-gray-900">Ready to build your system?</h2>
+        <p class="text-xl text-gray-600 mb-8">
           There are no shortcuts. But you have the map.
         </p>
         <div class="flex flex-col sm:flex-row gap-4">
           <a href="/en/ruta-constructor" class="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-400 hover:to-purple-500 text-white font-bold text-lg px-8 py-4 rounded-lg transition-all transform hover:scale-105 text-center">
             Start now
           </a>
-          <a href="/en/proyectos" class="border-2 border-purple-500 text-purple-400 hover:bg-purple-500/10 font-bold text-lg px-8 py-4 rounded-lg transition-all text-center">
+          <a href="/en/proyectos" class="border-2 border-purple-500 text-purple-600 hover:bg-purple-500/10 font-bold text-lg px-8 py-4 rounded-lg transition-all text-center">
             View projects
           </a>
         </div>

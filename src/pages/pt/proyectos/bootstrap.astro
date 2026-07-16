@@ -8,33 +8,33 @@ const t = dict.pt;
   <section class="py-20 px-4">
     <div class="max-w-4xl mx-auto">
       <div class="flex items-center gap-4 mb-8">
-        <a href="/pt/proyectos" class="text-cyan-400 hover:text-cyan-300">← Projetos</a>
+        <a href="/pt/proyectos" class="text-cyan-500 hover:text-cyan-700">← Projetos</a>
       </div>
 
       <div class="flex items-center gap-4 mb-8">
         <div class="w-16 h-16 bg-emerald-500/20 rounded-xl flex items-center justify-center text-4xl">🚀</div>
         <div>
-          <h1 class="text-4xl font-bold text-emerald-400">{t.bootstrapTitle}</h1>
-          <p class="text-xl text-emerald-400/70">{t.bootstrapSubtitle}</p>
+          <h1 class="text-4xl font-bold text-emerald-600">{t.bootstrapTitle}</h1>
+          <p class="text-xl text-emerald-600/70">{t.bootstrapSubtitle}</p>
         </div>
       </div>
 
       <div class="flex gap-4 mb-8">
-        <a href="https://github.com/cargabsj175/neonatox-bootstrap" target="_blank" class="bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-semibold px-6 py-3 rounded-lg transition-colors">
+        <a href="https://github.com/neonatox/neonatox-bootstrap" target="_blank" class="bg-emerald-500 hover:bg-emerald-400 text-white font-semibold px-6 py-3 rounded-lg transition-colors">
           {t.verRepos} →
         </a>
       </div>
 
-      <div class="prose prose-invert max-w-none">
-        <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700 mb-8">
+      <div class="prose max-w-none">
+        <div class="bg-gray-100 p-6 rounded-lg border border-gray-200 mb-8">
           <h2 class="text-2xl font-semibold text-emerald-300 mb-4">Descrição</h2>
-          <p class="text-slate-300">
+          <p class="text-gray-600">
             <strong>Neonatox Bootstrap</strong> é um script executável que instala o Neonatox a partir
             de qualquer distribuição GNU/Linux existente. Cria toda a hierarquia do sistema de arquivos,
             compila e instala o gerenciador de pacotes <strong>nhopkg</strong>, gera a configuração
             dinâmica do sistema (fstab, hostname, timezone, locale) e instala os pacotes base.
           </p>
-          <p class="text-slate-300 mt-4">
+          <p class="text-gray-600 mt-4">
             Além disso, suporta a instalação de três ambientes de desktop completos: <strong>KDE</strong>
             (KF6+Plasma), <strong>GNOME</strong> e <strong>XFCE</strong>, incluindo seus aplicativos
             principais e configuração de serviços.
@@ -42,43 +42,43 @@ const t = dict.pt;
         </div>
 
         <div class="grid md:grid-cols-2 gap-6 mb-8">
-          <div class="bg-slate-800/30 p-6 rounded-lg border border-slate-700">
+          <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
             <h3 class="text-xl font-semibold text-emerald-300 mb-4">Comandos</h3>
             <table class="w-full text-sm">
               <thead>
-                <tr class="border-b border-slate-700">
-                  <th class="text-left py-2 text-slate-400">Comando</th>
-                  <th class="text-left py-2 text-slate-400">Descrição</th>
+                <tr class="border-b border-gray-200">
+                  <th class="text-left py-2 text-gray-500">Comando</th>
+                  <th class="text-left py-2 text-gray-500">Descrição</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="border-b border-slate-800">
-                  <td class="py-2 text-emerald-400">core</td>
-                  <td class="py-2 text-slate-300">Sistema base: diretórios, nhopkg, configuração, pacotes core</td>
+                <tr class="border-b border-gray-200">
+                  <td class="py-2 text-emerald-600">core</td>
+                  <td class="py-2 text-gray-600">Sistema base: diretórios, nhopkg, configuração, pacotes core</td>
                 </tr>
-                <tr class="border-b border-slate-800">
-                  <td class="py-2 text-emerald-400">kde</td>
-                  <td class="py-2 text-slate-300">Desktop KDE + desktop-common</td>
+                <tr class="border-b border-gray-200">
+                  <td class="py-2 text-emerald-600">kde</td>
+                  <td class="py-2 text-gray-600">Desktop KDE + desktop-common</td>
                 </tr>
-                <tr class="border-b border-slate-800">
-                  <td class="py-2 text-emerald-400">gnome</td>
-                  <td class="py-2 text-slate-300">Desktop GNOME + desktop-common</td>
+                <tr class="border-b border-gray-200">
+                  <td class="py-2 text-emerald-600">gnome</td>
+                  <td class="py-2 text-gray-600">Desktop GNOME + desktop-common</td>
                 </tr>
-                <tr class="border-b border-slate-800">
-                  <td class="py-2 text-emerald-400">xfce</td>
-                  <td class="py-2 text-slate-300">Desktop XFCE + desktop-common</td>
+                <tr class="border-b border-gray-200">
+                  <td class="py-2 text-emerald-600">xfce</td>
+                  <td class="py-2 text-gray-600">Desktop XFCE + desktop-common</td>
                 </tr>
                 <tr>
-                  <td class="py-2 text-emerald-400">chroot</td>
-                  <td class="py-2 text-slate-300">Shell interativo dentro do sistema destino</td>
+                  <td class="py-2 text-emerald-600">chroot</td>
+                  <td class="py-2 text-gray-600">Shell interativo dentro do sistema destino</td>
                 </tr>
               </tbody>
             </table>
           </div>
 
-          <div class="bg-slate-800/30 p-6 rounded-lg border border-slate-700">
+          <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
             <h3 class="text-xl font-semibold text-emerald-300 mb-4">Tecnologias</h3>
-            <ul class="space-y-2 text-slate-300">
+            <ul class="space-y-2 text-gray-600">
               <li>✓ Script Bash executável principal</li>
               <li>✓ systemd para gestão de serviços</li>
               <li>✓ btrfs com snapshots e systemd-nspawn</li>
@@ -89,27 +89,27 @@ const t = dict.pt;
           </div>
         </div>
 
-        <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700 mb-8">
+        <div class="bg-gray-100 p-6 rounded-lg border border-gray-200 mb-8">
           <h2 class="text-2xl font-semibold text-emerald-300 mb-4">Uso rápido</h2>
-          <div class="space-y-4 text-slate-300">
-            <div class="bg-slate-900 p-4 rounded-lg">
-              <code class="text-emerald-400">sudo ./neonatox-bootstrap -L /mnt core</code>
-              <p class="text-slate-400 text-sm mt-1">Instalar sistema base em /mnt</p>
+          <div class="space-y-4 text-gray-600">
+            <div class="bg-gray-50 p-4 rounded-lg">
+              <code class="text-emerald-600">sudo ./neonatox-bootstrap -L /mnt core</code>
+              <p class="text-gray-500 text-sm mt-1">Instalar sistema base em /mnt</p>
             </div>
-            <div class="bg-slate-900 p-4 rounded-lg">
-              <code class="text-emerald-400">sudo ./neonatox-bootstrap -L /mnt -p minhasenha kde</code>
-              <p class="text-slate-400 text-sm mt-1">Instalar KDE com senha root</p>
+            <div class="bg-gray-50 p-4 rounded-lg">
+              <code class="text-emerald-600">sudo ./neonatox-bootstrap -L /mnt -p minhasenha kde</code>
+              <p class="text-gray-500 text-sm mt-1">Instalar KDE com senha root</p>
             </div>
-            <div class="bg-slate-900 p-4 rounded-lg">
-              <code class="text-emerald-400">sudo ./neonatox-bootstrap -L /mnt --hostname neonbox --locale pt_BR.UTF-8 core</code>
-              <p class="text-slate-400 text-sm mt-1">Instalar com hostname e locale personalizados</p>
+            <div class="bg-gray-50 p-4 rounded-lg">
+              <code class="text-emerald-600">sudo ./neonatox-bootstrap -L /mnt --hostname neonbox --locale pt_BR.UTF-8 core</code>
+              <p class="text-gray-500 text-sm mt-1">Instalar com hostname e locale personalizados</p>
             </div>
           </div>
         </div>
 
-        <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700 mb-8">
+        <div class="bg-gray-100 p-6 rounded-lg border border-gray-200 mb-8">
           <h2 class="text-2xl font-semibold text-emerald-300 mb-4">Estrutura do projeto</h2>
-          <pre is:raw class="bg-slate-900 p-4 rounded-lg text-green-400 text-sm overflow-x-auto">neonatox-bootstrap          # executável principal (bash)
+          <pre is:raw class="bg-gray-100 p-4 rounded-lg text-gray-800 text-sm overflow-x-auto">neonatox-bootstrap          # executável principal (bash)
 bootstrap/
   data/etc/                 # configuração estática
     {passwd,group,profile,bashrc,os-release,...}
@@ -126,12 +126,12 @@ bootstrap/
 FLUJO.md                    # diagrama de fluxo detalhado</pre>
         </div>
 
-        <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700 mb-8">
+        <div class="bg-gray-100 p-6 rounded-lg border border-gray-200 mb-8">
           <h2 class="text-2xl font-semibold text-emerald-300 mb-4">Fluxo de execução</h2>
-          <p class="text-slate-300 mb-4">
+          <p class="text-gray-600 mb-4">
             O script executa os seguintes passos sequencialmente:
           </p>
-          <ol class="space-y-2 text-slate-300 list-decimal list-inside">
+          <ol class="space-y-2 text-gray-600 list-decimal list-inside">
             <li>Criação da hierarquia de diretórios e symlinks do sistema</li>
             <li>Cópia de arquivos de configuração estáticos</li>
             <li>Clonagem, compilação e instalação do nhopkg a partir da fonte</li>

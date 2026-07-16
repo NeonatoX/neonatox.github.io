@@ -8,40 +8,40 @@ const t = dict.en;
   <section class="py-20 px-4">
     <div class="max-w-4xl mx-auto">
       <div class="flex items-center gap-4 mb-8">
-        <a href="/en/proyectos" class="text-cyan-400 hover:text-cyan-300">← Projects</a>
+        <a href="/en/proyectos" class="text-cyan-500 hover:text-cyan-700">← Projects</a>
       </div>
 
       <div class="flex items-center gap-4 mb-8">
         <div class="w-16 h-16 bg-purple-500/20 rounded-xl flex items-center justify-center text-4xl">💿</div>
         <div>
-          <h1 class="text-4xl font-bold text-purple-400">Neonatox Live Boot</h1>
-          <p class="text-xl text-purple-400/70">From-scratch Live ISO builder</p>
+          <h1 class="text-4xl font-bold text-purple-600">Neonatox Live Boot</h1>
+          <p class="text-xl text-purple-600/70">From-scratch Live ISO builder</p>
         </div>
       </div>
 
       <div class="flex gap-4 mb-8">
-        <a href="https://github.com/cargabsj175/neonatox-live-boot" target="_blank" class="bg-purple-500 hover:bg-purple-400 text-slate-900 font-semibold px-6 py-3 rounded-lg transition-colors">
+        <a href="https://github.com/neonatox/neonatox-live-boot" target="_blank" class="bg-purple-500 hover:bg-purple-400 text-white font-semibold px-6 py-3 rounded-lg transition-colors">
           {t.verRepos} →
         </a>
       </div>
 
-      <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700 mb-8">
+      <div class="bg-gray-100 p-6 rounded-lg border border-gray-200 mb-8">
         <h2 class="text-2xl font-semibold text-purple-300 mb-4">Description</h2>
-        <p class="text-slate-300">
+        <p class="text-gray-600">
           From-scratch Linux Live ISO builder. Designed as an educational and experimental project 
           that demonstrates, step by step, how a complete Linux system boots, detects hardware, 
           mounts a real filesystem, and hands control to systemd.
         </p>
-        <p class="text-slate-300 mt-4">
+        <p class="text-gray-600 mt-4">
           This project intentionally avoids high-level frameworks (like dracut or live-build) 
           to expose the real boot mechanics.
         </p>
       </div>
 
       <div class="grid md:grid-cols-2 gap-6 mb-8">
-        <div class="bg-slate-800/30 p-6 rounded-lg border border-slate-700">
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
           <h3 class="text-xl font-semibold text-purple-300 mb-4">Features</h3>
-          <ul class="space-y-2 text-slate-300">
+          <ul class="space-y-2 text-gray-600">
             <li>✓ BIOS and UEFI boot with GRUB</li>
             <li>✓ Complete system in SquashFS</li>
             <li>✓ Writable live system with OverlayFS</li>
@@ -51,41 +51,41 @@ const t = dict.en;
           </ul>
         </div>
 
-        <div class="bg-slate-800/30 p-6 rounded-lg border border-slate-700">
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
           <h3 class="text-xl font-semibold text-purple-300 mb-4">Tested compatibility</h3>
           <table class="w-full text-sm">
             <thead>
-              <tr class="border-b border-slate-700">
-                <th class="text-left py-2 text-slate-400">Distro</th>
-                <th class="text-center py-2 text-slate-400">USB</th>
-                <th class="text-center py-2 text-slate-400">Ventoy</th>
+              <tr class="border-b border-gray-200">
+                <th class="text-left py-2 text-gray-500">Distro</th>
+                <th class="text-center py-2 text-gray-500">USB</th>
+                <th class="text-center py-2 text-gray-500">Ventoy</th>
               </tr>
             </thead>
             <tbody>
-              <tr class="border-b border-slate-800">
-                <td class="py-2 text-slate-300">Alpine 3.22</td>
-                <td class="text-center text-green-400">✓</td>
-                <td class="text-center text-green-400">✓</td>
+              <tr class="border-b border-gray-200">
+                <td class="py-2 text-gray-600">Alpine 3.22</td>
+                <td class="text-center text-emerald-600">✓</td>
+                <td class="text-center text-emerald-600">✓</td>
               </tr>
-              <tr class="border-b border-slate-800">
-                <td class="py-2 text-slate-300">NeonatoX 2025</td>
-                <td class="text-center text-green-400">✓</td>
-                <td class="text-center text-green-400">✓</td>
+              <tr class="border-b border-gray-200">
+                <td class="py-2 text-gray-600">NeonatoX 2025</td>
+                <td class="text-center text-emerald-600">✓</td>
+                <td class="text-center text-emerald-600">✓</td>
               </tr>
               <tr>
-                <td class="py-2 text-slate-300">Ubuntu 24.04</td>
-                <td class="text-center text-green-400">✓</td>
-                <td class="text-center text-green-400">✓</td>
+                <td class="py-2 text-gray-600">Ubuntu 24.04</td>
+                <td class="text-center text-emerald-600">✓</td>
+                <td class="text-center text-emerald-600">✓</td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
 
-      <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700 mb-8">
+      <div class="bg-gray-100 p-6 rounded-lg border border-gray-200 mb-8">
         <h2 class="text-2xl font-semibold text-purple-300 mb-4">Usage</h2>
-        <pre is:raw class="bg-slate-900 p-4 rounded-lg text-green-400 text-sm overflow-x-auto"># Clone repository
-git clone https://github.com/cargabsj175/neonatox-live-boot.git
+        <pre is:raw class="bg-gray-100 p-4 rounded-lg text-gray-800 text-sm overflow-x-auto"># Clone repository
+git clone https://github.com/neonatox/neonatox-live-boot.git
 
 # Customize background if desired
 # cp your-image.png iso/background.png

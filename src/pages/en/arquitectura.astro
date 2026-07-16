@@ -8,67 +8,67 @@ const t = dict.en;
   <section class="py-20 px-4">
     <div class="max-w-4xl mx-auto">
       <h1 class="text-4xl font-bold text-cyan-400 mb-8">System Architecture</h1>
-      <p class="text-xl text-slate-300 mb-12">
+      <p class="text-xl text-gray-600 mb-12">
         Neonatox builds on Linux From Scratch with systemd as init and a native package manager. Here's the full map.
       </p>
 
-      <div class="bg-slate-800/50 p-8 rounded-xl border border-slate-700 mb-12">
-        <h2 class="text-2xl font-semibold text-cyan-300 mb-6 text-center">System Layers</h2>
+      <div class="bg-gray-100 p-8 rounded-xl border border-gray-200 mb-12">
+        <h2 class="text-2xl font-semibold text-cyan-700 mb-6 text-center">System Layers</h2>
         
         <div class="space-y-4">
           <div class="flex items-center gap-4">
-            <div class="w-32 text-right text-slate-400 font-mono text-sm">Applications</div>
+            <div class="w-32 text-right text-gray-500 font-mono text-sm">Applications</div>
             <div class="flex-1 bg-purple-500/20 border border-purple-500/50 rounded p-3 text-center text-purple-300">GUI Apps, CLI tools, Services</div>
           </div>
           <div class="flex items-center gap-4">
-            <div class="w-32 text-right text-slate-400 font-mono text-sm">nhopkg</div>
-            <div class="flex-1 bg-cyan-500/20 border border-cyan-500/50 rounded p-3 text-center text-cyan-300">Native package manager</div>
+            <div class="w-32 text-right text-gray-500 font-mono text-sm">nhopkg</div>
+            <div class="flex-1 bg-cyan-500/20 border border-cyan-500/50 rounded p-3 text-center text-cyan-700">Native package manager</div>
           </div>
           <div class="flex items-center gap-4">
-            <div class="w-32 text-right text-slate-400 font-mono text-sm">Systemd</div>
+            <div class="w-32 text-right text-gray-500 font-mono text-sm">Systemd</div>
             <div class="flex-1 bg-yellow-500/20 border border-yellow-500/50 rounded p-3 text-center text-yellow-300">Init + Services + Logging</div>
           </div>
           <div class="flex items-center gap-4">
-            <div class="w-32 text-right text-slate-400 font-mono text-sm">Glibc + Toolchain</div>
+            <div class="w-32 text-right text-gray-500 font-mono text-sm">Glibc + Toolchain</div>
             <div class="flex-1 bg-green-500/20 border border-green-500/50 rounded p-3 text-center text-green-300">libc, gcc, binutils, make</div>
           </div>
           <div class="flex items-center gap-4">
-            <div class="w-32 text-right text-slate-400 font-mono text-sm">Linux Kernel</div>
+            <div class="w-32 text-right text-gray-500 font-mono text-sm">Linux Kernel</div>
             <div class="flex-1 bg-red-500/20 border border-red-500/50 rounded p-3 text-center text-red-300">Kernel 6.x (custom build)</div>
           </div>
         </div>
       </div>
 
       <div class="grid md:grid-cols-2 gap-8 mb-12">
-        <div class="bg-slate-800/30 p-6 rounded-lg border border-slate-700">
-          <h3 class="text-xl font-semibold text-cyan-300 mb-4">Init: systemd</h3>
-          <p class="text-slate-400 text-sm">
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-semibold text-cyan-700 mb-4">Init: systemd</h3>
+          <p class="text-gray-500 text-sm">
             We don't reinvent the wheel. systemd is the most documented, most tested init with the largest ecosystem.
             Neonatox integrates it completely: services, sockets, timers, sysusers, tmpfiles.
           </p>
         </div>
         
-        <div class="bg-slate-800/30 p-6 rounded-lg border border-slate-700">
-          <h3 class="text-xl font-semibold text-cyan-300 mb-4">Manager: nhopkg</h3>
-          <p class="text-slate-400 text-sm">
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-semibold text-cyan-700 mb-4">Manager: nhopkg</h3>
+          <p class="text-gray-500 text-sm">
             Native, minimal, transparent. <code>.nhopkg</code> format with lifecycle functions:
             <code>nbuild()</code>, <code>ninstall()</code>, <code>npostinstall()</code>, <code>npostremove()</code>.
             Every package is a masterclass.
           </p>
         </div>
 
-        <div class="bg-slate-800/30 p-6 rounded-lg border border-slate-700">
-          <h3 class="text-xl font-semibold text-cyan-300 mb-4">Multilib</h3>
-          <p class="text-slate-400 text-sm">
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-semibold text-cyan-700 mb-4">Multilib</h3>
+          <p class="text-gray-500 text-sm">
             Architecture x86_64 + i686. We don't choose: we support both.
             Compilation with <code>CFLAGS="-O2 -march=x86-64 -mtune=generic"</code> for 64-bit,
             multilib GCC for 32-bit when needed.
           </p>
         </div>
 
-        <div class="bg-slate-800/30 p-6 rounded-lg border border-slate-700">
-          <h3 class="text-xl font-semibold text-cyan-300 mb-4">LFS Base</h3>
-          <p class="text-slate-400 text-sm">
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <h3 class="text-xl font-semibold text-cyan-700 mb-4">LFS Base</h3>
+          <p class="text-gray-500 text-sm">
             Everything starts from /tools. Static toolchain, then dynamic.
             Each package builds on the previous one. The trust chain is visible,
             no black magic.
@@ -79,45 +79,45 @@ const t = dict.en;
       <div class="overflow-x-auto mb-12">
         <table class="w-full text-sm">
           <thead>
-            <tr class="border-b border-slate-700">
-              <th class="text-left py-3 px-4 text-slate-400">Feature</th>
-              <th class="text-center py-3 px-4 text-purple-400">Neonatox</th>
-              <th class="text-center py-3 px-4 text-slate-400">Debian</th>
-              <th class="text-center py-3 px-4 text-slate-400">Arch</th>
-              <th class="text-center py-3 px-4 text-slate-400">Gentoo</th>
+            <tr class="border-b border-gray-200">
+              <th class="text-left py-3 px-4 text-gray-500">Feature</th>
+              <th class="text-center py-3 px-4 text-purple-600">Neonatox</th>
+              <th class="text-center py-3 px-4 text-gray-500">Debian</th>
+              <th class="text-center py-3 px-4 text-gray-500">Arch</th>
+              <th class="text-center py-3 px-4 text-gray-500">Gentoo</th>
             </tr>
           </thead>
           <tbody>
-            <tr class="border-b border-slate-800">
-              <td class="py-3 px-4 text-slate-300">Native package manager</td>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 text-gray-600">Native package manager</td>
               <td class="text-center py-3 px-4 text-cyan-400">nhopkg</td>
-              <td class="text-center py-3 px-4 text-slate-500">dpkg</td>
-              <td class="text-center py-3 px-4 text-slate-500">pacman</td>
-              <td class="text-center py-3 px-4 text-slate-500">portage</td>
+              <td class="text-center py-3 px-4 text-gray-400">dpkg</td>
+              <td class="text-center py-3 px-4 text-gray-400">pacman</td>
+              <td class="text-center py-3 px-4 text-gray-400">portage</td>
             </tr>
-            <tr class="border-b border-slate-800">
-              <td class="py-3 px-4 text-slate-300">Reproducible build</td>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 text-gray-600">Reproducible build</td>
               <td class="text-center py-3 px-4 text-cyan-400">✓</td>
               <td class="text-center py-3 px-4">-</td>
               <td class="text-center py-3 px-4">-</td>
               <td class="text-center py-3 px-4">✓</td>
             </tr>
-            <tr class="border-b border-slate-800">
-              <td class="py-3 px-4 text-slate-300">Docs in every package</td>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 text-gray-600">Docs in every package</td>
               <td class="text-center py-3 px-4 text-cyan-400">✓</td>
               <td class="text-center py-3 px-4">-</td>
               <td class="text-center py-3 px-4">-</td>
               <td class="text-center py-3 px-4">-</td>
             </tr>
-            <tr class="border-b border-slate-800">
-              <td class="py-3 px-4 text-slate-300">LFS Base</td>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 text-gray-600">LFS Base</td>
               <td class="text-center py-3 px-4 text-cyan-400">✓</td>
               <td class="text-center py-3 px-4">-</td>
               <td class="text-center py-3 px-4">-</td>
               <td class="text-center py-3 px-4">-</td>
             </tr>
             <tr>
-              <td class="py-3 px-4 text-slate-300">Multilib</td>
+              <td class="py-3 px-4 text-gray-600">Multilib</td>
               <td class="text-center py-3 px-4 text-cyan-400">✓</td>
               <td class="text-center py-3 px-4">✓</td>
               <td class="text-center py-3 px-4">-</td>
@@ -128,7 +128,7 @@ const t = dict.en;
       </div>
 
       <div class="flex gap-4">
-        <a href="/en/paquetes" class="bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-semibold px-6 py-3 rounded-lg transition-colors">
+        <a href="/en/paquetes" class="bg-cyan-500 hover:bg-cyan-400 text-white font-semibold px-6 py-3 rounded-lg transition-colors">
           See packages
         </a>
         <a href="/en/ruta-constructor" class="border border-cyan-500 text-cyan-400 hover:bg-cyan-500/10 font-semibold px-6 py-3 rounded-lg transition-colors">

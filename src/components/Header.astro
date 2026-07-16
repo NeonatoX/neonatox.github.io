@@ -11,39 +11,39 @@ const t = navLabels[currentLang] || navLabels.es;
 const id = 'h-' + Math.random().toString(36).slice(2, 7);
 ---
 
-<header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur border-b border-slate-700">
+<header class="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-gray-200">
   <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
     <a href={`/${currentLang}/`} class="flex items-center gap-2">
       <img src="/logo.png" alt="Neonatox" class="h-8 w-auto" />
     </a>
-    <nav class="hidden md:flex gap-6 text-slate-300 items-center">
+    <nav class="hidden md:flex gap-6 text-gray-600 items-center">
       <a href={`/${currentLang}/historia`}>{t.historia}</a>
       <a href={`/${currentLang}/filosofia`}>{t.filosofia}</a>
       <a href={`/${currentLang}/arquitectura`}>{t.arquitectura}</a>
       <a href={`/${currentLang}/paquetes`}>{t.paquetes}</a>
-      <a href={`/${currentLang}/proyectos`} class="text-purple-400 hover:text-purple-300">{t.proyectos}</a>
-      <a href={`/${currentLang}/blog`} class="text-amber-400 hover:text-amber-300">{t.blog}</a>
-      <a href={`/${currentLang}/descargas`} class="text-cyan-400 hover:text-cyan-300">{t.descargas || t.downloads}</a>
+      <a href={`/${currentLang}/proyectos`} class="text-purple-600 hover:text-purple-300">{t.proyectos}</a>
+      <a href={`/${currentLang}/blog`} class="text-amber-600 hover:text-amber-300">{t.blog}</a>
+      <a href={`/${currentLang}/descargas`} class="text-cyan-500 hover:text-cyan-700">{t.descargas || t.downloads}</a>
     </nav>
     <div class="flex items-center gap-2">
       <div class="hidden md:block"><LangSwitcher currentLang={currentLang} /></div>
-      <button id={`${id}-btn`} class="md:hidden w-10 h-10 flex items-center justify-center text-slate-300 hover:text-white focus:outline-none" aria-label="Menu">
+      <button id={`${id}-btn`} class="md:hidden w-10 h-10 flex items-center justify-center text-gray-600 hover:text-gray-900 focus:outline-none" aria-label="Menu">
         <svg id={`${id}-icon`} class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
         </svg>
       </button>
     </div>
   </div>
-  <div id={`${id}-menu`} class="md:hidden hidden border-t border-slate-700 bg-slate-900/95 backdrop-blur">
-    <div class="px-4 py-4 flex flex-col gap-3 text-slate-300">
+  <div id={`${id}-menu`} class="md:hidden hidden border-t border-gray-200 bg-white/95 backdrop-blur">
+    <div class="px-4 py-4 flex flex-col gap-3 text-gray-600">
       <a href={`/${currentLang}/historia`} class="py-2">{t.historia}</a>
       <a href={`/${currentLang}/filosofia`} class="py-2">{t.filosofia}</a>
       <a href={`/${currentLang}/arquitectura`} class="py-2">{t.arquitectura}</a>
       <a href={`/${currentLang}/paquetes`} class="py-2">{t.paquetes}</a>
-      <a href={`/${currentLang}/proyectos`} class="py-2 text-purple-400">{t.proyectos}</a>
-      <a href={`/${currentLang}/blog`} class="py-2 text-amber-400">{t.blog}</a>
+      <a href={`/${currentLang}/proyectos`} class="py-2 text-purple-600">{t.proyectos}</a>
+      <a href={`/${currentLang}/blog`} class="py-2 text-amber-600">{t.blog}</a>
       <a href={`/${currentLang}/descargas`} class="py-2 text-cyan-400">{t.descargas || t.downloads}</a>
-      <div class="pt-2 border-t border-slate-700"><LangSwitcher currentLang={currentLang} /></div>
+      <div class="pt-2 border-t border-gray-200"><LangSwitcher currentLang={currentLang} /></div>
     </div>
   </div>
 </header>

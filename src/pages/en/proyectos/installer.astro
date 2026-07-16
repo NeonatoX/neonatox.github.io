@@ -8,7 +8,7 @@ const t = dict.en;
   <section class="py-20 px-4">
     <div class="max-w-4xl mx-auto">
       <div class="flex items-center gap-4 mb-8">
-        <a href="/en/proyectos" class="text-cyan-400 hover:text-cyan-300">← Projects</a>
+        <a href="/en/proyectos" class="text-cyan-500 hover:text-cyan-700">← Projects</a>
       </div>
 
       <div class="flex items-center gap-4 mb-8">
@@ -20,43 +20,43 @@ const t = dict.en;
       </div>
 
       <div class="flex gap-4 mb-8">
-        <a href="https://github.com/cargabsj175/neonatox-installer" target="_blank" class="bg-yellow-500 hover:bg-yellow-400 text-slate-900 font-semibold px-6 py-3 rounded-lg transition-colors">
+        <a href="https://github.com/neonatox/neonatox-installer" target="_blank" class="bg-yellow-500 hover:bg-yellow-400 text-white font-semibold px-6 py-3 rounded-lg transition-colors">
           {t.verRepos} →
         </a>
         <span class="bg-yellow-500/20 text-yellow-400 px-3 py-2 rounded-lg text-sm">{t.experimental}</span>
       </div>
 
-      <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700 mb-8">
+      <div class="bg-gray-100 p-6 rounded-lg border border-gray-200 mb-8">
         <h2 class="text-2xl font-semibold text-yellow-300 mb-4">Description</h2>
-        <p class="text-slate-300">
+        <p class="text-gray-600">
           Portable, modular, state-based installation framework designed for live systems 
           generated with <strong>neonatox-live-boot</strong>.
         </p>
-        <p class="text-slate-300 mt-4">
+        <p class="text-gray-600 mt-4">
           The installer <strong>is not a monolithic script</strong>, but a set of micro-applications 
           that work independently, store state in `.conf` + `.ok` files, and can be called 
           from CLI, TUI, or GUI.
         </p>
       </div>
 
-      <div class="bg-slate-800/30 p-6 rounded-lg border border-slate-700 mb-8">
+      <div class="bg-gray-50 p-6 rounded-lg border border-gray-200 mb-8">
         <h3 class="text-xl font-semibold text-yellow-300 mb-4">Micro-applications</h3>
         <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
-          <div class="bg-slate-900 p-3 rounded"><span class="text-yellow-400">partctl</span><p class="text-slate-500 text-xs">Partitions</p></div>
-          <div class="bg-slate-900 p-3 rounded"><span class="text-yellow-400">localectl</span><p class="text-slate-500 text-xs">Locale/Keyboard</p></div>
-          <div class="bg-slate-900 p-3 rounded"><span class="text-yellow-400">timectl</span><p class="text-slate-500 text-xs">Timezone</p></div>
-          <div class="bg-slate-900 p-3 rounded"><span class="text-yellow-400">usersctl</span><p class="text-slate-500 text-xs">Users</p></div>
-          <div class="bg-slate-900 p-3 rounded"><span class="text-yellow-400">fstabctl</span><p class="text-slate-500 text-xs">fstab</p></div>
-          <div class="bg-slate-900 p-3 rounded"><span class="text-yellow-400">bootctl</span><p class="text-slate-500 text-xs">Bootloader</p></div>
-          <div class="bg-slate-900 p-3 rounded"><span class="text-yellow-400">systemid</span><p class="text-slate-500 text-xs">Hostname</p></div>
-          <div class="bg-slate-900 p-3 rounded"><span class="text-yellow-400">sysconfig</span><p class="text-slate-500 text-xs">System config</p></div>
-          <div class="bg-slate-900 p-3 rounded"><span class="text-yellow-400">distroinfo</span><p class="text-slate-500 text-xs">OS release</p></div>
+          <div class="bg-white p-3 rounded"><span class="text-yellow-400">partctl</span><p class="text-gray-400 text-xs">Partitions</p></div>
+          <div class="bg-white p-3 rounded"><span class="text-yellow-400">localectl</span><p class="text-gray-400 text-xs">Locale/Keyboard</p></div>
+          <div class="bg-white p-3 rounded"><span class="text-yellow-400">timectl</span><p class="text-gray-400 text-xs">Timezone</p></div>
+          <div class="bg-white p-3 rounded"><span class="text-yellow-400">usersctl</span><p class="text-gray-400 text-xs">Users</p></div>
+          <div class="bg-white p-3 rounded"><span class="text-yellow-400">fstabctl</span><p class="text-gray-400 text-xs">fstab</p></div>
+          <div class="bg-white p-3 rounded"><span class="text-yellow-400">bootctl</span><p class="text-gray-400 text-xs">Bootloader</p></div>
+          <div class="bg-white p-3 rounded"><span class="text-yellow-400">systemid</span><p class="text-gray-400 text-xs">Hostname</p></div>
+          <div class="bg-white p-3 rounded"><span class="text-yellow-400">sysconfig</span><p class="text-gray-400 text-xs">System config</p></div>
+          <div class="bg-white p-3 rounded"><span class="text-yellow-400">distroinfo</span><p class="text-gray-400 text-xs">OS release</p></div>
         </div>
       </div>
 
-      <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700 mb-8">
+      <div class="bg-gray-100 p-6 rounded-lg border border-gray-200 mb-8">
         <h2 class="text-2xl font-semibold text-yellow-300 mb-4">Supported distributions</h2>
-        <ul class="space-y-2 text-slate-300">
+        <ul class="space-y-2 text-gray-600">
           <li>✓ <strong>Neonatox</strong> - via live + bind /boot</li>
           <li>✓ <strong>Debian/Ubuntu</strong> - update-initramfs</li>
           <li>✓ <strong>Arch Linux</strong> - mkinitcpio</li>

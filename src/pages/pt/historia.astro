@@ -10,110 +10,110 @@ const t = {
 <BaseLayout title={t.title} description={t.desc} lang="pt">
   <section class="py-16 px-4">
     <div class="max-w-4xl mx-auto">
-      <a href="/pt/" class="text-cyan-400 hover:text-cyan-300 mb-8 inline-block">{t.backHome}</a>
+      <a href="/pt/" class="text-cyan-500 hover:text-cyan-700 mb-8 inline-block">{t.backHome}</a>
 
       <article class="space-y-12">
 
         <div class="text-center">
           <h1 class="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 mb-8">{t.title}</h1>
-          <p class="text-xl text-slate-300 leading-relaxed">
+          <p class="text-xl text-gray-600 leading-relaxed">
             O NeonatoX não nasceu porque o Linux estava quebrado.<br />
             <strong>Nasceu porque eu queria entendê-lo de verdade.</strong>
           </p>
-          <p class="text-slate-300 mt-4">
+          <p class="text-gray-600 mt-4">
             Para muita gente, software livre é só "usar coisas de graça". Para mim sempre significou algo mais profundo:
           </p>
-          <ul class="list-disc list-inside text-slate-300 space-y-1 mt-4 max-w-md mx-auto">
+          <ul class="list-disc list-inside text-gray-600 space-y-1 mt-4 max-w-md mx-auto">
             <li>A liberdade de modificar.</li>
             <li>A liberdade de construir.</li>
             <li>A liberdade de compreender o que está realmente acontecendo dentro da máquina.</li>
           </ul>
-          <p class="text-lg text-slate-300 mt-6">
+          <p class="text-lg text-gray-600 mt-6">
             Eu não queria instalar uma distribuição. Queria <strong>experimentar</strong> essas liberdades na prática.
           </p>
         </div>
 
-        <div class="rounded-xl overflow-hidden border border-slate-700 mb-4">
+        <div class="rounded-xl overflow-hidden border border-gray-200 mb-4">
           <img src="/screenshots/historia-hero.jpg" alt="Neonatox - O começo" class="w-full h-auto" loading="lazy">
         </div>
 
-        <hr class="border-slate-700" />
+        <hr class="border-gray-200" />
 
         <!-- O COMEÇO -->
         <section>
-          <h2 class="text-2xl font-bold text-white mb-4">O começo</h2>
-          <p class="text-slate-300">Tudo mudou no dia em que descobri o <strong>Linux From Scratch</strong>.</p>
-          <p class="text-slate-300 mt-4">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">O começo</h2>
+          <p class="text-gray-600">Tudo mudou no dia em que descobri o <strong>Linux From Scratch</strong>.</p>
+          <p class="text-gray-600 mt-4">
             No começo era só copiar e colar comandos. Mas em algum momento fez clique. Parei de seguir instruções e comecei a <strong>entender</strong> por que as coisas eram feitas daquela maneira: o toolchain, glibc, o kernel, as rotas, as variáveis de ambiente…
           </p>
-          <p class="text-slate-300 mt-4">
+          <p class="text-gray-600 mt-4">
             Esse foi o momento em que o Neonatox deixou de ser apenas uma ideia louca.
           </p>
-          <div class="rounded-xl overflow-hidden border border-slate-700 mt-6">
+          <div class="rounded-xl overflow-hidden border border-gray-200 mt-6">
             <img src="/screenshots/historia-comienzo.jpg" alt="Linux From Scratch - O começo" class="w-full h-auto" loading="lazy">
           </div>
         </section>
 
-        <hr class="border-slate-700" />
+        <hr class="border-gray-200" />
 
         <!-- PRIMEIRAS VERSÕES -->
         <section>
-          <h2 class="text-2xl font-bold text-white mb-4">Primeiras versões</h2>
-          <p class="text-slate-300">As primeiras versões eram um desastre lindo. Não tinha gerenciador de pacotes, tudo era compilado à mão. Lembro especialmente de compilar o <strong>XFree86</strong>… foi traumático.</p>
-          <p class="text-slate-300 mt-4">Aquela experiência deixou claro que eu precisava de modularidade, reprodutibilidade e controle real.</p>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">Primeiras versões</h2>
+          <p class="text-gray-600">As primeiras versões eram um desastre lindo. Não tinha gerenciador de pacotes, tudo era compilado à mão. Lembro especialmente de compilar o <strong>XFree86</strong>… foi traumático.</p>
+          <p class="text-gray-600 mt-4">Aquela experiência deixou claro que eu precisava de modularidade, reprodutibilidade e controle real.</p>
         </section>
 
-        <hr class="border-slate-700" />
+        <hr class="border-gray-200" />
 
         <!-- ORIGEM DO NOME -->
         <section>
-          <h2 class="text-2xl font-bold text-white mb-4">Origem do nome</h2>
-          <p class="text-slate-300">O nome <strong>Neonatox</strong> surgiu numa conversa com meu irmão. Eu explicava que não estava modificando nenhuma distro, mas criando algo do zero. Então ele disse:</p>
-          <blockquote class="border-l-4 border-cyan-500 pl-4 italic text-slate-400 my-6 text-lg">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">Origem do nome</h2>
+          <p class="text-gray-600">O nome <strong>Neonatox</strong> surgiu numa conversa com meu irmão. Eu explicava que não estava modificando nenhuma distro, mas criando algo do zero. Então ele disse:</p>
+          <blockquote class="border-l-4 border-cyan-500 pl-4 italic text-gray-500 my-6 text-lg">
             "É como um neonato… mas com X" → <strong class="text-cyan-400">Neonatox</strong>
           </blockquote>
-          <p class="text-slate-300">Um sistema nascendo do zero.</p>
+          <p class="text-gray-600">Um sistema nascendo do zero.</p>
         </section>
 
-        <hr class="border-slate-700" />
+        <hr class="border-gray-200" />
 
         <!-- NHOPKG -->
         <section>
-          <h2 class="text-2xl font-bold text-white mb-4">nhopkg</h2>
-          <p class="text-slate-300">Depois chegou um dos pilares do projeto: <strong>nhopkg</strong>.</p>
-          <p class="text-slate-300 mt-4">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">nhopkg</h2>
+          <p class="text-gray-600">Depois chegou um dos pilares do projeto: <strong>nhopkg</strong>.</p>
+          <p class="text-gray-600 mt-4">
             Originalmente criado por <strong>Jaime Gil</strong> para seu projeto <strong>Nhoax</strong>, este gerenciador de pacotes era simples, compreensível e adaptável. Quando Jaime deixou o projeto, decidi continuá-lo e adaptá-lo ao Neonatox.
           </p>
-          <div class="rounded-xl overflow-hidden border border-slate-700 mt-6">
+          <div class="rounded-xl overflow-hidden border border-gray-200 mt-6">
             <img src="/screenshots/historia-nhopkg.jpg" alt="nhopkg - O gerenciador de pacotes" class="w-full h-auto" loading="lazy">
           </div>
         </section>
 
-        <hr class="border-slate-700" />
+        <hr class="border-gray-200" />
 
         <!-- A PAUSA -->
         <section>
-          <h2 class="text-2xl font-bold text-white mb-4">A pausa</h2>
-          <p class="text-slate-300">Como quase todos os projetos pessoais, o Neonatox também teve seu inverno. Anos em que a vida real venceu. O projeto congelou, não por falta de vontade, mas porque simplesmente não era o momento.</p>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">A pausa</h2>
+          <p class="text-gray-600">Como quase todos os projetos pessoais, o Neonatox também teve seu inverno. Anos em que a vida real venceu. O projeto congelou, não por falta de vontade, mas porque simplesmente não era o momento.</p>
         </section>
 
-        <hr class="border-slate-700" />
+        <hr class="border-gray-200" />
 
         <!-- O RETORNO -->
         <section>
-          <h2 class="text-2xl font-bold text-white mb-4">O retorno (2023)</h2>
-          <p class="text-slate-300">Quando voltei, fiz com outra cabeça. Com mais experiência e clareza. O que antes era um experimento bagunçado começou a se transformar em algo mais sério e estruturado.</p>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">O retorno (2023)</h2>
+          <p class="text-gray-600">Quando voltei, fiz com outra cabeça. Com mais experiência e clareza. O que antes era um experimento bagunçado começou a se transformar em algo mais sério e estruturado.</p>
         </section>
 
-        <hr class="border-slate-700" />
+        <hr class="border-gray-200" />
 
         <!-- HOJE -->
         <section>
-          <h2 class="text-2xl font-bold text-white mb-4">Hoje</h2>
-          <p class="text-slate-300"><strong>O NeonatoX é, acima de tudo, um quebra-cabeças.</strong></p>
-          <p class="text-slate-300 mt-4">Não é mais uma distribuição qualquer. É uma plataforma para aprender, quebrar coisas, reconstruí-las e entender como um sistema operacional realmente funciona.</p>
-          <p class="text-slate-300 mt-6">E ainda está aqui. Não foi abandonado.<br /><strong class="text-cyan-400">Só estava esperando o momento certo.</strong></p>
-          <div class="rounded-xl overflow-hidden border border-slate-700 mt-6">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">Hoje</h2>
+          <p class="text-gray-600"><strong>O NeonatoX é, acima de tudo, um quebra-cabeças.</strong></p>
+          <p class="text-gray-600 mt-4">Não é mais uma distribuição qualquer. É uma plataforma para aprender, quebrar coisas, reconstruí-las e entender como um sistema operacional realmente funciona.</p>
+          <p class="text-gray-600 mt-6">E ainda está aqui. Não foi abandonado.<br /><strong class="text-cyan-400">Só estava esperando o momento certo.</strong></p>
+          <div class="rounded-xl overflow-hidden border border-gray-200 mt-6">
             <img src="/screenshots/historia-hoy.jpg" alt="Neonatox hoje" class="w-full h-auto" loading="lazy">
           </div>
         </section>

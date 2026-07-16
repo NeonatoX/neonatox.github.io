@@ -8,63 +8,63 @@ const t = dict.es;
   <section class="py-20 px-4">
     <div class="max-w-4xl mx-auto">
       <div class="flex items-center gap-4 mb-8">
-        <a href="/es/proyectos" class="text-cyan-400 hover:text-cyan-300">← Proyectos</a>
+        <a href="/es/proyectos" class="text-cyan-500 hover:text-cyan-700">← Proyectos</a>
       </div>
 
       <div class="flex items-center gap-4 mb-8">
         <div class="w-16 h-16 bg-cyan-500/20 rounded-xl flex items-center justify-center text-4xl">📦</div>
         <div>
           <h1 class="text-4xl font-bold text-cyan-400">nhopkg</h1>
-          <p class="text-xl text-cyan-400/70">Gestor de paquetes universal</p>
+          <p class="text-xl text-cyan-600/70">Gestor de paquetes universal</p>
         </div>
       </div>
 
       <div class="flex gap-4 mb-8">
-        <a href="https://github.com/cargabsj175/neonatox-nhopkg" target="_blank" class="bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-semibold px-6 py-3 rounded-lg transition-colors">
+        <a href="https://github.com/neonatox/neonatox-nhopkg" target="_blank" class="bg-cyan-500 hover:bg-cyan-400 text-white font-semibold px-6 py-3 rounded-lg transition-colors">
           {t.verRepos} →
         </a>
       </div>
 
-      <div class="prose prose-invert max-w-none">
-        <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700 mb-8">
-          <h2 class="text-2xl font-semibold text-cyan-300 mb-4">Descripción</h2>
-          <p class="text-slate-300">
+      <div class="prose max-w-none">
+        <div class="bg-gray-100 p-6 rounded-lg border border-gray-200 mb-8">
+          <h2 class="text-2xl font-semibold text-cyan-700 mb-4">Descripción</h2>
+          <p class="text-gray-600">
             nhopkg es un gestor de paquetes diseñado para funcionar en cualquier distribución GNU/Linux. 
             Utiliza paquetes binarios (`.nho`) y paquetes fuente (`.srcnho`), permitiendo crear, instalar, 
             convertir y gestionar software de manera simple, consistente y portable.
           </p>
-          <p class="text-slate-300 mt-4">
+          <p class="text-gray-600 mt-4">
             Originalmente desarrollado en 2010, nhopkg combina simplicidad, poder y control total sobre el 
             empaquetado, siendo especialmente útil para sistemas similares a Slackware o entornos minimalistas.
           </p>
         </div>
 
         <div class="grid md:grid-cols-2 gap-6 mb-8">
-          <div class="bg-slate-800/30 p-6 rounded-lg border border-slate-700">
-            <h3 class="text-xl font-semibold text-cyan-300 mb-4">Formatos de paquete</h3>
+          <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+            <h3 class="text-xl font-semibold text-cyan-700 mb-4">Formatos de paquete</h3>
             <table class="w-full text-sm">
               <thead>
-                <tr class="border-b border-slate-700">
-                  <th class="text-left py-2 text-slate-400">Extensión</th>
-                  <th class="text-left py-2 text-slate-400">Tipo</th>
+                <tr class="border-b border-gray-200">
+                  <th class="text-left py-2 text-gray-500">Extensión</th>
+                  <th class="text-left py-2 text-gray-500">Tipo</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="border-b border-slate-800">
+                <tr class="border-b border-gray-200">
                   <td class="py-2 text-cyan-400">.nho</td>
-                  <td class="py-2 text-slate-300">Binario</td>
+                  <td class="py-2 text-gray-600">Binario</td>
                 </tr>
                 <tr>
                   <td class="py-2 text-cyan-400">.srcnho</td>
-                  <td class="py-2 text-slate-300">Fuente</td>
+                  <td class="py-2 text-gray-600">Fuente</td>
                 </tr>
               </tbody>
             </table>
           </div>
 
-          <div class="bg-slate-800/30 p-6 rounded-lg border border-slate-700">
-            <h3 class="text-xl font-semibold text-cyan-300 mb-4">Características</h3>
-            <ul class="space-y-2 text-slate-300">
+          <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+            <h3 class="text-xl font-semibold text-cyan-700 mb-4">Características</h3>
+            <ul class="space-y-2 text-gray-600">
               <li>✓ Conversión automática Slackware (.tgz → .nho)</li>
               <li>✓ Resolución de dependencias</li>
               <li>✓ Compilación desde fuente</li>
@@ -75,10 +75,10 @@ const t = dict.es;
           </div>
         </div>
 
-        <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700 mb-8">
-          <h2 class="text-2xl font-semibold text-cyan-300 mb-4">Instalación</h2>
-          <p class="text-slate-400 text-sm mb-4">nhopkg usa Meson como sistema de build:</p>
-          <pre is:raw class="bg-slate-900 p-4 rounded-lg text-green-400 text-sm overflow-x-auto"># Instalar dependencias
+        <div class="bg-gray-100 p-6 rounded-lg border border-gray-200 mb-8">
+          <h2 class="text-2xl font-semibold text-cyan-700 mb-4">Instalación</h2>
+          <p class="text-gray-500 text-sm mb-4">nhopkg usa Meson como sistema de build:</p>
+          <pre is:raw class="bg-gray-100 p-4 rounded-lg text-gray-800 text-sm overflow-x-auto"># Instalar dependencias
 sudo apt install meson ninja-build
 
 # Configurar
@@ -91,39 +91,39 @@ ninja -C builddir
 sudo ninja -C builddir install</pre>
         </div>
 
-        <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700 mb-8">
-          <h2 class="text-2xl font-semibold text-cyan-300 mb-4">Uso básico</h2>
-          <div class="space-y-4 text-slate-300">
-            <div class="bg-slate-900 p-4 rounded-lg">
+        <div class="bg-gray-100 p-6 rounded-lg border border-gray-200 mb-8">
+          <h2 class="text-2xl font-semibold text-cyan-700 mb-4">Uso básico</h2>
+          <div class="space-y-4 text-gray-600">
+            <div class="bg-gray-50 p-4 rounded-lg">
               <code class="text-cyan-400">sudo nhopkg -i paquete-1.0-1.nho</code>
-              <p class="text-slate-400 text-sm mt-1">Instalar paquete binario local</p>
+              <p class="text-gray-500 text-sm mt-1">Instalar paquete binario local</p>
             </div>
-            <div class="bg-slate-900 p-4 rounded-lg">
+            <div class="bg-gray-50 p-4 rounded-lg">
               <code class="text-cyan-400">sudo nhopkg -S nombre-paquete</code>
-              <p class="text-slate-400 text-sm mt-1">Instalar desde repositorio</p>
+              <p class="text-gray-500 text-sm mt-1">Instalar desde repositorio</p>
             </div>
-            <div class="bg-slate-900 p-4 rounded-lg">
+            <div class="bg-gray-50 p-4 rounded-lg">
               <code class="text-cyan-400">sudo nhopkg -b paquete.srcnho</code>
-              <p class="text-slate-400 text-sm mt-1">Compilar e instalar desde fuente</p>
+              <p class="text-gray-500 text-sm mt-1">Compilar e instalar desde fuente</p>
             </div>
-            <div class="bg-slate-900 p-4 rounded-lg">
+            <div class="bg-gray-50 p-4 rounded-lg">
               <code class="text-cyan-400">sudo nhopkg -y</code>
-              <p class="text-slate-400 text-sm mt-1">Actualizar todos los paquetes</p>
+              <p class="text-gray-500 text-sm mt-1">Actualizar todos los paquetes</p>
             </div>
-            <div class="bg-slate-900 p-4 rounded-lg">
+            <div class="bg-gray-50 p-4 rounded-lg">
               <code class="text-cyan-400">sudo nhopkg -r nombre-paquete</code>
-              <p class="text-slate-400 text-sm mt-1">Eliminar un paquete</p>
+              <p class="text-gray-500 text-sm mt-1">Eliminar un paquete</p>
             </div>
-            <div class="bg-slate-900 p-4 rounded-lg">
+            <div class="bg-gray-50 p-4 rounded-lg">
               <code class="text-cyan-400">sudo nhopkg -z paquete.tgz</code>
-              <p class="text-slate-400 text-sm mt-1">Convertir paquete Slackware</p>
+              <p class="text-gray-500 text-sm mt-1">Convertir paquete Slackware</p>
             </div>
           </div>
         </div>
 
-        <div class="bg-slate-800/30 p-6 rounded-lg border border-slate-700 mb-8">
-          <h3 class="text-xl font-semibold text-cyan-300 mb-4">Herramientas adicionales</h3>
-          <ul class="space-y-2 text-slate-300">
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200 mb-8">
+          <h3 class="text-xl font-semibold text-cyan-700 mb-4">Herramientas adicionales</h3>
+          <ul class="space-y-2 text-gray-600">
             <li><code class="text-cyan-400">nhopkg-repos</code> - Gestión de repositorios</li>
             <li><code class="text-cyan-400">nhouser</code> - Gestión de usuarios/grupos para scripts de paquete</li>
             <li><code class="text-cyan-400">nhopkg-overlay</code> - Entorno de build aislado con overlayfs</li>
@@ -131,7 +131,7 @@ sudo ninja -C builddir install</pre>
         </div>
 
         <div class="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-6">
-          <p class="text-cyan-300">
+          <p class="text-cyan-700">
             <strong>Historia:</strong> Creado originalmente en 2010 por Jaime Gil de Sagredo Luna. 
             Desde entonces, mantenido y evolucionado por Carlos Sánchez para la distribución NeonatoX.
           </p>

@@ -79,35 +79,35 @@ const apiUrl = 'https://gitlab.com/api/v4/groups/neonatox-sources/projects?per_p
 
   <!-- Metrics Hero -->
   <div id="metrics-hero" class="grid grid-cols-2 md:grid-cols-4 gap-4">
-    <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700 text-center">
+    <div class="bg-gray-100 p-6 rounded-xl border border-gray-200 text-center">
       <div id="metrics-total" class="text-4xl font-bold text-cyan-400 mb-1">{totalCount}</div>
-      <div class="text-sm text-slate-400">paquetes totales</div>
+      <div class="text-sm text-gray-500">paquetes totales</div>
     </div>
-    <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700 text-center">
-      <div class="text-4xl font-bold text-green-400 mb-1">{last30.length}</div>
-      <div class="text-sm text-slate-400">activos (30d)</div>
+    <div class="bg-gray-100 p-6 rounded-xl border border-gray-200 text-center">
+      <div class="text-4xl font-bold text-emerald-600 mb-1">{last30.length}</div>
+      <div class="text-sm text-gray-500">activos (30d)</div>
     </div>
-    <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700 text-center">
-      <div class="text-4xl font-bold text-purple-400 mb-1">{last365.length}</div>
-      <div class="text-sm text-slate-400">activos (1 año)</div>
+    <div class="bg-gray-100 p-6 rounded-xl border border-gray-200 text-center">
+      <div class="text-4xl font-bold text-purple-600 mb-1">{last365.length}</div>
+      <div class="text-sm text-gray-500">activos (1 año)</div>
     </div>
-    <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700 text-center">
-      <div class="text-4xl font-bold text-amber-400 mb-1">{sortedCats.length}</div>
-      <div class="text-sm text-slate-400">categorías</div>
+    <div class="bg-gray-100 p-6 rounded-xl border border-gray-200 text-center">
+      <div class="text-4xl font-bold text-amber-600 mb-1">{sortedCats.length}</div>
+      <div class="text-sm text-gray-500">categorías</div>
     </div>
   </div>
 
   <!-- Categories -->
   <div>
-    <h3 class="text-xl font-semibold text-white mb-6">Distribución por categoría</h3>
+    <h3 class="text-xl font-semibold text-gray-900 mb-6">Distribución por categoría</h3>
     <div class="space-y-3">
       {sortedCats.map(([cat, count]) => (
         <div>
           <div class="flex justify-between text-sm mb-1">
-            <span class="text-slate-300">{cat}</span>
-            <span class="text-slate-400">{count}</span>
+            <span class="text-gray-600">{cat}</span>
+            <span class="text-gray-500">{count}</span>
           </div>
-          <div class="w-full bg-slate-700 rounded-full h-2 overflow-hidden">
+          <div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
             <div
               class="h-full rounded-full bg-gradient-to-r from-cyan-500 to-purple-500"
               style={`width: ${(count / maxCat) * 100}%`}
@@ -120,16 +120,16 @@ const apiUrl = 'https://gitlab.com/api/v4/groups/neonatox-sources/projects?per_p
 
   <!-- Recent packages -->
   <div>
-    <h3 class="text-xl font-semibold text-white mb-6">Paquetes actualizados recientemente</h3>
+    <h3 class="text-xl font-semibold text-gray-900 mb-6">Paquetes actualizados recientemente</h3>
     <div class="grid md:grid-cols-2 gap-3">
       {recent.map(p => (
         <a
           href={`https://gitlab.com/neonatox-sources/${p.name}`}
           target="_blank"
-          class="bg-slate-800/30 p-4 rounded-lg border border-slate-700 hover:border-cyan-500/50 transition-colors flex justify-between items-center"
+          class="bg-gray-50 p-4 rounded-lg border border-gray-200 hover:border-cyan-500/50 transition-colors flex justify-between items-center"
         >
           <span class="text-cyan-400 font-mono text-sm">{p.name}</span>
-          <span class="text-xs text-slate-500">{p.last}</span>
+          <span class="text-xs text-gray-400">{p.last}</span>
         </a>
       ))}
     </div>
