@@ -3,6 +3,7 @@ title: "Welcome to Neonatox — A tour of the website"
 description: "Discover all sections of the official Neonatox website, their purpose, and how to make the most of them."
 pubDate: 2026-05-26
 lang: en
+author: "Carlos Sánchez"
 tags: ["neonatox", "website", "welcome"]
 ---
 

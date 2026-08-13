@@ -3,6 +3,7 @@ title: "O egoísmo produtivo: Git, Linux e algumas reflexões sobre Neonatox"
 description: "Como o 'egoísmo produtivo' inspirou esta distro Linux, assim como Git e Linux nasceram de resolver problemas próprios."
 pubDate: 2026-06-20
 lang: pt
+author: "Carlos Sánchez"
 tags: ["Software Livre", "Neonatox", "Linux", "Desenvolvimento"]
 ---
 

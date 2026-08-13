@@ -3,6 +3,7 @@ title: "Productive Selfishness: Git, Linux and Some Reflections on Neonatox"
 description: "How 'productive selfishness' inspired this Linux distro, just like Git and Linux were born from solving own problems."
 pubDate: 2026-06-20
 lang: en
+author: "Carlos Sánchez"
 tags: ["Free Software", "Neonatox", "Linux", "Development"]
 ---
 

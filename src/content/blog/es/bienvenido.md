@@ -3,6 +3,7 @@ title: "Bienvenido a Neonatox — Un recorrido por la web"
 description: "Conoce todas las secciones de la página oficial de Neonatox, su propósito y cómo aprovecharlas al máximo."
 pubDate: 2026-05-26
 lang: es
+author: "Carlos Sánchez"
 tags: ["neonatox", "web", "bienvenida"]
 ---
 

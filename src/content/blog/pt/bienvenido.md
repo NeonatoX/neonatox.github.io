@@ -3,6 +3,7 @@ title: "Bem-vindo ao Neonatox — Um tour pelo site"
 description: "Conheça todas as seções do site oficial do Neonatox, seu propósito e como aproveitá-las ao máximo."
 pubDate: 2026-05-26
 lang: pt
+author: "Carlos Sánchez"
 tags: ["neonatox", "site", "boas-vindas"]
 ---
 
