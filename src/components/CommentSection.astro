@@ -1,0 +1,42 @@
+---
+interface Props {
+  lang?: 'es' | 'en' | 'pt';
+  title?: string;
+}
+
+const { lang = 'es', title } = Astro.props;
+
+const headings = {
+  es: 'Comentarios',
+  en: 'Comments',
+  pt: 'Comentários',
+};
+---
+
+<section id="comentarios" class="mt-16">
+  <h2 class="text-2xl font-bold text-gray-900 mb-6" id="comentarios">{title ?? headings[lang]}</h2>
+
+  <!--
+    Giscus: comentarios vía GitHub Discussions.
+    data-mapping="pathname" vincula cada hilo a la URL del artículo (ideal para i18n).
+  -->
+  <script
+    is:inline
+    src="https://giscus.app/client.js"
+    data-repo="NeonatoX/neonatox.github.io"
+    data-repo-id="R_kgDOSgHVTQ"
+    data-category="General"
+    data-category-id="DIC_kwDOSgHVTc4DFr5W"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="light"
+    data-lang={lang}
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async
+  >
+  </script>
+</section>
