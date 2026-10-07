@@ -14,6 +14,7 @@ const t = {
 
       <article class="space-y-12">
 
+        <!-- INTRO -->
         <div class="text-center">
           <h1 class="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 mb-8">{t.title}</h1>
           <p class="text-xl text-gray-600 leading-relaxed">
@@ -39,12 +40,17 @@ const t = {
 
         <hr class="border-gray-200" />
 
-        <!-- THE BEGINNING -->
+        <!-- THE BEGINNING: FROM VEGNUX TO NEONATOX -->
         <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">The beginning</h2>
-          <p class="text-gray-600">Everything changed the day I discovered <strong>Linux From Scratch</strong>.</p>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">The beginning: From VegnuX to NeonatoX</h2>
+          <p class="text-gray-600">
+            It all formally began in <strong>2007</strong> with the publication of the <em>Manifesto 0.1.0</em> of the <strong>MKL/VegnuX</strong> project (Venezuelan GNU/Linux eXperimental Project). This was the first initiative to develop its own distribution, guided by the principles of free software, source code availability, and experimentation.
+          </p>
           <p class="text-gray-600 mt-4">
-            At first it was just copy-pasting commands. But at some point, it clicked. I stopped following instructions and started <strong>understanding</strong> why things were done that way: the toolchain, glibc, the kernel, the paths, the environment variables…
+            Over time, the project's vision evolved. <strong>VegnuX</strong> became the "banner" or umbrella for a broader set of free software initiatives and projects. Within this growing ecosystem, the distribution itself needed its own distinct identity.
+          </p>
+          <p class="text-gray-600 mt-4">
+            Everything changed the day I discovered <strong>Linux From Scratch</strong>. At first it was just copy-pasting commands. But at some point, it clicked. I stopped following instructions and started <strong>understanding</strong> why things were done that way: the toolchain, glibc, the kernel, the paths, the environment variables…
           </p>
           <p class="text-gray-600 mt-4">
             That was the moment Neonatox stopped being just a crazy idea.
@@ -52,6 +58,26 @@ const t = {
           <div class="rounded-xl overflow-hidden border border-gray-200 mt-6">
             <img src="/screenshots/historia-comienzo.jpg" alt="Linux From Scratch - The beginning" class="w-full h-auto" loading="lazy">
           </div>
+        </section>
+
+        <hr class="border-gray-200" />
+
+        <!-- ORIGIN OF THE NAME AND THE TRANSITION -->
+        <section>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">Origin of the name and the transition</h2>
+          <p class="text-gray-600">
+            It was in this context that <strong>NeonatoX</strong> was born. While VegnuX covered more general projects, NeonatoX consolidated itself as the specific name of the distribution. The first official milestone under this new identity was the release of <strong>NeonatoX Cañaverales 0.48.0</strong> in <strong>April 2009</strong>.
+          </p>
+          <p class="text-gray-600 mt-4">
+            This name change not only marked a new stage of maturity for the distro, but also helped clearly differentiate it from other local initiatives with phonetically similar names (such as Venenux), consolidating its own memorable identity.
+          </p>
+          <p class="text-gray-600 mt-4">
+            The name <strong>Neonatox</strong> came up in a conversation with my brother. I was explaining that I wasn't modifying any distro, but creating something from scratch. Then he said:
+          </p>
+          <blockquote class="border-l-4 border-cyan-500 pl-4 italic text-gray-500 my-6 text-lg">
+            "It's like a neonate… but with an X" → <strong class="text-cyan-400">Neonatox</strong>
+          </blockquote>
+          <p class="text-gray-600">A system being born from scratch, under the wing of the VegnuX project, but with its own personality.</p>
         </section>
 
         <hr class="border-gray-200" />
@@ -65,24 +91,15 @@ const t = {
 
         <hr class="border-gray-200" />
 
-        <!-- ORIGIN OF THE NAME -->
+        <!-- NHOPKG AND THE COMMUNITY -->
         <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">Origin of the name</h2>
-          <p class="text-gray-600">The name <strong>Neonatox</strong> came up in a conversation with my brother. I was explaining that I wasn't modifying any distro, but creating something from scratch. Then he said:</p>
-          <blockquote class="border-l-4 border-cyan-500 pl-4 italic text-gray-500 my-6 text-lg">
-            "It's like a neonate… but with an X" → <strong class="text-cyan-400">Neonatox</strong>
-          </blockquote>
-          <p class="text-gray-600">A system being born from scratch.</p>
-        </section>
-
-        <hr class="border-gray-200" />
-
-        <!-- NHOPKG -->
-        <section>
-          <h2 class="text-2xl font-bold text-gray-900 mb-4">nhopkg</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">nhopkg and the community</h2>
           <p class="text-gray-600">Then came one of the project's pillars: <strong>nhopkg</strong>.</p>
           <p class="text-gray-600 mt-4">
             Originally created by <strong>Jaime Gil</strong> for his project <strong>Nhoax</strong>, this package manager was simple, understandable, and adaptable. When Jaime left the project, I decided to continue it and adapt it to Neonatox.
+          </p>
+          <p class="text-gray-600 mt-4">
+            Development was transparent and iterative. Historical records show how it went from a manager that "resolved some dependencies" to the creation of <strong>pynhopkg</strong> (a Python tool for managing package sources), thanks to community collaboration. Developers such as <em>dominuskernel</em> and <em>Nehemías Velázquez</em> contributed to the installer and the manager, demonstrating the community spirit of free software.
           </p>
           <div class="rounded-xl overflow-hidden border border-gray-200 mt-6">
             <img src="/screenshots/historia-nhopkg.jpg" alt="nhopkg - The package manager" class="w-full h-auto" loading="lazy">
@@ -107,6 +124,25 @@ const t = {
 
         <hr class="border-gray-200" />
 
+        <!-- PHILOSOPHY AND PRAGMATISM -->
+        <section>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">Philosophy and pragmatism</h2>
+          <p class="text-gray-600">
+            At the beginning of the project, the vision was strict: using <strong>linux-libre</strong> as the only kernel option, maintaining absolute purity of 100% free software. It was an invaluable learning stage and a principle we will always respect.
+          </p>
+          <p class="text-gray-600 mt-4">
+            However, over the years and with the rapid evolution of hardware, reality imposed itself. Keeping a system usable as a daily-use machine without proprietary firmware (needed for Wi-Fi, modern graphics, or certain peripherals) became unfeasible, even for me as a developer.
+          </p>
+          <p class="text-gray-600 mt-4">
+            NeonatoX evolved toward a more <strong>pragmatic</strong> approach, but without betraying its roots. It's not about abandoning the ideals of free software, but balancing them with technical reality. <strong>Anyone who wishes to keep a 100% free system still has that option</strong>: the free kernel, along with its sources and binaries, remains completely available in our repositories.
+          </p>
+          <p class="text-gray-600 mt-4">
+            Today, the project seeks to offer a system that truly works in the real world, being fully transparent and giving the user total control to decide what they install on their own machine.
+          </p>
+        </section>
+
+        <hr class="border-gray-200" />
+
         <!-- TODAY -->
         <section>
           <h2 class="text-2xl font-bold text-gray-900 mb-4">Today</h2>
@@ -116,6 +152,35 @@ const t = {
           <div class="rounded-xl overflow-hidden border border-gray-200 mt-6">
             <img src="/screenshots/historia-hoy.jpg" alt="Neonatox today" class="w-full h-auto" loading="lazy">
           </div>
+        </section>
+
+        <hr class="border-gray-200" />
+
+        <!-- HISTORICAL REFERENCES -->
+        <section>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">Historical references</h2>
+          <ul class="list-disc list-inside text-gray-600 space-y-2">
+            <li>
+              <a href="https://vegnux.wordpress.com/2007/05/29/lanzamiento-del-manifiesto-0-1-0-mklvegnux/" class="text-cyan-500 hover:text-cyan-700" target="_blank" rel="noopener noreferrer">
+                MKL/VegnuX Manifesto 0.1.0 (2007)
+              </a>
+            </li>
+            <li>
+              <a href="https://vegnux.wordpress.com/2009/04/16/liberada-neonatox-canaverales-0-48-0/" class="text-cyan-500 hover:text-cyan-700" target="_blank" rel="noopener noreferrer">
+                Release of NeonatoX Cañaverales 0.48.0 (2009)
+              </a>
+            </li>
+            <li>
+              <a href="https://vegnux.wordpress.com/2013/05/28/version-actualizada-de-neonatox-06-2rc5/" class="text-cyan-500 hover:text-cyan-700" target="_blank" rel="noopener noreferrer">
+                Evolution and transparency of nhopkg / pynhopkg (2013)
+              </a>
+            </li>
+            <li>
+              <a href="https://vegnux.wordpress.com/" class="text-cyan-500 hover:text-cyan-700" target="_blank" rel="noopener noreferrer">
+                Official blog of the VegnuX Project
+              </a>
+            </li>
+          </ul>
         </section>
 
       </article>
