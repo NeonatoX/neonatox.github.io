@@ -6,7 +6,19 @@ import { dict } from '../../utils/i18n';
 const t = dict.en;
 ---
 
-<BaseLayout title="Home" description="Neonatox: learn Linux by building it from scratch. Experimental, educational, and transparent distro." lang="en">
+<BaseLayout
+  title="Home"
+  description="Neonatox: learn Linux by building it from scratch. Experimental, educational, and transparent distro."
+  lang="en"
+  canonical="/en/"
+  rssUrl="/en/blog/rss.xml"
+  alternates={[
+    { hreflang: 'es', href: '/es/' },
+    { hreflang: 'en', href: '/en/' },
+    { hreflang: 'pt', href: '/pt/' },
+    { hreflang: 'x-default', href: '/es/' },
+  ]}
+>
   <!-- HERO -->
   <section class="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-b from-gray-50 via-gray-50 to-gray-100"></div>

@@ -1,19 +1,25 @@
 ---
 import BlogLayout from '../../../layouts/BlogLayout.astro';
-import { getCollection } from 'astro:content';
+import {
+  getAllPosts,
+  getLocaleFromSlug,
+  getSlugFromSlug,
+} from '../../../utils/blog';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog', ({ slug }) => slug.startsWith('es/'));
-  return posts.map(post => ({
-    params: { slug: post.slug.replace('es/', '') },
-    props: { post },
-  }));
+  const allPosts = await getAllPosts();
+  // Nota: literal 'es' dentro de getStaticPaths (limitación de Astro
+  // con las constantes de nivel superior en esta función).
+  return allPosts
+    .filter((post) => getLocaleFromSlug(post.slug) === 'es')
+    .map((post) => ({
+      params: { slug: getSlugFromSlug(post.slug) },
+      props: { post },
+    }));
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const allPosts = await getAllPosts();
 ---
 
-<BlogLayout title={post.data.title} description={post.data.description} lang="es" pubDate={post.data.pubDate} author={post.data.author} tags={post.data.tags}>
-  <Content />
-</BlogLayout>
+<BlogLayout post={post} lang="es" allPosts={allPosts} />

@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import BlogIndex from '../../../../components/BlogIndex.astro';
+import { dict } from '../../../../utils/i18n';
+import {
+  getAllPosts,
+  getBlogPath,
+  getLocaleFromSlug,
+  getRssPath,
+  getTagPath,
+  getTagSlug,
+  normalizeText,
+  type Locale,
+} from '../../../../utils/blog';
+
+const lang: Locale = 'en';
+const t = dict.en.blog;
+
+export async function getStaticPaths() {
+  const allPosts = await getAllPosts();
+  // Nota: literales 'en' dentro de getStaticPaths (limitación de Astro
+  // con las constantes de nivel superior en esta función).
+  const posts = allPosts.filter((post) => getLocaleFromSlug(post.slug) === 'en');
+
+  // Mapa slug de etiqueta → etiqueta original (con acentos y mayúsculas).
+  const tags = new Map<string, string>();
+  for (const post of posts) {
+    for (const tag of post.data.tags ?? []) {
+      tags.set(getTagSlug(tag), tag);
+    }
+  }
+
+  return [...tags.entries()].map(([tagSlug, tagLabel]) => ({
+    params: { tag: tagSlug },
+    props: { tagLabel },
+  }));
+}
+
+const { tagLabel } = Astro.props;
+const allPosts = await getAllPosts();
+const posts = allPosts.filter(
+  (post) =>
+    getLocaleFromSlug(post.slug) === lang &&
+    (post.data.tags ?? []).some((tag) => normalizeText(tag) === normalizeText(tagLabel))
+);
+
+const langLinks = {
+  es: getBlogPath('es'),
+  en: getBlogPath('en'),
+  pt: getBlogPath('pt'),
+};
+
+const alternates = [
+  { hreflang: 'es', href: getBlogPath('es') },
+  { hreflang: 'en', href: getBlogPath('en') },
+  { hreflang: 'pt', href: getBlogPath('pt') },
+  { hreflang: 'x-default', href: getBlogPath('es') },
+];
+---
+
+<BaseLayout
+  title={`${t.title} — #${tagLabel}`}
+  description={`${t.description} — ${t.filterByTag}: #${tagLabel}.`}
+  lang={lang}
+  canonical={getTagPath(lang, tagLabel)}
+  rssUrl={getRssPath(lang)}
+  alternates={alternates}
+  langLinks={langLinks}
+>
+  <BlogIndex lang={lang} t={t} posts={posts} allPosts={allPosts} activeTag={tagLabel} />
+</BaseLayout>

@@ -1,0 +1,224 @@
+---
+import BlogCard from './BlogCard.astro';
+import {
+  getBlogPath,
+  getPostsOnlyInOtherLocales,
+  getRssPath,
+  type BlogPost,
+  type Locale,
+} from '../utils/blog';
+
+interface Props {
+  lang: Locale;
+  t: Record<string, string>;
+  posts: BlogPost[];
+  allPosts: BlogPost[];
+  /** Etiqueta activa en las rutas estáticas `/blog/tag/<tag>/`. */
+  activeTag?: string;
+}
+
+const { lang, t, posts, allPosts, activeTag } = Astro.props;
+
+const rssPath = getRssPath(lang);
+const onlyInOther = getPostsOnlyInOtherLocales(lang, allPosts);
+
+const languageNames: Record<Locale, string> = {
+  es: 'Español',
+  en: 'English',
+  pt: 'Português',
+};
+
+const resultsLabel = (count: number) =>
+  `${count} ${count === 1 ? t.resultOne : t.resultOther}`;
+---
+
+<section class="max-w-5xl mx-auto px-4 py-12 md:py-16">
+  <header class="mb-8">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">{t.title}</h1>
+        <p class="max-w-2xl text-gray-500">{t.subtitle}</p>
+      </div>
+      <a
+        href={rssPath}
+        class="inline-flex items-center gap-1 text-sm text-cyan-600 transition-colors hover:text-cyan-500"
+        title={t.rss}
+      >
+        {t.rss}
+        <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.18 15.64a2.18 2.18 0 1 1 0 4.36 2.18 2.18 0 0 1 0-4.36zM4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83A15.56 15.56 0 0 0 4 4.44zM4 10.1v2.83a6.07 6.07 0 0 1 6.07 6.07h2.83A8.9 8.9 0 0 0 4 10.1z"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <form id="blog-search-form" class="relative w-full sm:max-w-md" role="search">
+      <label for="blog-search" class="sr-only">{t.searchPlaceholder}</label>
+      <svg class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 10.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+      </svg>
+      <input
+        id="blog-search"
+        type="search"
+        placeholder={t.searchPlaceholder}
+        autocomplete="off"
+        class="w-full rounded-lg border border-gray-200 bg-white py-2.5 pl-10 pr-4 text-sm text-gray-900 outline-none transition focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20"
+      />
+    </form>
+
+    <p id="search-count" class="text-sm text-gray-400" aria-live="polite">
+      {resultsLabel(posts.length)}
+    </p>
+  </div>
+
+  <div id="tag-filter" class="mt-4 hidden items-center gap-2 text-sm text-gray-500">
+    <span>
+      {t.filterByTag}:
+      <strong id="tag-filter-name" class="font-semibold text-gray-900"></strong>
+    </span>
+    <button
+      id="tag-filter-clear"
+      type="button"
+      class="rounded-md border border-gray-200 bg-white px-2 py-1 text-xs font-medium text-gray-600 transition hover:border-cyan-400/60 hover:text-cyan-600"
+    >
+      {t.clearFilter}
+    </button>
+  </div>
+
+  {posts.length === 0 && (
+    <p class="mt-10 rounded-xl border border-dashed border-gray-300 bg-gray-50 p-8 text-center text-gray-400">
+      {t.noPosts}
+    </p>
+  )}
+
+  <div id="blog-posts" class="mt-8 grid gap-6 md:grid-cols-2">
+    {posts.map((post, index) => {
+      const isFeatured = index === 0 && posts.length > 1 && Boolean(post.data.cover);
+      return (
+        <div data-blog-item class:list={[isFeatured && 'md:col-span-2']}>
+          <BlogCard post={post} lang={lang} t={t} featured={isFeatured} />
+        </div>
+      );
+    })}
+  </div>
+
+  {posts.length > 0 && (
+    <p id="search-empty" class="mt-10 hidden rounded-xl border border-dashed border-gray-300 bg-gray-50 p-8 text-center text-gray-400">
+      {t.searchNoResults}
+    </p>
+  )}
+
+  {onlyInOther.length > 0 && (
+    <aside class="mt-12 rounded-xl border border-gray-200 bg-gray-50 p-5 text-sm text-gray-500">
+      <p class="font-medium text-gray-900">{t.onlyInOther}</p>
+      <ul class="mt-2 flex flex-wrap gap-x-4 gap-y-1">
+        {onlyInOther.map(({ locale, posts: otherPosts }) => (
+          <li>
+            <a href={getBlogPath(locale)} class="font-medium text-cyan-600 hover:underline">
+              {languageNames[locale]} ({otherPosts.length})
+            </a>
+          </li>
+        ))}
+      </ul>
+    </aside>
+  )}
+</section>
+
+<script
+  define:vars={{
+    locale: lang,
+    resultOne: t.resultOne,
+    resultOther: t.resultOther,
+    blogIndexUrl: getBlogPath(lang),
+    initialTag: activeTag ?? '',
+  }}
+>
+  const form = document.getElementById('blog-search-form');
+  const input = document.getElementById('blog-search');
+  const count = document.getElementById('search-count');
+  const empty = document.getElementById('search-empty');
+  const tagFilter = document.getElementById('tag-filter');
+  const tagName = document.getElementById('tag-filter-name');
+  const tagClear = document.getElementById('tag-filter-clear');
+  const cards = Array.from(document.querySelectorAll('.blog-card'));
+
+  // Igual que normalizeText del servidor: minúsculas y sin acentos,
+  // para que buscar "glibc" encuentre "glibc" y "Anuncio" a "anuncio".
+  const normalize = (value) =>
+    value
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase();
+
+  let activeTag = null;
+  let activeTagLabel = '';
+  // Ruta estática de etiqueta: al limpiar se vuelve al índice del blog.
+  let isStaticTag = false;
+
+  if (initialTag) {
+    activeTag = normalize(initialTag);
+    activeTagLabel = initialTag;
+    isStaticTag = true;
+  } else {
+    // Compatibilidad con /blog/?tag=nombre
+    const params = new URLSearchParams(window.location.search);
+    const tagParam = params.get('tag');
+    if (tagParam) {
+      activeTag = normalize(tagParam);
+      activeTagLabel = tagParam;
+    }
+  }
+
+  const pluralRules = new Intl.PluralRules(locale);
+
+  function applyFilter() {
+    const query = normalize((input && input.value ? input.value : '').trim());
+    let visible = 0;
+
+    for (const card of cards) {
+      const text = card.dataset.search || '';
+      const tags = (card.dataset.tags || '').split('|').filter(Boolean);
+      const matchesText = !query || text.includes(query);
+      const matchesTag = !activeTag || tags.includes(activeTag);
+      const show = matchesText && matchesTag;
+      const item = card.closest('[data-blog-item]');
+      if (item) item.classList.toggle('hidden', !show);
+      if (show) visible++;
+    }
+
+    const resultLabel =
+      pluralRules.select(visible) === 'one' ? resultOne : resultOther;
+    if (count) count.textContent = visible + ' ' + resultLabel;
+    if (empty) empty.classList.toggle('hidden', visible !== 0);
+
+    if (activeTag) {
+      if (tagName) tagName.textContent = activeTagLabel;
+      if (tagFilter) {
+        tagFilter.classList.remove('hidden');
+        tagFilter.classList.add('flex');
+      }
+    } else if (tagFilter) {
+      tagFilter.classList.add('hidden');
+      tagFilter.classList.remove('flex');
+    }
+  }
+
+  if (form) form.addEventListener('submit', (event) => event.preventDefault());
+  if (input) input.addEventListener('input', applyFilter);
+
+  if (tagClear) {
+    tagClear.addEventListener('click', () => {
+      if (isStaticTag) {
+        window.location.href = blogIndexUrl;
+        return;
+      }
+      activeTag = null;
+      activeTagLabel = '';
+      const url = new URL(window.location.href);
+      url.searchParams.delete('tag');
+      window.history.replaceState({}, '', url);
+      applyFilter();
+    });
+  }
+
+  applyFilter();
+</script>

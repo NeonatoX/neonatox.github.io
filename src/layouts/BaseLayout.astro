@@ -1,14 +1,45 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import type { Locale } from '../utils/blog';
+
+interface Alternate {
+  hreflang: string;
+  href: string;
+}
 
 interface Props {
   title: string;
   description?: string;
-  lang?: 'es' | 'en' | 'pt';
+  lang?: Locale;
+  /** Ruta canónica (por defecto, la URL actual resuelta contra `site`). */
+  canonical?: string;
+  type?: 'website' | 'article';
+  image?: string;
+  rssUrl?: string;
+  /** Entradas `hreflang` → `x-default` incluido. */
+  alternates?: Alternate[];
+  noindex?: boolean;
+  /** Enlaces por idioma que se reenvían al LangSwitcher del Header. */
+  langLinks?: Partial<Record<Locale, string>>;
 }
 
-const { title, description = '', lang = 'es' } = Astro.props;
+const {
+  title,
+  description = '',
+  lang = 'es',
+  canonical,
+  type = 'website',
+  image = '/og-image.png',
+  rssUrl,
+  alternates = [],
+  noindex = false,
+  langLinks,
+} = Astro.props;
+
+const site = Astro.site ?? new URL('https://neonatox.github.io');
+const canonicalUrl = new URL(canonical ?? Astro.url.pathname, site);
+const imageUrl = new URL(image, site);
 ---
 
 <!DOCTYPE html>
@@ -24,20 +55,28 @@ const { title, description = '', lang = 'es' } = Astro.props;
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="description" content={description} />
     <title>{title} | Neonatox</title>
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="canonical" href={canonicalUrl} />
     <meta property="og:site_name" content="Neonatox" />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={type} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content="https://neonatox.github.io/og-image.png" />
-    <meta property="og:url" content={Astro.url} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:url" content={canonicalUrl} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content="https://neonatox.github.io/og-image.png" />
+    <meta name="twitter:image" content={imageUrl} />
+    {alternates.map((alternate) => (
+      <link rel="alternate" hreflang={alternate.hreflang} href={new URL(alternate.href, site)} />
+    ))}
+    {rssUrl && (
+      <link rel="alternate" type="application/rss+xml" title={`Blog RSS (${lang})`} href={new URL(rssUrl, site)} />
+    )}
     <slot name="head" />
   </head>
   <body class="bg-white text-gray-900 min-h-screen flex flex-col">
-    <Header />
+    <Header langLinks={langLinks} />
     <main class="flex-1">
       <slot />
     </main>

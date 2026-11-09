@@ -7,7 +7,19 @@ export default defineConfig({
   base: '/',
   integrations: [
     tailwind(),
-    sitemap()
+    sitemap({
+      i18n: {
+        defaultLocale: 'es',
+        locales: {
+          es: 'es',
+          en: 'en',
+          pt: 'pt',
+        },
+      },
+      // La raíz `/` es solo un redirect por JS hacia /es/: excluirla evita
+      // un hreflang "es" duplicado junto con /es/.
+      filter: (page) => page !== 'https://neonatox.github.io/',
+    }),
   ],
   i18n: {
     defaultLocale: 'es',

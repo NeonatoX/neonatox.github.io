@@ -1,6 +1,17 @@
 ---
 import LangSwitcher from './LangSwitcher.astro';
-const currentLang = Astro.params.lang || 'es';
+import type { Locale } from '../utils/blog';
+
+interface Props {
+  /** Enlaces por idioma para el LangSwitcher (en posts: traducción o índice). */
+  langLinks?: Partial<Record<Locale, string>>;
+}
+
+const { langLinks } = Astro.props;
+
+// El idioma actual se deriva de la URL: en rutas como /en/blog/... y
+// /pt/blog/... Astro.params.lang no está definido y el nav salía en español.
+const currentLang = (Astro.url.pathname.match(/^\/(es|en|pt)(\/|$)/)?.[1] ?? 'es') as Locale;
 
 const navLabels: Record<string, Record<string, string>> = {
   es: { historia: 'Historia', filosofia: 'Filosofía', arquitectura: 'Arquitectura', paquetes: 'Paquetes', blog: 'Blog', proyectos: 'Proyectos', descargas: 'Descargas' },
@@ -26,7 +37,7 @@ const id = 'h-' + Math.random().toString(36).slice(2, 7);
       <a href={`/${currentLang}/descargas`} class="text-cyan-500 hover:text-cyan-700">{t.descargas || t.downloads}</a>
     </nav>
     <div class="flex items-center gap-2">
-      <div class="hidden md:block"><LangSwitcher currentLang={currentLang} /></div>
+      <div class="hidden md:block"><LangSwitcher currentLang={currentLang} langLinks={langLinks} /></div>
       <button id={`${id}-btn`} class="md:hidden w-10 h-10 flex items-center justify-center text-gray-600 hover:text-gray-900 focus:outline-none" aria-label="Menu">
         <svg id={`${id}-icon`} class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
@@ -43,7 +54,7 @@ const id = 'h-' + Math.random().toString(36).slice(2, 7);
       <a href={`/${currentLang}/proyectos`} class="py-2 text-purple-600">{t.proyectos}</a>
       <a href={`/${currentLang}/blog`} class="py-2 text-amber-600">{t.blog}</a>
       <a href={`/${currentLang}/descargas`} class="py-2 text-cyan-400">{t.descargas || t.downloads}</a>
-      <div class="pt-2 border-t border-gray-200"><LangSwitcher currentLang={currentLang} /></div>
+      <div class="pt-2 border-t border-gray-200"><LangSwitcher currentLang={currentLang} langLinks={langLinks} /></div>
     </div>
   </div>
 </header>

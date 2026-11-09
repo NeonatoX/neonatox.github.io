@@ -1,24 +1,41 @@
 ---
 // src/components/LangSwitcher.astro
-const { currentLang = 'es' } = Astro.props;
-const langs = [
+import type { Locale } from '../utils/blog';
+
+interface Props {
+  currentLang?: Locale;
+  /** Enlaces por idioma (en posts: la traducción o el índice del blog). */
+  langLinks?: Partial<Record<Locale, string>>;
+}
+
+const { currentLang, langLinks } = Astro.props;
+
+const langs: Array<{ code: Locale; label: string; title: string }> = [
   { code: 'es', label: 'ES', title: 'Español' },
   { code: 'en', label: 'EN', title: 'English' },
   { code: 'pt', label: 'PT', title: 'Português' }
 ];
+
+// El idioma actual se deriva de la URL (funciona en todas las rutas,
+// incluidas /en/blog/... y /pt/blog/...), no de Astro.params.lang.
+const pathLang = Astro.url.pathname.match(/^\/(es|en|pt)(\/|$)/)?.[1] as Locale | undefined;
+const active = currentLang ?? pathLang ?? 'es';
 const currentPath = Astro.url.pathname;
 ---
 <div class="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
   {langs.map(lang => {
-    const isActive = lang.code === currentLang;
-    // Reconstruye la URL manteniendo la ruta pero cambiando el prefijo de idioma
-    const newPath = currentPath.replace(/^\/(es|en|pt)(\/|$)/, `/${lang.code}/`);
+    const isActive = lang.code === active;
+    // Si hay langLinks explícitos (posts del blog), úsalos; si no,
+    // reconstruye la URL manteniendo la ruta pero cambiando el prefijo.
+    const href =
+      langLinks?.[lang.code] ??
+      currentPath.replace(/^\/(es|en|pt)(\/|$)/, `/${lang.code}/`);
     return (
       <a
-        href={newPath}
+        href={href}
         class={`px-2 py-1 text-sm rounded-md transition ${
-          isActive 
-            ? 'bg-cyan-500 text-black font-medium' 
+          isActive
+            ? 'bg-cyan-500 text-black font-medium'
             : 'text-gray-600 hover:text-gray-900 hover:bg-gray-200'
         }`}
         title={lang.title}

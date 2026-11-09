@@ -127,7 +127,7 @@ Usuarios avanzados, desarrolladores, educadores
 📁 3. Estructura de Archivos
 ----------------------------
 
-neonatox.github.io/ ├─ public/ │ └─ robots.txt ├─ src/ │ ├─ assets/ # Imágenes, SVGs, fuentes │ ├─ components/ │ │ ├─ Header.astro # Navbar con LangSwitcher │ │ ├─ Footer.astro │ │ └─ LangSwitcher.astro # Selector ES/EN/PT │ ├─ content/docs/ # Futuro: MDX para guías │ ├─ layouts/ │ │ └─ BaseLayout.astro # Layout base con <slot /> │ ├─ pages/ │ │ ├─ index.astro # Redirect a /es/ │ │ ├─ es/ │ │ │ ├─ index.astro # Landing ES │ │ │ ├─ filosofia.astro │ │ │ ├─ arquitectura.astro │ │ │ ├─ paquetes.astro # Docs nhopkg + ejemplo Transmission │ │ │ └─ ruta-constructor.astro │ │ ├─ en/ # Mismas páginas, traducción EN │ │ └─ pt/ # Mismas páginas, traducción PT-BR │ └─ utils/ │ └─ i18n.ts # Diccionario de traducciones ├─ astro.config.mjs ├─ tailwind.config.cjs ├─ postcss.config.cjs ├─ tsconfig.json └─ package.json
+neonatox.github.io/ ├─ public/ │ └─ robots.txt # Sitemap: https://neonatox.github.io/sitemap-index.xml ├─ src/ │ ├─ assets/ # Imágenes, SVGs, fuentes │ ├─ components/ │ │ ├─ Header.astro # Navbar (idioma derivado de la URL) │ │ ├─ Footer.astro │ │ ├─ LangSwitcher.astro # Selector ES/EN/PT, acepta langLinks │ │ ├─ CommentSection.astro # Giscus │ │ ├─ BlogCard.astro # Tarjeta de post (portada, fecha, tags) │ │ ├─ BlogIndex.astro # Índice: buscador, filtro por etiqueta, conteo │ │ └─ TableOfContents.astro # TOC h2/h3 (móvil + escritorio) │ ├─ content/ │ │ └─ blog/{es,en,pt}/ # Posts .md, mismo slug = traducción │ │ └─ config.ts # Schema: cover, draft, updatedDate, legacyUrl... │ ├─ layouts/ │ │ ├─ BaseLayout.astro # Layout base: Header/Footer + SEO (canonical, hreflang...) │ │ └─ BlogLayout.astro # Post: TOC, relacionadas, JSON-LD, Giscus │ ├─ pages/ │ │ ├─ index.astro # Redirect a /es/ │ │ ├─ es/ │ │ │ ├─ index.astro # Landing ES │ │ │ ├─ filosofia.astro │ │ │ ├─ arquitectura.astro │ │ │ ├─ paquetes.astro # Docs nhopkg + ejemplo Transmission │ │ │ ├─ ruta-constructor.astro │ │ │ └─ blog/ # index, [...slug], tag/[tag], rss.xml.ts │ │ ├─ en/ # Mismas páginas, traducción EN │ │ └─ pt/ # Mismas páginas, traducción PT-BR │ └─ utils/ │ ├─ i18n.ts # Diccionario de traducciones (incl. claves blog) │ └─ blog.ts # Helpers del blog (rutas, tags, related...) ├─ BLOG.md # Guía del blog ├─ BLOG-TUTORIAL.md # Tutorial de Markdown para posts ├─ astro.config.mjs ├─ tailwind.config.cjs ├─ postcss.config.cjs ├─ tsconfig.json └─ package.json
 
 #### Convenciones de Nombres
 
@@ -379,14 +379,14 @@ Opcional, pero consistente
 
 1.  **Ruta del Constructor** (`/ruta-constructor`): Guía paso a paso LFS → primer nhopkg → ISO bootable
 2.  **Página de Arquitectura**: Diagrama SVG de capas del sistema, comparativa con Debian/Arch/Gentoo
-3.  **Blog técnico**: Primer post "De usuario curioso a constructor de sistemas" (historia personal)
+3.  **Blog técnico**: Posts existentes + buscador, etiquetas y RSS por idioma (completado ✅ — ver `BLOG.md`)
 4.  **FAQ técnica**: Preguntas frecuentes sobre nhopkg, systemd, multilib
 
 ### v1.2 (Prioridad Media)
 
-1.  **Buscador interno**: Integración con Pagefind o similar
+1.  **Buscador del blog**: Ya implementado en cliente, insensible a acentos (✅); el buscador de docs podría usar Pagefind
 2.  **Modo oscuro/claro**: Toggle persistente con `localStorage`
-3.  **RSS feeds**: Por idioma, para el blog
+3.  **RSS feeds**: Por idioma, para el blog (✅ — `/es/blog/rss.xml`, `/en/blog/rss.xml`, `/pt/blog/rss.xml`)
 4.  **Analytics ligero**: Plausible o Fathom (privacy-first)
 
 ### v2.0 (Visión)
@@ -436,6 +436,15 @@ Opcional, pero consistente
 *   **SEO desde el inicio:** Title, meta description, encabezados jerárquicos
 *   **Enlazado interno:** Conecta conceptos relacionados entre páginas
 
+#### Al Añadir Posts al Blog
+
+1.  **Frontmatter:** Usa el schema de `src/content/config.ts` (ver `BLOG.md`): `cover`, `updatedDate`, `draft`, `legacyUrl` son opcionales; `author` y `tags` tienen defaults
+2.  **Traducciones:** Mismo nombre de archivo en `src/content/blog/{es,en,pt}/` para que el selector de idioma y los `hreflang` conecten las versiones
+3.  **Sin traducción:** El selector enlaza al índice del blog de ese idioma y el índice avisa de artículos solo en otros idiomas
+4.  **Etiquetas:** Cada una genera ruta estática `/es/blog/tag/<slug>/` (minúsculas, sin acentos); `?tag=` sigue funcionando por compatibilidad
+5.  **Idioma del header:** Se deriva de `Astro.url.pathname` (`^/(es|en|pt)(/|$)`), no de `Astro.params.lang` (no existe en las rutas del blog)
+6.  **Astro 5 legacy:** Usa `post.slug` y `await post.render()`; dentro de `getStaticPaths`, literales `'es'`/`'en'`/`'pt'`, no constantes de nivel superior
+
 #### Al Corregir Bugs
 
 1.  **Reproduce el error** localmente
@@ -457,7 +466,7 @@ Si algo no está claro o necesitas decisión de diseño:
 *   **Opciones concretas:** Ofrece 2-3 alternativas con pros/contras
 *   **Contexto técnico:** Incluye snippet o error exacto si es relevante
 
-**Última actualización:** Mayo 2026  
+**Última actualización:** Noviembre 2026  
 **Mantenedor:** @cargabsj175  
 **Licencia del contenido:** CC BY-SA 4.0  
 **Código del sitio:** MIT

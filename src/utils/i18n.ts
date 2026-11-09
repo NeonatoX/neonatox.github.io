@@ -58,7 +58,35 @@ export const dict = {
     rollingRelease: "Rolling release",
     rollingReleaseDesc: "Actualizaciones continuas sin versiones estrictas",
     transparentPack: "Empaquetado transparente",
-    transparentPackDesc: "Cada paquete documenta su construcción"
+    transparentPackDesc: "Cada paquete documenta su construcción",
+    // Blog
+    blog: {
+      title: "Blog",
+      subtitle: "Noticias, guías y reflexiones sobre Neonatox.",
+      description: "Blog de Neonatox: noticias, guías y reflexiones sobre construir Linux desde cero.",
+      readMore: "Leer artículo",
+      backToBlog: "← Volver al blog",
+      publishedOn: "Publicado el",
+      updatedOn: "Actualizado el",
+      by: "por",
+      noPosts: "Todavía no hay artículos. Vuelve pronto.",
+      searchPlaceholder: "Buscar artículos...",
+      searchNoResults: "Ningún artículo coincide con tu búsqueda.",
+      resultOne: "artículo encontrado",
+      resultOther: "artículos encontrados",
+      readingTime: "min de lectura",
+      availableIn: "También disponible en",
+      onlyInOther: "Algunos artículos solo están disponibles en otros idiomas:",
+      previous: "Artículo anterior",
+      next: "Artículo siguiente",
+      relatedPosts: "Artículos relacionados",
+      toc: "En esta página",
+      copyLink: "Copiar enlace",
+      copied: "¡Copiado!",
+      rss: "RSS",
+      clearFilter: "Quitar filtro",
+      filterByTag: "Filtrando por etiqueta"
+    }
   },
   en: {
     heroTitle: "Not another distro. Your next evolution with Linux.",
@@ -117,7 +145,35 @@ export const dict = {
     rollingRelease: "Rolling release",
     rollingReleaseDesc: "Continuous updates without strict versions",
     transparentPack: "Transparent packaging",
-    transparentPackDesc: "Every package documents its build"
+    transparentPackDesc: "Every package documents its build",
+    // Blog
+    blog: {
+      title: "Blog",
+      subtitle: "News, guides and thoughts about Neonatox.",
+      description: "Neonatox blog: news, guides and thoughts about building Linux from scratch.",
+      readMore: "Read article",
+      backToBlog: "← Back to blog",
+      publishedOn: "Published on",
+      updatedOn: "Updated on",
+      by: "by",
+      noPosts: "No articles yet. Come back soon.",
+      searchPlaceholder: "Search articles...",
+      searchNoResults: "No articles match your search.",
+      resultOne: "article found",
+      resultOther: "articles found",
+      readingTime: "min read",
+      availableIn: "Also available in",
+      onlyInOther: "Some articles are only available in other languages:",
+      previous: "Previous article",
+      next: "Next article",
+      relatedPosts: "Related articles",
+      toc: "On this page",
+      copyLink: "Copy link",
+      copied: "Copied!",
+      rss: "RSS",
+      clearFilter: "Clear filter",
+      filterByTag: "Filtering by tag"
+    }
   },
   pt: {
     heroTitle: "Não é só mais uma distro. É sua próxima evolução com Linux.",
@@ -176,7 +232,35 @@ export const dict = {
     rollingRelease: "Rolling release",
     rollingReleaseDesc: "Atualizações contínuas sem versões estritas",
     transparentPack: "Empacotamento transparente",
-    transparentPackDesc: "Cada pacote documenta sua construção"
+    transparentPackDesc: "Cada pacote documenta sua construção",
+    // Blog
+    blog: {
+      title: "Blog",
+      subtitle: "Notícias, guias e reflexões sobre o Neonatox.",
+      description: "Blog do Neonatox: notícias, guias e reflexões sobre construir Linux do zero.",
+      readMore: "Ler artigo",
+      backToBlog: "← Voltar ao blog",
+      publishedOn: "Publicado em",
+      updatedOn: "Atualizado em",
+      by: "por",
+      noPosts: "Ainda não há artigos. Volte em breve.",
+      searchPlaceholder: "Buscar artigos...",
+      searchNoResults: "Nenhum artigo corresponde à sua busca.",
+      resultOne: "artigo encontrado",
+      resultOther: "artigos encontrados",
+      readingTime: "min de leitura",
+      availableIn: "Também disponível em",
+      onlyInOther: "Alguns artigos estão disponíveis apenas em outros idiomas:",
+      previous: "Artigo anterior",
+      next: "Próximo artigo",
+      relatedPosts: "Artigos relacionados",
+      toc: "Nesta página",
+      copyLink: "Copiar link",
+      copied: "Copiado!",
+      rss: "RSS",
+      clearFilter: "Remover filtro",
+      filterByTag: "Filtrando por etiqueta"
+    }
   }
 };
 

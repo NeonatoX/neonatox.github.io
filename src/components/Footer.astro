@@ -1,5 +1,7 @@
 ---
-const currentLang = Astro.params.lang || 'es';
+// El idioma se deriva de la URL (igual que Header/LangSwitcher), porque
+// Astro.params.lang no existe en las rutas del blog.
+const currentLang = Astro.url.pathname.match(/^\/(es|en|pt)(\/|$)/)?.[1] ?? 'es';
 ---
 <footer class="bg-gray-50 border-t border-gray-200 py-8 mt-16">
   <div class="max-w-6xl mx-auto px-4 text-center text-gray-500 text-sm">

@@ -6,8 +6,13 @@ const blog = defineCollection({
     description: z.string(),
     pubDate: z.date(),
     lang: z.enum(['es', 'en', 'pt']),
-    author: z.string(),
-    tags: z.array(z.string()).optional(),
+    author: z.string().default('Carlos Sánchez'),
+    tags: z.array(z.string()).default([]),
+    cover: z.string().optional(),
+    coverAlt: z.string().optional(),
+    updatedDate: z.coerce.date().optional(),
+    draft: z.boolean().default(false),
+    legacyUrl: z.string().url().optional(),
   }),
 });
 

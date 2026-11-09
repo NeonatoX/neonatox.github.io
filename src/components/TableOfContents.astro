@@ -1,0 +1,51 @@
+---
+import type { MarkdownHeading } from 'astro';
+
+interface Props {
+  headings: MarkdownHeading[];
+  label: string;
+  /** `mobile` renderiza un <details> colapsable; `desktop` un <nav> plano. */
+  variant?: 'mobile' | 'desktop';
+}
+
+const { headings, label, variant = 'desktop' } = Astro.props;
+const items = headings.filter((heading) => heading.depth === 2 || heading.depth === 3);
+---
+
+{items.length > 1 && variant === 'desktop' && (
+  <nav aria-label={label} class="rounded-xl border border-gray-200 bg-gray-50 p-5">
+    <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-gray-400">{label}</p>
+    <ul class="toc space-y-2 text-sm">
+      {items.map((heading) => (
+        <li class:list={['toc-item', heading.depth === 3 && 'pl-4']}>
+          <a href={`#${heading.slug}`} class="toc-link block text-gray-500 transition hover:text-cyan-600">
+            {heading.text}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+)}
+
+{items.length > 1 && variant === 'mobile' && (
+  <details class="rounded-xl border border-gray-200 bg-gray-50 p-4">
+    <summary class="cursor-pointer select-none text-xs font-semibold uppercase tracking-wide text-gray-400">{label}</summary>
+    <ul class="toc mt-3 space-y-2 text-sm">
+      {items.map((heading) => (
+        <li class:list={['toc-item', heading.depth === 3 && 'pl-4']}>
+          <a href={`#${heading.slug}`} class="toc-link block text-gray-500 transition hover:text-cyan-600">
+            {heading.text}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </details>
+)}
+
+<style>
+  /* Resaltado de la sección activa (scrollspy en BlogLayout). */
+  .toc a.toc-active {
+    color: #06b6d4; /* cyan-500 */
+    font-weight: 600;
+  }
+</style>

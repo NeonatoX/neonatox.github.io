@@ -1,12 +1,18 @@
 import rss from '@astrojs/rss';
-import { getCollection } from 'astro:content';
 import type { APIContext } from 'astro';
+import {
+  getAllPosts,
+  getBlogPostPath,
+  getLocaleFromSlug,
+  getSlugFromSlug,
+} from '../../../utils/blog';
 
 const AUTHOR_EMAIL = 'cargabsj175@gmail.com';
 
 export async function GET(context: APIContext) {
-  const posts = await getCollection('blog', ({ slug }) => slug.startsWith('en/'));
-  posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+  const posts = (await getAllPosts()).filter(
+    (post) => getLocaleFromSlug(post.slug) === 'en'
+  );
 
   return rss({
     title: 'Neonatox Blog',
@@ -18,7 +24,8 @@ export async function GET(context: APIContext) {
       pubDate: post.data.pubDate,
       description: post.data.description,
       author: `${AUTHOR_EMAIL} (${post.data.author})`,
-      link: `en/blog/${post.slug.replace('en/', '')}/`,
+      link: getBlogPostPath('en', getSlugFromSlug(post.slug)),
+      categories: post.data.tags ?? [],
     })),
   });
 }

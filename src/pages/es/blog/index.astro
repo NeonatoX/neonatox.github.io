@@ -1,33 +1,42 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
+import BlogIndex from '../../../components/BlogIndex.astro';
+import { dict } from '../../../utils/i18n';
+import {
+  getAllPosts,
+  getBlogPath,
+  getLocaleFromSlug,
+  getRssPath,
+  type Locale,
+} from '../../../utils/blog';
 
-const posts = await getCollection('blog', ({ slug }) => slug.startsWith('es/'));
-posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+const lang: Locale = 'es';
+const t = dict.es.blog;
+const allPosts = await getAllPosts();
+const posts = allPosts.filter((post) => getLocaleFromSlug(post.slug) === lang);
+
+const langLinks = {
+  es: getBlogPath('es'),
+  en: getBlogPath('en'),
+  pt: getBlogPath('pt'),
+};
+
+const alternates = [
+  { hreflang: 'es', href: getBlogPath('es') },
+  { hreflang: 'en', href: getBlogPath('en') },
+  { hreflang: 'pt', href: getBlogPath('pt') },
+  { hreflang: 'x-default', href: getBlogPath('es') },
+];
 ---
 
-<BaseLayout title="Blog" description="Blog de Neonatox" lang="es">
-  <section class="max-w-3xl mx-auto px-4 py-16">
-    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Blog</h1>
-    <p class="text-gray-500 mb-10">Noticias, guías y reflexiones sobre Neonatox.
-      <a href="/es/blog/rss.xml" class="inline-flex items-center gap-1 text-cyan-600 hover:text-cyan-500 text-sm ml-2">RSS <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M6.18 15.64a2.18 2.18 0 1 1 0 4.36 2.18 2.18 0 0 1 0-4.36zM4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83A15.56 15.56 0 0 0 4 4.44zM4 10.1v2.83a6.07 6.07 0 0 1 6.07 6.07h2.83A8.9 8.9 0 0 0 4 10.1z"/></svg></a>
-    </p>
-
-    {posts.length === 0 && <p class="text-gray-400">No hay artículos todavía.</p>}
-
-    <div class="space-y-6">
-      {posts.map(post => (
-        <a href={`/es/blog/${post.slug.replace('es/', '')}`} class="block bg-gray-100 p-6 rounded-xl border border-gray-200 hover:border-cyan-500/50 transition-colors">
-          <h2 class="text-xl font-semibold text-gray-900 mb-2">{post.data.title}</h2>
-          <p class="text-gray-500 text-sm mb-3">{post.data.description}</p>
-          <div class="flex items-center gap-3 text-xs text-gray-400">
-            <time datetime={post.data.pubDate.toISOString()}>{post.data.pubDate.toLocaleDateString('es', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
-            <span>·</span>
-            <span>{post.data.author}</span>
-            {post.data.tags?.map(tag => <span class="bg-gray-200 text-gray-500 px-2 py-0.5 rounded">{tag}</span>)}
-          </div>
-        </a>
-      ))}
-    </div>
-  </section>
+<BaseLayout
+  title="Blog"
+  description={t.description}
+  lang={lang}
+  canonical={getBlogPath(lang)}
+  rssUrl={getRssPath(lang)}
+  alternates={alternates}
+  langLinks={langLinks}
+>
+  <BlogIndex lang={lang} t={t} posts={posts} allPosts={allPosts} />
 </BaseLayout>

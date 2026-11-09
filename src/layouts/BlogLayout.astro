@@ -1,31 +1,94 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import CommentSection from '../components/CommentSection.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+import BlogCard from '../components/BlogCard.astro';
+import { dict } from '../utils/i18n';
+import {
+  formatDate,
+  getAdjacentPosts,
+  getBlogPath,
+  getBlogPostPath,
+  getLocaleFromSlug,
+  getPostLanguageLinks,
+  getReadingTime,
+  getRelatedPosts,
+  getRssPath,
+  getSlugFromSlug,
+  getTagPath,
+  getTranslations,
+  type BlogPost,
+  type Locale,
+} from '../utils/blog';
 
 interface Props {
-  title: string;
-  description: string;
-  lang: 'es' | 'en' | 'pt';
-  pubDate: Date;
-  author?: string;
-  tags?: string[];
+  post: BlogPost;
+  lang: Locale;
+  allPosts: BlogPost[];
 }
 
-const { title, description, lang, pubDate, author, tags = [] } = Astro.props;
-const labels = {
-  es: { back: '← Volver al blog', by: 'por' },
-  en: { back: '← Back to blog', by: 'by' },
-  pt: { back: '← Voltar ao blog', by: 'por' },
+const { post, lang, allPosts } = Astro.props;
+const t = dict[lang].blog;
+
+const slug = getSlugFromSlug(post.slug);
+const url = getBlogPostPath(lang, slug);
+
+// Content Collections legacy (Astro 5): render del propio post.
+const { Content, headings } = await post.render();
+
+const readingTime = getReadingTime(post.body);
+const translations = getTranslations(post, allPosts);
+const langLinks = getPostLanguageLinks(post, allPosts);
+const postsByLocale = allPosts.filter(
+  (candidate) => getLocaleFromSlug(candidate.slug) === lang
+);
+const { older, newer } = getAdjacentPosts(post, postsByLocale);
+const related = getRelatedPosts(post, allPosts, 3);
+const tags = post.data.tags ?? [];
+
+const languageNames: Record<Locale, string> = {
+  es: 'Español',
+  en: 'English',
+  pt: 'Português',
 };
+
+const otherTranslations = (Object.entries(translations) as Array<[Locale, BlogPost]>)
+  .filter(([locale]) => locale !== lang);
+
+// hreflang de cada traducción + x-default (es es el locale por defecto).
+const alternates: Array<{ hreflang: string; href: string }> = (
+  Object.entries(translations) as Array<[Locale, BlogPost]>
+).map(([locale, translation]) => ({
+  hreflang: locale,
+  href: getBlogPostPath(locale, getSlugFromSlug(translation.slug)),
+}));
+
+if (translations.es) {
+  alternates.push({
+    hreflang: 'x-default',
+    href: getBlogPostPath('es', getSlugFromSlug(translations.es.slug)),
+  });
+}
+
+const image = post.data.cover ?? '/og-image.png';
+const site = Astro.site ?? new URL('https://neonatox.github.io');
+const imageUrl = new URL(image, site).toString();
+const canonicalUrl = new URL(url, site).toString();
+const published = post.data.pubDate.toISOString();
+const modified = (post.data.updatedDate ?? post.data.pubDate).toISOString();
+
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: title,
-  description,
-  image: ['https://neonatox.github.io/og-image.png'],
-  author: { '@type': 'Person', name: author ?? 'Neonatox' },
-  datePublished: pubDate.toISOString(),
-  mainEntityOfPage: new URL(Astro.url.pathname, Astro.site).toString(),
+  headline: post.data.title,
+  description: post.data.description,
+  image: [imageUrl],
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: lang,
+  author: { '@type': 'Person', name: post.data.author },
+  mainEntityOfPage: canonicalUrl,
+  keywords: tags.join(', '),
 };
 ---
 
@@ -47,36 +110,250 @@ const jsonLd = {
     border-radius: 0 !important;
     font-size: inherit !important;
   }
+  /* Los saltos al ancla del TOC no quedan tapados por el header sticky. */
+  .prose-post h2,
+  .prose-post h3 {
+    scroll-margin-top: 5.5rem;
+  }
 </style>
 
-<BaseLayout title={title} description={description} lang={lang}>
-  <meta property="og:type" content="article" slot="head" />
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  lang={lang}
+  type="article"
+  image={image}
+  canonical={url}
+  rssUrl={getRssPath(lang)}
+  alternates={alternates}
+  langLinks={langLinks}
+>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
-  <article class="max-w-3xl mx-auto px-4 py-16">
-    <a href={`/${lang}/blog`} class="text-cyan-500 hover:text-cyan-700 mb-8 inline-block">{labels[lang].back}</a>
+  <meta property="article:published_time" content={published} slot="head" />
+  <meta property="article:modified_time" content={modified} slot="head" />
+  <meta property="article:author" content={post.data.author} slot="head" />
+  {tags.map((tag) => (
+    <meta property="article:tag" content={tag} slot="head" />
+  ))}
+
+  <article class="max-w-5xl mx-auto px-4 py-12 md:py-16">
+    <a href={getBlogPath(lang)} class="text-cyan-500 hover:text-cyan-700 mb-8 inline-block">{t.backToBlog}</a>
 
     <header class="mb-10">
-      <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{title}</h1>
-      <div class="flex flex-wrap items-center gap-3 text-sm text-gray-500">
-        <time datetime={pubDate.toISOString()}>{pubDate.toLocaleDateString(lang, { year: 'numeric', month: 'long', day: 'numeric' })}</time>
-        {author && <span class="text-gray-400">·</span>}
-        {author && <span>{labels[lang].by} {author}</span>}
-        {tags.length > 0 && (
-          <div class="flex gap-2">
-            {tags.map(tag => (
-              <span class="bg-gray-200 text-gray-600 px-2 py-0.5 rounded text-xs">{tag}</span>
-            ))}
-          </div>
-        )}
+      <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{post.data.title}</h1>
+
+      <div class="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-gray-500">
+        <time datetime={published}>{formatDate(post.data.pubDate, lang)}</time>
+        <span class="text-gray-400" aria-hidden="true">·</span>
+        <span>{readingTime} {t.readingTime}</span>
+        <span class="text-gray-400" aria-hidden="true">·</span>
+        <span>{t.by} {post.data.author}</span>
+        <button
+          id="copy-link-btn"
+          type="button"
+          class="inline-flex items-center gap-1 text-xs text-gray-400 transition hover:text-cyan-600"
+          data-url={canonicalUrl}
+          data-copy={t.copyLink}
+          data-copied={t.copied}
+        >
+          <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 0 0-5.656 0l-4 4a4 4 0 1 0 5.656 5.656l1.102-1.101m-.758-4.899a4 4 0 0 0 5.656 0l4-4a4 4 0 0 0-5.656-5.656l-1.1 1.1" />
+          </svg>
+          <span id="copy-link-label">{t.copyLink}</span>
+        </button>
       </div>
+
+      {post.data.updatedDate && (
+        <p class="mt-2 text-sm text-gray-400">
+          {t.updatedOn} <time datetime={modified}>{formatDate(post.data.updatedDate, lang)}</time>
+        </p>
+      )}
+
+      {tags.length > 0 && (
+        <div class="mt-5 flex flex-wrap gap-2">
+          {tags.map((tag) => (
+            <a
+              href={getTagPath(lang, tag)}
+              class="bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full text-xs font-medium transition hover:bg-cyan-500 hover:text-white"
+            >
+              #{tag}
+            </a>
+          ))}
+        </div>
+      )}
     </header>
 
-    <div class="max-w-none text-gray-700 leading-relaxed [&_h2]:text-gray-900 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mt-12 [&_h2]:mb-4 [&_h3]:text-gray-900 [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:mt-8 [&_h3]:mb-3 [&_p]:mb-5 [&_a]:text-cyan-600 [&_a:hover]:text-cyan-500 [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-4 [&_li]:mb-1 [&_hr]:border-gray-200 [&_hr]:my-10 [&_code]:bg-gray-100 [&_code]:text-emerald-700 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-sm [&_strong]:text-gray-900 [&_blockquote]:border-l-4 [&_blockquote]:border-cyan-500 [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:text-gray-500 [&_blockquote]:my-6 [&_blockquote]:text-lg">
-      <slot />
+    {post.data.cover && (
+      <img
+        src={post.data.cover}
+        alt={post.data.coverAlt ?? post.data.title}
+        class="mt-2 mb-10 max-h-[32rem] w-full rounded-xl object-cover"
+        loading="eager"
+      />
+    )}
+
+    <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_16rem]">
+      <div class="min-w-0">
+        <div class="lg:hidden">
+          <TableOfContents headings={headings} label={t.toc} variant="mobile" />
+        </div>
+
+        <div class="prose-post mt-6 max-w-none text-gray-700 leading-relaxed [&_h2]:text-gray-900 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mt-12 [&_h2]:mb-4 [&_h3]:text-gray-900 [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:mt-8 [&_h3]:mb-3 [&_p]:mb-5 [&_a]:text-cyan-600 [&_a:hover]:text-cyan-500 [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-4 [&_li]:mb-1 [&_hr]:border-gray-200 [&_hr]:my-10 [&_code]:bg-gray-100 [&_code]:text-emerald-700 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-sm [&_strong]:text-gray-900 [&_blockquote]:border-l-4 [&_blockquote]:border-cyan-500 [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:text-gray-500 [&_blockquote]:my-6 [&_blockquote]:text-lg">
+          <Content />
+        </div>
+
+        {otherTranslations.length > 0 && (
+          <aside class="mt-10 rounded-xl border border-gray-200 bg-gray-50 p-5 text-sm text-gray-500">
+            <p class="font-medium text-gray-900">{t.availableIn}:</p>
+            <ul class="mt-2 flex flex-wrap gap-x-4 gap-y-1">
+              {otherTranslations.map(([locale, translation]) => (
+                <li>
+                  <a
+                    href={getBlogPostPath(locale, getSlugFromSlug(translation.slug))}
+                    hreflang={locale}
+                    class="font-medium text-cyan-600 hover:underline"
+                  >
+                    {languageNames[locale]}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </aside>
+        )}
+
+        {related.length > 0 && (
+          <section class="mt-12">
+            <h2 class="text-lg font-bold text-gray-900 mb-4">{t.relatedPosts}</h2>
+            <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-1">
+              {related.map((relatedPost) => (
+                <BlogCard post={relatedPost} lang={lang} t={t} />
+              ))}
+            </div>
+          </section>
+        )}
+
+        {(older || newer) && (
+          <nav class="mt-12 grid gap-4 border-t border-gray-200 pt-8 sm:grid-cols-2" aria-label={t.previous + ' / ' + t.next}>
+            {older ? (
+              <a href={getBlogPostPath(lang, getSlugFromSlug(older.slug))} class="rounded-xl border border-gray-200 bg-white p-5 transition hover:border-cyan-400/60 hover:shadow-sm">
+                <span class="text-xs font-semibold uppercase tracking-wide text-gray-400">{t.previous}</span>
+                <span class="mt-1 block font-semibold text-gray-900">{older.data.title}</span>
+              </a>
+            ) : (
+              <span></span>
+            )}
+            {newer && (
+              <a href={getBlogPostPath(lang, getSlugFromSlug(newer.slug))} class="rounded-xl border border-gray-200 bg-white p-5 text-left transition hover:border-cyan-400/60 hover:shadow-sm sm:text-right">
+                <span class="text-xs font-semibold uppercase tracking-wide text-gray-400">{t.next}</span>
+                <span class="mt-1 block font-semibold text-gray-900">{newer.data.title}</span>
+              </a>
+            )}
+          </nav>
+        )}
+      </div>
+
+      <aside class="hidden lg:block">
+        <div class="sticky top-24">
+          <TableOfContents headings={headings} label={t.toc} />
+        </div>
+      </aside>
+    </div>
+
+    <div class="mt-16">
+      <CommentSection lang={lang} />
     </div>
   </article>
-
-  <div class="max-w-3xl mx-auto px-4 pb-16">
-    <CommentSection lang={lang} />
-  </div>
 </BaseLayout>
+
+<script>
+  // Scrollspy del TOC: un único observador para las dos instancias
+  // (móvil y escritorio) del índice de contenidos.
+  (function () {
+    const links = Array.from(
+      document.querySelectorAll('.toc a[href^="#"]')
+    );
+    if (links.length === 0) return;
+
+    const headingIds = new Set(links.map((link) => link.getAttribute('href')));
+    const headings = Array.from(
+      document.querySelectorAll('article h2[id], article h3[id]')
+    ).filter((heading) => headingIds.has('#' + heading.id));
+    if (headings.length === 0) return;
+
+    let ticking = false;
+
+    function update() {
+      ticking = false;
+      let current = '';
+      for (const heading of headings) {
+        if (heading.getBoundingClientRect().top <= 100) {
+          current = heading.id;
+        }
+      }
+      // Al final de la página, activar siempre la última sección.
+      const lastId = headings[headings.length - 1].id;
+      if (
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 4
+      ) {
+        current = lastId;
+      }
+      for (const link of links) {
+        link.classList.toggle(
+          'toc-active',
+          link.getAttribute('href') === '#' + current
+        );
+      }
+    }
+
+    window.addEventListener(
+      'scroll',
+      function () {
+        if (!ticking) {
+          ticking = true;
+          window.requestAnimationFrame(update);
+        }
+      },
+      { passive: true }
+    );
+
+    // Smooth scroll a los saltos internos del TOC.
+    for (const link of links) {
+      link.addEventListener('click', function (event) {
+        const id = this.getAttribute('href');
+        const target = document.querySelector(id);
+        if (!target) return;
+        event.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+
+    update();
+  })();
+
+  // Copiar el enlace canónico del artículo.
+  (function () {
+    const btn = document.getElementById('copy-link-btn');
+    if (!btn) return;
+    const label = document.getElementById('copy-link-label');
+    const copyText = btn.dataset.copy || '';
+    const copiedText = btn.dataset.copied || '';
+    let timer = null;
+
+    btn.addEventListener('click', function () {
+      const url = btn.dataset.url || window.location.href;
+      const done = function () {
+        if (label) label.textContent = copiedText;
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+          if (label) label.textContent = copyText;
+        }, 2000);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(done).catch(done);
+      } else {
+        done();
+      }
+    });
+  })();
+</script>
