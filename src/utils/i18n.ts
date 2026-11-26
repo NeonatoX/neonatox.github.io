@@ -6,6 +6,23 @@ export const dict = {
     ctaStart: "Empieza a construir",
     ctaArch: "Ver la arquitectura",
     pkgRuleTitle: "Un paquete en Neonatox enseña, no solo instala.",
+    portal: {
+      eyebrow: "Sistema de paquetes nhopkg",
+      title: "Portal de Fuentes de NeonatoX",
+      lead: "Cada receta nhoid, sus dependencias y sus subpaquetes viven ahora en un único catálogo generado directamente desde Git. La documentación de paquetes se mudó a su nueva casa: abre, explora y aprende cómo se construye cada pieza del sistema.",
+      button: "Repositorio",
+      screenshotAlt: "Catálogo de paquetes del Portal de Fuentes de NeonatoX",
+      cards: [
+        { title: "Catálogo interconectado", desc: "De un paquete saltas a sus dependencias, a su estructura binaria o a sus splitpackages. Sin islas de información: todo tiene contexto." },
+        { title: "Git como fuente única", desc: "La metadata nhoid se edita en Git y el portal la publica directamente desde la API de GitLab. Lo que ves es exactamente lo que hay en el repositorio." },
+        { title: "Siempre al día", desc: "Generación estática con caché incremental, noticias y feeds RSS. Consulta el estado real de los paquetes sin esperar a que alguien actualice esta página." }
+      ],
+      sectionTitle: "Un mapa para construir",
+      sectionDesc: "El Portal de Fuentes es la casa ordenada del proyecto: recetas legibles, dependencias navegables y un flujo de trabajo claro para contribuir. Si quieres entender Neonatox, empieza por ahí.",
+      catalogLink: "Abrir el catálogo de paquetes →",
+      blogLink: "Leer el anuncio del portal →",
+      builderLink: "Ver la ruta del constructor →"
+    },
     langSwitch: "Idioma",
     proyectosTitle: "Ecosistema Neonatox",
     proyectosDesc: "Herramientas construidas desde cero para construir sistemas Linux desde cero.",
@@ -94,6 +111,23 @@ export const dict = {
     ctaStart: "Start building",
     ctaArch: "See the architecture",
     pkgRuleTitle: "A Neonatox package teaches, it doesn't just install.",
+    portal: {
+      eyebrow: "nhopkg package system",
+      title: "NeonatoX Sources Portal",
+      lead: "Every nhoid recipe, its dependencies and its subpackages now live in a single catalog generated straight from Git. Package documentation has moved to its new home: open it, explore it, and learn how every piece of the system is built.",
+      button: "Repository",
+      screenshotAlt: "Package catalog of the NeonatoX Sources Portal",
+      cards: [
+        { title: "An interconnected catalog", desc: "Jump from a package to its dependencies, its binary structure or its splitpackages. No islands of information: everything has context." },
+        { title: "Git as the single source", desc: "nhoid metadata is edited in Git and the portal publishes it directly from the GitLab API. What you see is exactly what is in the repository." },
+        { title: "Always up to date", desc: "Static generation with incremental cache, news and RSS feeds. Check the real state of packages without waiting for someone to update this page." }
+      ],
+      sectionTitle: "A map for building",
+      sectionDesc: "The Sources Portal is the project's tidy home: readable recipes, browsable dependencies and a clear workflow for contributing. If you want to understand NeonatoX, start there.",
+      catalogLink: "Open the package catalog →",
+      blogLink: "Read the portal announcement →",
+      builderLink: "See the Builder Path →"
+    },
     langSwitch: "Language",
     proyectosTitle: "Neonatox Ecosystem",
     proyectosDesc: "Tools built from scratch to build Linux systems from scratch.",
@@ -181,6 +215,23 @@ export const dict = {
     ctaStart: "Comece a construir",
     ctaArch: "Ver a arquitetura",
     pkgRuleTitle: "Um pacote no Neonatox ensina, não apenas instala.",
+    portal: {
+      eyebrow: "Sistema de pacotes nhopkg",
+      title: "Portal de Fontes do Neonatox",
+      lead: "Cada receita nhoid, suas dependências e seus subpacotes agora vivem em um único catálogo gerado diretamente do Git. A documentação dos pacotes mudou para sua nova casa: abra, explore e aprenda como cada parte do sistema é construída.",
+      button: "Repositório",
+      screenshotAlt: "Catálogo de pacotes do Portal de Fontes do Neonatox",
+      cards: [
+        { title: "Catálogo interconectado", desc: "De um pacote você salta para suas dependências, sua estrutura binária ou seus splitpackages. Sem ilhas de informação: tudo tem contexto." },
+        { title: "Git como fonte única", desc: "A metadata nhoid é editada no Git e o portal a publica diretamente da API do GitLab. O que você vê é exatamente o que está no repositório." },
+        { title: "Sempre atualizado", desc: "Geração estática com cache incremental, notícias e feeds RSS. Consulte o estado real dos pacotes sem esperar que alguém atualize esta página." }
+      ],
+      sectionTitle: "Um mapa para construir",
+      sectionDesc: "O Portal de Fontes é a casa organizada do projeto: receitas legíveis, dependências navegáveis e um fluxo de trabalho claro para contribuir. Se você quer entender o Neonatox, comece por ali.",
+      catalogLink: "Abrir o catálogo de pacotes →",
+      blogLink: "Ler o anúncio do portal →",
+      builderLink: "Ver o Caminho do Construtor →"
+    },
     langSwitch: "Idioma",
     proyectosTitle: "Ecossistema Neonatox",
     projetosDesc: "Ferramentas construídas do zero para construir sistemas Linux do zero.",

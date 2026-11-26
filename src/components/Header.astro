@@ -14,11 +14,14 @@ const { langLinks } = Astro.props;
 const currentLang = (Astro.url.pathname.match(/^\/(es|en|pt)(\/|$)/)?.[1] ?? 'es') as Locale;
 
 const navLabels: Record<string, Record<string, string>> = {
-  es: { historia: 'Historia', filosofia: 'Filosofía', arquitectura: 'Arquitectura', paquetes: 'Paquetes', blog: 'Blog', proyectos: 'Proyectos', descargas: 'Descargas' },
-  en: { historia: 'History', filosofia: 'Philosophy', arquitectura: 'Architecture', paquetes: 'Packages', blog: 'Blog', proyectos: 'Projects', descargas: 'Downloads' },
-  pt: { historia: 'História', filosofia: 'Filosofia', arquitetura: 'Arquitetura', pacotes: 'Pacotes', blog: 'Blog', projetos: 'Projetos', downloads: 'Downloads' }
+  es: { historia: 'Historia', filosofia: 'Filosofía', arquitectura: 'Arquitectura', paquetes: 'Paquetes', blog: 'Blog', proyectos: 'Proyectos', descargas: 'Descargas', repositorio: 'Repositorio' },
+  en: { historia: 'History', filosofia: 'Philosophy', arquitectura: 'Architecture', paquetes: 'Packages', blog: 'Blog', proyectos: 'Projects', descargas: 'Downloads', repositorio: 'Repository' },
+  // Claves normalizadas para que el nav PT no renderice `undefined`.
+  pt: { historia: 'História', filosofia: 'Filosofia', arquitectura: 'Arquitetura', paquetes: 'Pacotes', blog: 'Blog', proyectos: 'Projetos', descargas: 'Downloads', repositorio: 'Repositório' }
 };
 const t = navLabels[currentLang] || navLabels.es;
+const sourcesPortal = 'https://neonatox-sources.gitlab.io/';
+const sourcesCatalog = `${sourcesPortal}packages/`;
 const id = 'h-' + Math.random().toString(36).slice(2, 7);
 ---
 
@@ -31,10 +34,18 @@ const id = 'h-' + Math.random().toString(36).slice(2, 7);
       <a href={`/${currentLang}/historia`}>{t.historia}</a>
       <a href={`/${currentLang}/filosofia`}>{t.filosofia}</a>
       <a href={`/${currentLang}/arquitectura`}>{t.arquitectura}</a>
-      <a href={`/${currentLang}/paquetes`}>{t.paquetes}</a>
+      <a href={sourcesCatalog} target="_blank" rel="noopener noreferrer">{t.paquetes}</a>
       <a href={`/${currentLang}/proyectos`} class="text-purple-600 hover:text-purple-300">{t.proyectos}</a>
       <a href={`/${currentLang}/blog`} class="text-amber-600 hover:text-amber-300">{t.blog}</a>
-      <a href={`/${currentLang}/descargas`} class="text-cyan-500 hover:text-cyan-700">{t.descargas || t.downloads}</a>
+      <a href={`/${currentLang}/descargas`} class="text-cyan-500 hover:text-cyan-700">{t.descargas}</a>
+      <a
+        href={sourcesPortal}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-1 bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-400 hover:to-purple-400 text-white font-bold px-4 py-2 rounded-lg shadow-md shadow-cyan-500/20 transition-all whitespace-nowrap"
+      >
+        {t.repositorio} <span aria-hidden="true">↗</span>
+      </a>
     </nav>
     <div class="flex items-center gap-2">
       <div class="hidden md:block"><LangSwitcher currentLang={currentLang} langLinks={langLinks} /></div>
@@ -50,10 +61,18 @@ const id = 'h-' + Math.random().toString(36).slice(2, 7);
       <a href={`/${currentLang}/historia`} class="py-2">{t.historia}</a>
       <a href={`/${currentLang}/filosofia`} class="py-2">{t.filosofia}</a>
       <a href={`/${currentLang}/arquitectura`} class="py-2">{t.arquitectura}</a>
-      <a href={`/${currentLang}/paquetes`} class="py-2">{t.paquetes}</a>
+      <a href={sourcesCatalog} target="_blank" rel="noopener noreferrer" class="py-2">{t.paquetes}</a>
       <a href={`/${currentLang}/proyectos`} class="py-2 text-purple-600">{t.proyectos}</a>
       <a href={`/${currentLang}/blog`} class="py-2 text-amber-600">{t.blog}</a>
-      <a href={`/${currentLang}/descargas`} class="py-2 text-cyan-400">{t.descargas || t.downloads}</a>
+      <a href={`/${currentLang}/descargas`} class="py-2 text-cyan-400">{t.descargas}</a>
+      <a
+        href={sourcesPortal}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center justify-center gap-1 bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-400 hover:to-purple-400 text-white font-bold px-4 py-3 rounded-lg shadow-md shadow-cyan-500/20 transition-all"
+      >
+        {t.repositorio} <span aria-hidden="true">↗</span>
+      </a>
       <div class="pt-2 border-t border-gray-200"><LangSwitcher currentLang={currentLang} langLinks={langLinks} /></div>
     </div>
   </div>

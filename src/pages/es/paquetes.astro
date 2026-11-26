@@ -1,148 +1,83 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import PackageMetrics from '../../components/PackageMetrics.astro';
 import { dict } from '../../utils/i18n';
 const t = dict.es;
+const p = t.portal;
 ---
 
-<BaseLayout title="Sistema de Paquetes nhopkg | Neonatox" lang="es">
+<BaseLayout
+  title="Portal de Fuentes de NeonatoX | Sistema de paquetes"
+  description="El catálogo de paquetes, recetas nhoid y dependencias de NeonatoX viven en el Portal de Fuentes. Explora el repositorio."
+  lang="es"
+  alternates={[
+    { hreflang: 'es', href: '/es/paquetes' },
+    { hreflang: 'en', href: '/en/paquetes' },
+    { hreflang: 'pt', href: '/pt/paquetes' },
+    { hreflang: 'x-default', href: '/es/paquetes' }
+  ]}
+>
   <main class="max-w-5xl mx-auto px-6 py-16 text-gray-900">
-    <h1 class="text-3xl font-bold mb-6">{t.pkgRuleTitle}</h1>
-
-    <!-- Diferencia nhoid vs nho -->
-    <div class="grid md:grid-cols-2 gap-6 mb-12">
-      <div class="bg-cyan-500/10 border border-cyan-500/30 p-6 rounded-lg">
-        <h2 class="text-xl font-bold text-cyan-400 mb-3">*.srcnho (nhoid) – Paquete Fuente</h2>
-        <p class="text-gray-600 text-sm mb-3">
-          Archivo de metadatos que contiene todo lo necesario para compilar un paquete.
-        </p>
-        <ul class="text-gray-500 text-sm space-y-1">
-          <li>• Código fuente (descargado o incluido)</li>
-          <li>• Script <code>nbuild()</code> – cómo compilar</li>
-          <li>• Script <code>ninstall()</code> – cómo instalar</li>
-          <li>• Dependencias de build y runtime</li>
-          <li>• Metadatos (versión, licencia, repo)</li>
-        </ul>
-        <p class="text-cyan-400 text-xs mt-3 font-mono">Ejemplo: transmission.nhoid</p>
-      </div>
-
-      <div class="bg-purple-500/10 border border-purple-500/30 p-6 rounded-lg">
-        <h2 class="text-xl font-bold text-purple-600 mb-3">.nho – Paquete Binario</h2>
-        <p class="text-gray-600 text-sm mb-3">
-          Archivo comprimido listo para instalar. Contiene los binarios compilados.
-        </p>
-        <ul class="text-gray-500 text-sm space-y-1">
-          <li>• Archivos binarios compilados</li>
-          <li>• Metadatos del paquete</li>
-          <li>• Scripts post-install/post-remove</li>
-          <li>• Integración systemd</li>
-          <li>• Licencias en /usr/share/licenses</li>
-        </ul>
-        <p class="text-purple-600 text-xs mt-3 font-mono">Ejemplo: transmission-4.1.1-n2026-x86_64.nho</p>
-      </div>
-    </div>
-
-    <!-- Anatomía nhoid -->
-    <h2 class="text-2xl font-semibold mb-4">Anatomía de un nhoid real: Transmission 4.1.1</h2>
-    
-    <div class="bg-white rounded-lg overflow-hidden mb-6">
-      <div class="px-4 py-2 bg-gray-200 text-sm text-gray-600 border-b border-gray-200">
-        transmission.nhoid (paquete fuente)
-      </div>
-      <pre is:raw class="p-4 text-sm text-emerald-600 font-mono overflow-x-auto">
-#%NHO-0.5
-# Package Maintainer: cargabsj175 <cargabsj175@gmail.com>
-
-# Name:       transmission
-# Version:    4.1.1
-# Release:    n2026
-# License:    GPL-2.0-or-later
-# Repository: extra
-# Arch:       i686 x86_64
-# Splitpackage: base gtk qt
-
-# BuildDep:   curl nodejs libevent gtkmm4 qt6-svg cmake...
-# Dep(base):  curl nodejs libevent
-# Dep(gtk):   gtk4 hicolor-icon-theme
-# Dep(qt):    qt6-core qt6-svg
-
-nbuild() {
-  cd src/transmission-4.1.1
-  cmake -B build -DCMAKE_BUILD_TYPE=Release \
-    -DENABLE_GTK=ON -DENABLE_QT=ON -DENABLE_CLI=OFF
-  cmake --build build -j$(nproc/2)
-}
-
-ninstall() {
-  cmake --install build --prefix=$DESTDIR/usr
-}
-
-ninstall_gtk() {
-  install -Dm755 build/transmission-gtk $DESTDIR/usr/bin/transmission-gtk
-}
-
-ninstall_qt() {
-  install -Dm755 build/transmission-qt $DESTDIR/usr/bin/transmission-qt
-}
-      </pre>
-    </div>
-
-    <p class="text-gray-600 mb-6">
-      <strong>Claves del formato:</strong>
-    </p>
-    <ul class="list-disc pl-5 space-y-2 text-gray-600 mb-8">
-      <li><code>#%NHO-0.5</code>: versión del formato nhoid (control de cambios futuro)</li>
-      <li><code>Splitpackage</code>: define sub-paquetes (base, gtk, qt) derivados del mismo build</li>
-      <li><code>BuildDep</code>: dependencias solo necesarias para compilar</li>
-      <li><code>Dep(paquete)</code>: dependencias específicas por sub-paquete</li>
-      <li><code>nbuild()</code>: función de compilación</li>
-      <li><code>ninstall()</code>, <code>ninstall_gtk()</code>, etc.: funciones de instalación por sub-paquete</li>
-    </ul>
-
-    <!-- Funciones del ciclo de vida -->
-    <h3 class="text-xl font-semibold mb-3">Funciones del ciclo de vida</h3>
-    <div class="space-y-4 mb-8">
-      <div class="bg-gray-50 p-4 rounded-lg">
-        <code class="text-cyan-400">nbuild()</code>
-        <p class="text-gray-600 mt-2 text-sm">
-          Compilación aislada en <code>build/</code>. Usa <code>CFLAGS</code> explícitas y <code>cmake</code>/<code>make</code> con parallelización.
-        </p>
-      </div>
-      <div class="bg-gray-50 p-4 rounded-lg">
-        <code class="text-cyan-400">ninstall()</code>, <code>ninstall_&lt;subpkg&gt;()</code>
-        <p class="text-gray-600 mt-2 text-sm">
-          Instalación modular por sub-paquete usando <code>DESTDIR</code>. Integra systemd, licencias, y estructura de archivos.
-        </p>
-      </div>
-      <div class="bg-gray-50 p-4 rounded-lg">
-        <code class="text-cyan-400">npostinstall()</code>, <code class="text-gray-400">npostremove()</code>
-        <p class="text-gray-600 mt-2 text-sm">
-          Hooks post-instalación/remoción. Configuración de usuarios, habilitación de servicios, limpieza.
-        </p>
-      </div>
-    </div>
-
-    <!-- Repositorio de fuentes -->
-    <div class="bg-gray-100 p-6 rounded-lg border border-gray-200 mb-8">
-      <h3 class="text-xl font-semibold text-cyan-700 mb-3">Repositorio de fuentes</h3>
-      <p class="text-gray-600 text-sm mb-4">
-        Todos los nhoid de Neonatox están disponibles en GitLab, organizados por categorías.
-      </p>
-      <div class="flex gap-4 mb-6">
-        <a href="https://gitlab.com/neonatox-sources" target="_blank" class="bg-cyan-500 hover:bg-cyan-400 text-white font-semibold px-6 py-3 rounded-lg transition-colors">
-          Ver repositorio →
+    <!-- Hero -->
+    <section class="mb-12">
+      <p class="text-sm font-semibold uppercase tracking-widest text-cyan-600 mb-3">{p.eyebrow}</p>
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">{p.title}</h1>
+      <p class="text-gray-600 text-lg leading-relaxed mb-8 max-w-3xl">{p.lead}</p>
+      <div class="flex flex-wrap items-center gap-4">
+        <a
+          href="https://neonatox-sources.gitlab.io/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-400 hover:to-purple-400 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-cyan-500/20 transition-all"
+        >
+          {p.button} <span aria-hidden="true">↗</span>
         </a>
-        <span class="bg-gray-200 text-gray-600 px-3 py-2 rounded-lg text-sm">GitLab</span>
+        <a
+          href="https://neonatox-sources.gitlab.io/packages/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 border border-cyan-500 text-cyan-600 hover:bg-cyan-500/10 font-semibold px-6 py-4 rounded-xl transition-colors"
+        >
+          {p.catalogLink}
+        </a>
       </div>
-      <PackageMetrics />
-    </div>
+    </section>
 
-    <!-- CTA -->
-    <div class="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
-      <p class="text-cyan-700 text-sm">
-        💡 <strong>Más información:</strong> ¿Quieres saber cómo se construyó todo el sistema? 
-        <a href="/es/ruta-constructor" class="underline hover:text-cyan-200">Ver la historia de Neonatox →</a>
-      </p>
+    <img
+      src="/screenshots/portal-de-fuentes-catalogo.png"
+      alt={p.screenshotAlt}
+      class="w-full h-auto rounded-xl border border-gray-200 shadow-sm mb-12"
+      loading="lazy"
+    />
+
+    <!-- Qué ofrece el portal -->
+    <section class="grid md:grid-cols-3 gap-6 mb-12">
+      {p.cards.map((card, index) => (
+        <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+          <div class="text-cyan-500 font-mono text-sm mb-3">0{index + 1}</div>
+          <h2 class="text-xl font-semibold mb-3">{card.title}</h2>
+          <p class="text-gray-600 text-sm leading-relaxed">{card.desc}</p>
+        </div>
+      ))}
+    </section>
+
+    <!-- Bloque destacado -->
+    <section class="bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border border-cyan-500/30 rounded-2xl p-8 mb-10">
+      <h2 class="text-2xl font-bold mb-3">{p.sectionTitle}</h2>
+      <p class="text-gray-600 mb-6">{p.sectionDesc}</p>
+      <a
+        href="https://neonatox-sources.gitlab.io/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-400 hover:to-purple-400 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-cyan-500/20 transition-all"
+      >
+        {p.button} <span aria-hidden="true">↗</span>
+      </a>
+    </section>
+
+    <!-- Enlaces relacionados -->
+    <div class="flex flex-wrap gap-6 text-sm text-cyan-600">
+      <a href="/es/blog/portal-de-fuentes" class="underline hover:text-cyan-800">{p.blogLink}</a>
+      <a href="/es/ruta-constructor" class="underline hover:text-cyan-800">{p.builderLink}</a>
     </div>
   </main>
 </BaseLayout>
