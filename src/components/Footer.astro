@@ -2,10 +2,17 @@
 // El idioma se deriva de la URL (igual que Header/LangSwitcher), porque
 // Astro.params.lang no existe en las rutas del blog.
 const currentLang = Astro.url.pathname.match(/^\/(es|en|pt)(\/|$)/)?.[1] ?? 'es';
+const currentYear = new Date().getFullYear();
 ---
 <footer class="bg-gray-50 border-t border-gray-200 py-8 mt-16">
   <div class="max-w-6xl mx-auto px-4 text-center text-gray-500 text-sm">
-    <p>NEONATOX &copy; 2026 — {currentLang === 'es' ? 'Abre la caja. Descubre y experimenta sin atajos.' : currentLang === 'en' ? 'Open the box. Discover and experiment without shortcuts.' : 'Abra a caixa. Descubra e experimente sem atalhos.'}</p>
+    <p>GNU NeonatoX &copy; <span id="footer-year">{currentYear}</span> — {currentLang === 'es' ? 'Abre la caja. Descubre y experimenta sin atajos.' : currentLang === 'en' ? 'Open the box. Discover and experiment without shortcuts.' : 'Abra a caixa. Descubra e experimente sem atalhos.'}</p>
+    <script>
+      // El sitio es estático: actualiza el año en el navegador para que
+      // refleje siempre el año actual aunque la página esté en caché.
+      const yearEl = document.getElementById('footer-year');
+      if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+    </script>
     <div class="flex justify-center gap-4 mt-4">
       <a href="https://neonatox-sources.gitlab.io/packages/" target="_blank" rel="noopener noreferrer" class="text-cyan-500 hover:text-cyan-700">{currentLang === 'es' ? 'Paquetes' : currentLang === 'en' ? 'Packages' : 'Pacotes'}</a>
       <a href={`/${currentLang}/arquitectura`} class="text-cyan-500 hover:text-cyan-700">Arquitectura</a>
